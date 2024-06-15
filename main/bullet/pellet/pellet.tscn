@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://bmdnwia8jf7af"]
+
+[ext_resource type="PackedScene" uid="uid://nd2re4kr63gu" path="res://main/bullet/bullet.tscn" id="1_8jywf"]
+[ext_resource type="Texture2D" uid="uid://x3e8lonyrtgd" path="res://assets/sprites/circle.png" id="2_ynie0"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_0stpw"]
+radius = 2.0
+
+[node name="Pellet" instance=ExtResource("1_8jywf")]
+speed = 128.0
+damage = 1.0
+
+[node name="Sprite2D" parent="SpriteHolder" index="0"]
+scale = Vector2(0.03, 0.03)
+texture = ExtResource("2_ynie0")
+
+[node name="CollisionShape2D" parent="." index="2"]
+shape = SubResource("CircleShape2D_0stpw")

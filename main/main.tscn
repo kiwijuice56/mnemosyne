@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://bmip1vhc7m4m6"]
+
+[ext_resource type="Script" path="res://main/main.gd" id="1_1wch7"]
+[ext_resource type="PackedScene" uid="uid://cv8wagch44eli" path="res://main/actor/player/player.tscn" id="2_aeni1"]
+[ext_resource type="Texture2D" uid="uid://tmsq0xl15j6h" path="res://icon.svg" id="2_ky6no"]
+
+[node name="Main" type="Node"]
+script = ExtResource("1_1wch7")
+
+[node name="Icon" type="Sprite2D" parent="."]
+position = Vector2(18, -27)
+texture = ExtResource("2_ky6no")
+
+[node name="Player" parent="." instance=ExtResource("2_aeni1")]
+collision_layer = 1

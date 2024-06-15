@@ -1,0 +1,29 @@
+[gd_scene load_steps=7 format=3 uid="uid://cv8wagch44eli"]
+
+[ext_resource type="PackedScene" uid="uid://c5lbqx8a61pyi" path="res://main/actor/actor.tscn" id="1_nisst"]
+[ext_resource type="Script" path="res://main/actor/player/player.gd" id="2_r6spv"]
+[ext_resource type="PackedScene" uid="uid://bmdnwia8jf7af" path="res://main/bullet/pellet/pellet.tscn" id="3_0cv6q"]
+[ext_resource type="Texture2D" uid="uid://x3e8lonyrtgd" path="res://assets/sprites/circle.png" id="3_243k3"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_8f8lk"]
+radius = 3.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ojln1"]
+
+[node name="Player" instance=ExtResource("1_nisst")]
+script = ExtResource("2_r6spv")
+primary_bullet_scene = ExtResource("3_0cv6q")
+max_health = 3.0
+speed = 48.0
+
+[node name="Sprite2D" parent="SpriteHolder" index="0"]
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("3_243k3")
+
+[node name="CollisionShape2D" parent="." index="2"]
+shape = SubResource("CircleShape2D_8f8lk")
+
+[node name="CollisionShape2D" parent="HurtArea2D" index="0"]
+shape = SubResource("CircleShape2D_ojln1")
+
+[node name="Camera2D" type="Camera2D" parent="." index="4"]

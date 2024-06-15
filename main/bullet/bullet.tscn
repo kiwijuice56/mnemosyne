@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=3 uid="uid://nd2re4kr63gu"]
+
+[ext_resource type="Script" path="res://main/bullet/bullet.gd" id="1_r4p2m"]
+
+[node name="Bullet" type="Area2D"]
+collision_layer = 16
+script = ExtResource("1_r4p2m")
+
+[node name="LifeTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+one_shot = true
+
+[node name="SpriteHolder" type="Node2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="SpriteHolder"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
