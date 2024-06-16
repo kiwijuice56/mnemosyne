@@ -1,9 +1,9 @@
 [gd_scene load_steps=3 format=3 uid="uid://b1xrwfkcy66q5"]
 
 [ext_resource type="Material" uid="uid://160dgmvru7sp" path="res://main/actor/player/tentacle_material.tres" id="1_3gokc"]
-[ext_resource type="Texture2D" uid="uid://b1iiiey1nto1t" path="res://assets/sprites/rectangle.png" id="2_xeqge"]
+[ext_resource type="Texture2D" uid="uid://b1iiiey1nto1t" path="res://main/assets/sprites/rectangle.png" id="2_b2srl"]
 
 [node name="Tentacle" type="Sprite2D"]
 material = ExtResource("1_3gokc")
 scale = Vector2(1.6, 1.6)
-texture = ExtResource("2_xeqge")
+texture = ExtResource("2_b2srl")

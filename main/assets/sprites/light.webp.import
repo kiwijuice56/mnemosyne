@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b1iiiey1nto1t"
-path="res://.godot/imported/rectangle.png-c2124d9ba7d341a362fd455b26e820d9.ctex"
+uid="uid://dbcwvffvu5thv"
+path="res://.godot/imported/light.webp-a1b5b8553ffe272308fe052e55f2900d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/rectangle.png"
-dest_files=["res://.godot/imported/rectangle.png-c2124d9ba7d341a362fd455b26e820d9.ctex"]
+source_file="res://main/assets/sprites/light.webp"
+dest_files=["res://.godot/imported/light.webp-a1b5b8553ffe272308fe052e55f2900d.ctex"]
 
 [params]
 

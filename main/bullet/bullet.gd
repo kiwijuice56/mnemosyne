@@ -17,7 +17,7 @@ func _ready() -> void:
 	%LifeTimer.timeout.connect(destroy)
 	%LifeTimer.start(lifetime)
 
-func _on_body_entered(body: PhysicsBody2D) -> void:
+func _on_body_entered(_body: Node) -> void:
 	destroy()
 
 func _physics_process(delta: float) -> void:
@@ -31,3 +31,4 @@ func destroy() -> void:
 	if destroyed:
 		return
 	destroyed = true
+	queue_free()
