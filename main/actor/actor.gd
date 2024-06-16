@@ -43,13 +43,15 @@ func hurt(damage: int) -> void:
 	if health == 0:
 		kill()
 
-func shoot(bullet_scene: PackedScene, shoot_dir: Vector2) -> void:
+func shoot(bullet_scene: PackedScene, shoot_dir: Vector2) -> bool:
 	if not %ShootCooldownTimer.is_stopped():
-		return
+		return false
 	
 	var new_bullet: Bullet = bullet_scene.instantiate()
 	get_parent().add_child(new_bullet)
+	get_parent().move_child(new_bullet, get_index())
 	new_bullet.global_position = global_position
 	new_bullet.shoot(shoot_dir, velocity)
 	
 	%ShootCooldownTimer.start(new_bullet.cooldown)
+	return true

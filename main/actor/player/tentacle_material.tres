@@ -1,0 +1,9 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://160dgmvru7sp"]
+
+[ext_resource type="Shader" path="res://main/actor/player/tentacle.gdshader" id="1_8mse6"]
+
+[resource]
+shader = ExtResource("1_8mse6")
+shader_parameter/a = 0.06
+shader_parameter/f = 8.0
+shader_parameter/s = 16.0

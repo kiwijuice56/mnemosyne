@@ -1,24 +1,167 @@
-[gd_scene load_steps=7 format=3 uid="uid://cv8wagch44eli"]
+[gd_scene load_steps=18 format=3 uid="uid://cv8wagch44eli"]
 
 [ext_resource type="PackedScene" uid="uid://c5lbqx8a61pyi" path="res://main/actor/actor.tscn" id="1_nisst"]
 [ext_resource type="Script" path="res://main/actor/player/player.gd" id="2_r6spv"]
 [ext_resource type="PackedScene" uid="uid://bmdnwia8jf7af" path="res://main/bullet/pellet/pellet.tscn" id="3_0cv6q"]
 [ext_resource type="Texture2D" uid="uid://x3e8lonyrtgd" path="res://assets/sprites/circle.png" id="3_243k3"]
+[ext_resource type="PackedScene" uid="uid://b1xrwfkcy66q5" path="res://main/actor/player/tentacle.tscn" id="4_3rm2x"]
+[ext_resource type="Texture2D" uid="uid://do0l2t7e75n2x" path="res://main/actor/player/player.png" id="4_48ieq"]
+[ext_resource type="Material" uid="uid://160dgmvru7sp" path="res://main/actor/player/tentacle_material.tres" id="5_0l8la"]
+[ext_resource type="Script" path="res://main/actor/player/iris.gd" id="6_r0w64"]
+
+[sub_resource type="Curve" id="Curve_1jduo"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_8f8lk"]
 radius = 3.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ojln1"]
 
+[sub_resource type="Animation" id="Animation_ws3rr"]
+resource_name = "idle"
+loop_mode = 1
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SpriteHolder:scale:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0, 1.15, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.5, 1)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("SpriteHolder:scale:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0, 1.15, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.4, 1.1)
+}
+
+[sub_resource type="Animation" id="Animation_v7thn"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SpriteHolder:scale:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("SpriteHolder:scale:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("SpriteHolder:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_c1qjm"]
+_data = {
+"RESET": SubResource("Animation_v7thn"),
+"idle": SubResource("Animation_ws3rr")
+}
+
+[sub_resource type="Animation" id="Animation_rybs4"]
+resource_name = "shoot"
+length = 0.2
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SpriteHolder/TentacleHolder:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 6.283, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.2)
+}
+
+[sub_resource type="Animation" id="Animation_v740b"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SpriteHolder/TentacleHolder:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_yej6k"]
+_data = {
+"RESET": SubResource("Animation_v740b"),
+"shoot": SubResource("Animation_rybs4")
+}
+
 [node name="Player" instance=ExtResource("1_nisst")]
 script = ExtResource("2_r6spv")
 primary_bullet_scene = ExtResource("3_0cv6q")
+tentacle_scene = ExtResource("4_3rm2x")
+tentacle_material = ExtResource("5_0l8la")
+tentacle_speed_min = 5.0
+tentacle_speed_max = 16.0
 max_health = 3.0
 speed = 48.0
 
-[node name="Sprite2D" parent="SpriteHolder" index="0"]
+[node name="Trail" type="CPUParticles2D" parent="SpriteHolder" index="0"]
+lifetime = 0.8
+texture = ExtResource("3_243k3")
+emission_shape = 1
+emission_sphere_radius = 6.0
+gravity = Vector2(0, 45)
+scale_amount_min = 0.02
+scale_amount_max = 0.08
+scale_amount_curve = SubResource("Curve_1jduo")
+
+[node name="TentacleHolder" type="Node2D" parent="SpriteHolder" index="1"]
+unique_name_in_owner = true
+
+[node name="Iris" type="Sprite2D" parent="SpriteHolder" index="2"]
+unique_name_in_owner = true
+scale = Vector2(0.12, 0.12)
+texture = ExtResource("3_243k3")
+script = ExtResource("6_r0w64")
+
+[node name="Sprite2D2" type="Sprite2D" parent="SpriteHolder/Iris" index="0"]
+self_modulate = Color(0, 0, 0, 1)
+scale = Vector2(0.425, 0.425)
+texture = ExtResource("3_243k3")
+
+[node name="Sprite2D" type="Sprite2D" parent="SpriteHolder/Iris" index="1"]
 scale = Vector2(0.1, 0.1)
 texture = ExtResource("3_243k3")
+
+[node name="Sprite2D" parent="SpriteHolder" index="3"]
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("4_48ieq")
 
 [node name="CollisionShape2D" parent="." index="2"]
 shape = SubResource("CircleShape2D_8f8lk")
@@ -27,3 +170,16 @@ shape = SubResource("CircleShape2D_8f8lk")
 shape = SubResource("CircleShape2D_ojln1")
 
 [node name="Camera2D" type="Camera2D" parent="." index="4"]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="5"]
+unique_name_in_owner = true
+libraries = {
+"": SubResource("AnimationLibrary_c1qjm")
+}
+autoplay = "idle"
+
+[node name="SecondaryAnimationPlayer" type="AnimationPlayer" parent="." index="6"]
+unique_name_in_owner = true
+libraries = {
+"": SubResource("AnimationLibrary_yej6k")
+}
