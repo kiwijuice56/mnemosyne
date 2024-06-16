@@ -15,6 +15,10 @@ run/main_scene="res://main/main.tscn"
 config/features=PackedStringArray("4.2", "GL Compatibility")
 config/icon="res://icon.svg"
 
+[autoload]
+
+Ref="*res://main/ref.gd"
+
 [display]
 
 window/size/viewport_width=400
@@ -78,6 +82,7 @@ shoot={
 2d_physics/layer_3="human"
 2d_physics/layer_4="demon"
 2d_physics/layer_5="bullet"
+2d_physics/layer_6="spike"
 
 [rendering]
 

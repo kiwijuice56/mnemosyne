@@ -4,12 +4,14 @@ extends CharacterBody2D
 @export var max_health: float
 @export var speed: float
 @export var accel: float = 16.0
+@export var knockback_scale: float = 1.0
 
 var health: float = 0
 var dead: bool = false
 
 var locked: bool = false
 
+var knockback: Vector2
 var dir: Vector2 
 
 signal died(global_death_position: Vector2)
@@ -25,9 +27,9 @@ func _on_area_entered_hurt(area: Area2D) -> void:
 	
 	if area.get_parent() is Bullet:
 		var bullet: Bullet = area.get_parent() as Bullet
-		if bullet.destroyed:
+		if bullet.destroyed or bullet.shooter == self:
 			return
-		hurt(bullet.damage)
+		hurt(bullet.damage, (global_position - area.global_position).normalized())
 		bullet.hit(self)
 
 func _physics_process(delta: float) -> void:
@@ -37,6 +39,8 @@ func _physics_process(delta: float) -> void:
 		velocity = lerp(velocity, dir * speed, delta * accel)
 	velocity = min(speed, velocity.length()) * velocity.normalized()
 	
+	velocity += knockback
+	knockback = lerp(knockback, Vector2(), delta * accel * 0.75)
 	if not locked:
 		move_and_slide()
 
@@ -47,14 +51,17 @@ func kill() -> void:
 	dead = true
 	queue_free()
 
-func hurt(damage: float) -> void:
+func hurt(damage: float, hurt_dir: Vector2, knockback_extra: float = 1.0) -> bool:
 	if dead:
-		return
+		return false
+	
+	knockback = hurt_dir * 48.0 * knockback_scale * knockback_extra
 	
 	health -= damage
 	health = max(0, min(max_health, health))
 	if health == 0:
 		kill()
+	return true
 
 func shoot(bullet_scene: PackedScene, shoot_dir: Vector2) -> bool:
 	if dead:
@@ -67,6 +74,7 @@ func shoot(bullet_scene: PackedScene, shoot_dir: Vector2) -> bool:
 	get_parent().add_child(new_bullet)
 	get_parent().move_child(new_bullet, get_index())
 	new_bullet.global_position = global_position
+	new_bullet.shooter = self
 	new_bullet.shoot(shoot_dir, velocity)
 	
 	%ShootCooldownTimer.start(new_bullet.cooldown)

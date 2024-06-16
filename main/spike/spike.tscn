@@ -1,0 +1,73 @@
+[gd_scene load_steps=8 format=3 uid="uid://cldebfhty1gio"]
+
+[ext_resource type="Script" path="res://main/spike/spike.gd" id="1_x5tda"]
+[ext_resource type="Texture2D" uid="uid://emxr7yki1j14" path="res://main/spike/spike.png" id="1_xu4uh"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ini8t"]
+radius = 3.0
+
+[sub_resource type="Animation" id="Animation_cfnf2"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_k7dnx"]
+resource_name = "spin"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 6.28319]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_53f1s"]
+_data = {
+"RESET": SubResource("Animation_cfnf2"),
+"spin": SubResource("Animation_k7dnx")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_f36f2"]
+radius = 4.0
+
+[node name="Spike" type="CharacterBody2D"]
+collision_layer = 33
+collision_mask = 0
+script = ExtResource("1_x5tda")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("1_xu4uh")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_ini8t")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
+libraries = {
+"": SubResource("AnimationLibrary_53f1s")
+}
+autoplay = "spin"
+
+[node name="HitArea" type="Area2D" parent="."]
+collision_layer = 32
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitArea"]
+shape = SubResource("CircleShape2D_f36f2")

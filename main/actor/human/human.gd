@@ -2,7 +2,7 @@ class_name Human
 extends Actor
 
 @export var fear_speed: float
-@export var gravity: float = 64
+@export var gravity: float = 128
 
 var state: String = "idle"
 var group: Array[Human]
@@ -42,7 +42,6 @@ func _on_body_exited_detection(body: Node) -> void:
 		group.remove_at(group.find(human))
 
 func _on_friend_died(global_death_position: Vector2) -> void:
-	print(global_death_position)
 	state = "scared"
 	fear_spot = global_death_position
 
@@ -51,10 +50,10 @@ func _on_idle_timeout() -> void:
 		dir.x = (-1 if randf() < 0.5 else 1) if randf() < 0.5 else 0
 
 func _physics_process(delta: float) -> void:
-	if not is_on_floor_only():
+	if not is_on_floor():
 		velocity.y += gravity * delta
 	else:
-		velocity.y = gravity
+		velocity.y = 8
 	
 	if state == "idle":
 		if dir.x == 1 and (not %RightFloor.is_colliding() or %RightForward.is_colliding()):
@@ -72,6 +71,9 @@ func _physics_process(delta: float) -> void:
 		if fear_spot.distance_to(global_position) > 128.0:
 			state = "idle" 
 		velocity.x = dir.x * fear_speed
+	
+	velocity += knockback
+	knockback = lerp(knockback, Vector2(), delta * accel * 0.75)
 	
 	if not locked:
 		move_and_slide()

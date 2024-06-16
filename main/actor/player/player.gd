@@ -13,6 +13,7 @@ var tentacle_speed: float = 8.0
 var tentacle_count: int = 8
 
 func _ready() -> void:
+	super._ready()
 	initialize()
 
 func _physics_process(delta: float) -> void:
@@ -46,5 +47,21 @@ func initialize() -> void:
 func shoot(bullet_scene: PackedScene, shoot_dir: Vector2) -> bool:
 	if super.shoot(bullet_scene, shoot_dir):
 		%SecondaryAnimationPlayer.play("shoot")
+		return true
+	return false
+
+func _on_area_entered_hurt(area: Area2D) -> void:
+	if dead:
+		return
+	super._on_area_entered_hurt(area)
+	if area.get_parent() is Spike:
+		hurt(max_health * 0.25, (global_position - area.global_position).normalized(), 4.0)
+		area.get_parent().slice()
+
+func hurt(damage: float, hurt_dir: Vector2, knockback_extra: float = 1.0) -> bool:
+	if super.hurt(damage, hurt_dir, knockback_extra):
+		%TertiaryAnimationPlayer.play("hurt")
+		%ShakeCamera.shake(1.5)
+		Ref.hurt_effect.hurt()
 		return true
 	return false

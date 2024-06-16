@@ -16,6 +16,7 @@ var shooter_velocity: Vector2
 
 var dir: Vector2
 var destroyed: bool = false
+var shooter: Actor
 
 func _ready() -> void:
 	%HitArea2D.body_entered.connect(_on_body_entered)
