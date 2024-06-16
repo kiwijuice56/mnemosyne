@@ -6,6 +6,7 @@ extends CharacterBody2D
 @export var accel: float = 16.0
 
 var health: float = 0
+var dead: bool = false
 
 var locked: bool = false
 
@@ -17,6 +18,9 @@ func _ready() -> void:
 	%HurtArea2D.area_entered.connect(_on_area_entered_hurt)
 
 func _on_area_entered_hurt(area: Area2D) -> void:
+	if dead:
+		return
+	
 	if area.get_parent() is Bullet:
 		var bullet: Bullet = area.get_parent() as Bullet
 		if bullet.destroyed:
@@ -35,15 +39,24 @@ func _physics_process(delta: float) -> void:
 		move_and_slide()
 
 func kill() -> void:
+	if dead:
+		return
+	dead = true
 	queue_free()
 
 func hurt(damage: float) -> void:
+	if dead:
+		return
+	
 	health -= damage
 	health = max(0, min(max_health, health))
 	if health == 0:
 		kill()
 
 func shoot(bullet_scene: PackedScene, shoot_dir: Vector2) -> bool:
+	if dead:
+		return false
+	
 	if not %ShootCooldownTimer.is_stopped():
 		return false
 	

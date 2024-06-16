@@ -37,10 +37,10 @@ position = Vector2(-59, -176)
 position = Vector2(-26, -176)
 
 [node name="Human7" parent="." instance=ExtResource("4_yj1dv")]
-position = Vector2(3, -204)
+position = Vector2(168, -178)
 
 [node name="Human8" parent="." instance=ExtResource("4_yj1dv")]
-position = Vector2(36, -204)
+position = Vector2(201, -178)
 
 [node name="Human9" parent="." instance=ExtResource("4_yj1dv")]
 position = Vector2(-70, -212)
