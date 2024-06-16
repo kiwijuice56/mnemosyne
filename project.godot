@@ -27,7 +27,7 @@ window/stretch/mode="viewport"
 
 folder_colors={
 "res://build/": "gray",
-"res://main/actor/": "red"
+"res://main/assets/": "red"
 }
 
 [input]

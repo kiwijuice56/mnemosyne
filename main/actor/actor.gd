@@ -17,12 +17,12 @@ func _ready() -> void:
 	%HurtArea2D.area_entered.connect(_on_area_entered_hurt)
 
 func _on_area_entered_hurt(area: Area2D) -> void:
-	if area is Bullet:
-		var bullet: Bullet = area as Bullet
+	if area.get_parent() is Bullet:
+		var bullet: Bullet = area.get_parent() as Bullet
 		if bullet.destroyed:
 			return
-		hurt(area.damage)
-		area.destroy()
+		hurt(bullet.damage)
+		bullet.hit(self)
 
 func _physics_process(delta: float) -> void:
 	if dir.is_zero_approx():
@@ -37,7 +37,7 @@ func _physics_process(delta: float) -> void:
 func kill() -> void:
 	queue_free()
 
-func hurt(damage: int) -> void:
+func hurt(damage: float) -> void:
 	health -= damage
 	health = max(0, min(max_health, health))
 	if health == 0:

@@ -1,0 +1,27 @@
+[gd_scene load_steps=6 format=3 uid="uid://b8qxm7rwjhsbb"]
+
+[ext_resource type="PackedScene" uid="uid://c5lbqx8a61pyi" path="res://main/actor/actor.tscn" id="1_7wykg"]
+[ext_resource type="Texture2D" uid="uid://clw43qwrgjhjv" path="res://main/actor/human/human.png" id="2_cf3wo"]
+[ext_resource type="Script" path="res://main/actor/human/human.gd" id="2_fvux4"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tptly"]
+size = Vector2(2, 3)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_hns7j"]
+radius = 6.0
+
+[node name="Human" instance=ExtResource("1_7wykg")]
+script = ExtResource("2_fvux4")
+gravity = 300.0
+
+[node name="Sprite2D" parent="SpriteHolder" index="0"]
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("2_cf3wo")
+
+[node name="CollisionShape2D" parent="." index="2"]
+position = Vector2(0, 1.82)
+shape = SubResource("RectangleShape2D_tptly")
+
+[node name="CollisionShape2D" parent="HurtArea2D" index="0"]
+position = Vector2(0, 1.55)
+shape = SubResource("CircleShape2D_hns7j")

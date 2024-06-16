@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://bmdnwia8jf7af"]
+[gd_scene load_steps=11 format=3 uid="uid://bmdnwia8jf7af"]
 
 [ext_resource type="PackedScene" uid="uid://nd2re4kr63gu" path="res://main/bullet/bullet.tscn" id="1_8jywf"]
 [ext_resource type="Texture2D" uid="uid://b5b4qv7ykx2gf" path="res://main/assets/sprites/cross.png" id="2_5dcdl"]
+[ext_resource type="Script" path="res://main/bullet/pellet/pellet.gd" id="2_5s7i2"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_0stpw"]
-radius = 5.0
+radius = 3.0
 
 [sub_resource type="Animation" id="Animation_chm6r"]
 length = 0.001
@@ -19,6 +20,30 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("DestroyParticles:emitting")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("SpriteHolder/Sprite2D:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
 }
 
 [sub_resource type="Animation" id="Animation_2jkwh"]
@@ -37,15 +62,55 @@ tracks/0/keys = {
 "values": [0.0, 6.28319]
 }
 
+[sub_resource type="Animation" id="Animation_eald3"]
+resource_name = "destroy"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("DestroyParticles:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("SpriteHolder/Sprite2D:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_6r6gs"]
 _data = {
 "RESET": SubResource("Animation_chm6r"),
+"destroy": SubResource("Animation_eald3"),
 "rotate": SubResource("Animation_2jkwh")
 }
 
+[sub_resource type="Curve" id="Curve_5x2xm"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_hdkgx"]
+radius = 6.0
+
 [node name="Pellet" instance=ExtResource("1_8jywf")]
-speed = 128.0
+script = ExtResource("2_5s7i2")
+speed = 5.0
 damage = 1.0
+pierce = 2
+lifetime = 2.0
+bounce_amount = 1
 cooldown = 0.5
 
 [node name="Sprite2D" parent="SpriteHolder" index="0"]
@@ -61,3 +126,24 @@ libraries = {
 }
 autoplay = "rotate"
 speed_scale = 3.0
+
+[node name="DestroyParticles" type="CPUParticles2D" parent="." index="4"]
+emitting = false
+amount = 6
+one_shot = true
+speed_scale = 1.25
+explosiveness = 1.0
+texture = ExtResource("2_5dcdl")
+direction = Vector2(0, -1)
+spread = 180.0
+gravity = Vector2(0, 180)
+initial_velocity_min = 32.0
+initial_velocity_max = 64.0
+angular_velocity_min = 512.0
+angular_velocity_max = 512.0
+scale_amount_min = 0.6
+scale_amount_max = 0.8
+scale_amount_curve = SubResource("Curve_5x2xm")
+
+[node name="CollisionShape2D" parent="HitArea2D" index="0"]
+shape = SubResource("CircleShape2D_hdkgx")

@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://main/bullet/bullet.gd" id="1_r4p2m"]
 
-[node name="Bullet" type="Area2D"]
+[node name="Bullet" type="CharacterBody2D"]
 collision_layer = 16
 script = ExtResource("1_r4p2m")
 
@@ -15,3 +15,11 @@ one_shot = true
 [node name="Sprite2D" type="Sprite2D" parent="SpriteHolder"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+
+[node name="HitArea2D" type="Area2D" parent="."]
+unique_name_in_owner = true
+collision_layer = 16
+collision_mask = 0
+monitoring = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitArea2D"]
