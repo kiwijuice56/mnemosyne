@@ -20,30 +20,56 @@ layer_0/tile_data = PackedInt32Array(393219, 720896, 2, 458755, 393216, 1, 45875
 
 [node name="Human" parent="." instance=ExtResource("4_yj1dv")]
 position = Vector2(1, -126)
+max_health = 0.0
 
 [node name="Human2" parent="." instance=ExtResource("4_yj1dv")]
-position = Vector2(34, -126)
+position = Vector2(1, -126)
+max_health = 0.0
 
 [node name="Human3" parent="." instance=ExtResource("4_yj1dv")]
-position = Vector2(-117, -187)
+position = Vector2(15, -120)
+max_health = 0.0
 
 [node name="Human4" parent="." instance=ExtResource("4_yj1dv")]
-position = Vector2(-84, -187)
+position = Vector2(-22, -123)
+max_health = 0.0
 
 [node name="Human5" parent="." instance=ExtResource("4_yj1dv")]
-position = Vector2(-59, -176)
+position = Vector2(-42, -133)
+max_health = 0.0
 
 [node name="Human6" parent="." instance=ExtResource("4_yj1dv")]
-position = Vector2(-26, -176)
+position = Vector2(-72, -150)
+max_health = 0.0
 
 [node name="Human7" parent="." instance=ExtResource("4_yj1dv")]
-position = Vector2(168, -178)
+position = Vector2(-91, -182)
+max_health = 0.0
 
 [node name="Human8" parent="." instance=ExtResource("4_yj1dv")]
-position = Vector2(201, -178)
+position = Vector2(-59, -142)
+max_health = 0.0
 
 [node name="Human9" parent="." instance=ExtResource("4_yj1dv")]
-position = Vector2(-70, -212)
+position = Vector2(32, -131)
+max_health = 0.0
 
 [node name="Human10" parent="." instance=ExtResource("4_yj1dv")]
-position = Vector2(-37, -212)
+position = Vector2(49, -120)
+max_health = 0.0
+
+[node name="Human11" parent="." instance=ExtResource("4_yj1dv")]
+position = Vector2(66, -113)
+max_health = 0.0
+
+[node name="Human12" parent="." instance=ExtResource("4_yj1dv")]
+position = Vector2(86, -100)
+max_health = 0.0
+
+[node name="Human13" parent="." instance=ExtResource("4_yj1dv")]
+position = Vector2(151, -105)
+max_health = 0.0
+
+[node name="Human14" parent="." instance=ExtResource("4_yj1dv")]
+position = Vector2(177, -121)
+max_health = 0.0

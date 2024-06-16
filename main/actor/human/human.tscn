@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://b8qxm7rwjhsbb"]
+[gd_scene load_steps=12 format=3 uid="uid://b8qxm7rwjhsbb"]
 
 [ext_resource type="PackedScene" uid="uid://c5lbqx8a61pyi" path="res://main/actor/actor.tscn" id="1_7wykg"]
 [ext_resource type="Texture2D" uid="uid://clw43qwrgjhjv" path="res://main/actor/human/human.png" id="2_cf3wo"]
@@ -14,6 +14,45 @@ radius = 6.0
 [sub_resource type="Curve" id="Curve_r5tyb"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 2
+
+[sub_resource type="Animation" id="Animation_buebw"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CPUParticles2D:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("SpriteHolder/Sprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("SpriteHolder/Sprite2D:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
 
 [sub_resource type="Animation" id="Animation_80sdl"]
 resource_name = "die"
@@ -55,62 +94,27 @@ tracks/2/keys = {
 "values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
 }
 
-[sub_resource type="Animation" id="Animation_buebw"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("CPUParticles2D:emitting")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("SpriteHolder/Sprite2D:frame")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("SpriteHolder/Sprite2D:modulate")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 1)]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_wmusb"]
 _data = {
 "RESET": SubResource("Animation_buebw"),
 "die": SubResource("Animation_80sdl")
 }
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_khxoh"]
+radius = 96.0
+
 [node name="Human" instance=ExtResource("1_7wykg")]
+collision_layer = 4
 script = ExtResource("2_fvux4")
-gravity = null
-max_health = null
-speed = null
-accel = null
+fear_speed = 22.0
+gravity = 32.0
+max_health = 1.0
+speed = 16.0
 
 [node name="Sprite2D" parent="SpriteHolder" index="0"]
 scale = Vector2(0.3, 0.3)
 texture = ExtResource("2_cf3wo")
-hframes = 2
+hframes = 3
 
 [node name="CollisionShape2D" parent="." index="2"]
 position = Vector2(0, 1.82)
@@ -142,3 +146,36 @@ unique_name_in_owner = true
 libraries = {
 "": SubResource("AnimationLibrary_wmusb")
 }
+
+[node name="RightFloor" type="RayCast2D" parent="." index="6"]
+unique_name_in_owner = true
+position = Vector2(4, 1)
+target_position = Vector2(0, 8)
+
+[node name="RightForward" type="RayCast2D" parent="." index="7"]
+unique_name_in_owner = true
+position = Vector2(0, 1)
+target_position = Vector2(4, 0)
+collision_mask = 4
+
+[node name="LeftForward" type="RayCast2D" parent="." index="8"]
+unique_name_in_owner = true
+position = Vector2(0, 1)
+target_position = Vector2(-4, 0)
+collision_mask = 4
+
+[node name="LeftFloor" type="RayCast2D" parent="." index="9"]
+unique_name_in_owner = true
+position = Vector2(-4, 1)
+target_position = Vector2(0, 8)
+
+[node name="MoveTimer" type="Timer" parent="." index="10"]
+unique_name_in_owner = true
+
+[node name="DetectionArea2D" type="Area2D" parent="." index="11"]
+unique_name_in_owner = true
+collision_layer = 0
+collision_mask = 6
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea2D" index="0"]
+shape = SubResource("CircleShape2D_khxoh")

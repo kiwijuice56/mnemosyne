@@ -172,19 +172,19 @@ shape = SubResource("CircleShape2D_ojln1")
 
 [node name="Camera2D" type="Camera2D" parent="." index="4"]
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="5"]
+[node name="PointLight2D" type="PointLight2D" parent="." index="5"]
+energy = 3.0
+texture = ExtResource("9_ks0yu")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="6"]
 unique_name_in_owner = true
 libraries = {
 "": SubResource("AnimationLibrary_c1qjm")
 }
 autoplay = "idle"
 
-[node name="SecondaryAnimationPlayer" type="AnimationPlayer" parent="." index="6"]
+[node name="SecondaryAnimationPlayer" type="AnimationPlayer" parent="." index="7"]
 unique_name_in_owner = true
 libraries = {
 "": SubResource("AnimationLibrary_yej6k")
 }
-
-[node name="PointLight2D" type="PointLight2D" parent="." index="7"]
-energy = 2.15
-texture = ExtResource("9_ks0yu")

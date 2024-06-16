@@ -12,6 +12,8 @@ var locked: bool = false
 
 var dir: Vector2 
 
+signal died(global_death_position: Vector2)
+
 func _ready() -> void:
 	health = max_health
 	
@@ -41,6 +43,7 @@ func _physics_process(delta: float) -> void:
 func kill() -> void:
 	if dead:
 		return
+	died.emit(global_position)
 	dead = true
 	queue_free()
 
