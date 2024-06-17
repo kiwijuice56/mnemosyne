@@ -44,6 +44,12 @@ func _physics_process(delta: float) -> void:
 	if not locked:
 		move_and_slide()
 
+func initialize(time: int) -> void:
+	reset()
+
+func reset() -> void:
+	pass
+
 func kill() -> void:
 	if dead:
 		return

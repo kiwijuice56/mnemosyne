@@ -1,19 +1,9 @@
-[gd_scene load_steps=12 format=3 uid="uid://b8qxm7rwjhsbb"]
+[gd_scene load_steps=13 format=3 uid="uid://b8qxm7rwjhsbb"]
 
 [ext_resource type="PackedScene" uid="uid://c5lbqx8a61pyi" path="res://main/actor/actor.tscn" id="1_7wykg"]
 [ext_resource type="Texture2D" uid="uid://clw43qwrgjhjv" path="res://main/actor/human/human.png" id="2_cf3wo"]
 [ext_resource type="Script" path="res://main/actor/human/human.gd" id="2_fvux4"]
 [ext_resource type="Texture2D" uid="uid://x3e8lonyrtgd" path="res://main/assets/sprites/circle.png" id="4_d0t15"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_tptly"]
-size = Vector2(2, 2)
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_hns7j"]
-radius = 6.0
-
-[sub_resource type="Curve" id="Curve_r5tyb"]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
-point_count = 2
 
 [sub_resource type="Animation" id="Animation_buebw"]
 length = 0.001
@@ -100,6 +90,19 @@ _data = {
 "die": SubResource("Animation_80sdl")
 }
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tptly"]
+size = Vector2(2, 2)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_hns7j"]
+radius = 6.0
+
+[sub_resource type="Curve" id="Curve_r5tyb"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_14c5v"]
+colors = PackedColorArray(1, 0.0431373, 0.192157, 1, 0.1, 0.02, 0.0893333, 1)
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_khxoh"]
 radius = 96.0
 
@@ -111,21 +114,37 @@ gravity = 128.0
 max_health = 1.0
 speed = 16.0
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="1"]
+unique_name_in_owner = true
+libraries = {
+"": SubResource("AnimationLibrary_wmusb")
+}
+
+[node name="MoveTimer" type="Timer" parent="." index="2"]
+unique_name_in_owner = true
+
+[node name="SpriteHolder" parent="." index="3"]
+position = Vector2(0, -5)
+
 [node name="Sprite2D" parent="SpriteHolder" index="0"]
 scale = Vector2(0.3, 0.3)
 texture = ExtResource("2_cf3wo")
 hframes = 3
 
-[node name="CollisionShape2D" parent="." index="2"]
-position = Vector2(0, 1.82)
+[node name="CollisionShape2D" parent="." index="4"]
+position = Vector2(0, -3.18)
 shape = SubResource("RectangleShape2D_tptly")
+
+[node name="HurtArea2D" parent="." index="5"]
+position = Vector2(0, -5)
 
 [node name="CollisionShape2D" parent="HurtArea2D" index="0"]
 position = Vector2(0, 1.55)
 shape = SubResource("CircleShape2D_hns7j")
 
-[node name="CPUParticles2D" type="CPUParticles2D" parent="." index="4"]
+[node name="CPUParticles2D" type="CPUParticles2D" parent="." index="6"]
 z_index = -1
+position = Vector2(0, -3)
 emitting = false
 amount = 32
 lifetime = 0.2
@@ -139,38 +158,30 @@ initial_velocity_max = 114.28
 scale_amount_min = 0.01
 scale_amount_max = 0.02
 scale_amount_curve = SubResource("Curve_r5tyb")
-color = Color(1, 0, 0, 1)
+color = Color(0.939553, 0.179719, 0.42038, 1)
+color_ramp = SubResource("Gradient_14c5v")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="5"]
+[node name="RightFloor" type="RayCast2D" parent="." index="7"]
 unique_name_in_owner = true
-libraries = {
-"": SubResource("AnimationLibrary_wmusb")
-}
-
-[node name="RightFloor" type="RayCast2D" parent="." index="6"]
-unique_name_in_owner = true
-position = Vector2(4, 1)
+position = Vector2(4, -4)
 target_position = Vector2(0, 8)
 
-[node name="RightForward" type="RayCast2D" parent="." index="7"]
+[node name="RightForward" type="RayCast2D" parent="." index="8"]
 unique_name_in_owner = true
-position = Vector2(0, 1)
+position = Vector2(0, -4)
 target_position = Vector2(4, 0)
 collision_mask = 4
 
-[node name="LeftForward" type="RayCast2D" parent="." index="8"]
+[node name="LeftForward" type="RayCast2D" parent="." index="9"]
 unique_name_in_owner = true
-position = Vector2(0, 1)
+position = Vector2(0, -4)
 target_position = Vector2(-4, 0)
 collision_mask = 4
 
-[node name="LeftFloor" type="RayCast2D" parent="." index="9"]
+[node name="LeftFloor" type="RayCast2D" parent="." index="10"]
 unique_name_in_owner = true
-position = Vector2(-4, 1)
+position = Vector2(-4, -4)
 target_position = Vector2(0, 8)
-
-[node name="MoveTimer" type="Timer" parent="." index="10"]
-unique_name_in_owner = true
 
 [node name="DetectionArea2D" type="Area2D" parent="." index="11"]
 unique_name_in_owner = true

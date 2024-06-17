@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://main/actor/actor.gd" id="1_15cy5"]
 
-[node name="Actor" type="CharacterBody2D"]
+[node name="Actor" type="CharacterBody2D" groups=["Evolving"]]
 collision_layer = 0
 script = ExtResource("1_15cy5")
 

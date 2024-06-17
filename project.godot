@@ -21,11 +21,11 @@ Ref="*res://main/ref.gd"
 
 [display]
 
-window/size/viewport_width=400
-window/size/viewport_height=300
+window/size/viewport_width=350
+window/size/viewport_height=263
 window/size/window_width_override=1200
 window/size/window_height_override=900
-window/stretch/mode="viewport"
+window/stretch/mode="canvas_items"
 
 [file_customization]
 
@@ -89,4 +89,4 @@ shoot={
 textures/canvas_textures/default_texture_filter=0
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
-environment/defaults/default_clear_color=Color(0, 0, 0, 1)
+environment/defaults/default_clear_color=Color(0.19, 0.0988, 0.17632, 1)

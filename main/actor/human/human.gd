@@ -86,3 +86,7 @@ func kill() -> void:
 	%AnimationPlayer.play("die")
 	await %AnimationPlayer.animation_finished
 	queue_free()
+
+func initialize(_time: int) -> void:
+	if randf() < 0.35:
+		queue_free()

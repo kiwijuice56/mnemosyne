@@ -1,0 +1,14 @@
+[gd_scene load_steps=4 format=3 uid="uid://5s0ql846b3kx"]
+
+[ext_resource type="PackedScene" uid="uid://dr0dug4ga4q3a" path="res://main/decoration/decoration.tscn" id="1_2vqbw"]
+[ext_resource type="Texture2D" uid="uid://cyek7p4vecfoh" path="res://main/decoration/debris/old.png" id="2_8nuem"]
+[ext_resource type="Script" path="res://main/decoration/debris/debris.gd" id="2_lh32e"]
+
+[node name="Debris" instance=ExtResource("1_2vqbw")]
+script = ExtResource("2_lh32e")
+
+[node name="Stuff" type="Sprite2D" parent="." index="0"]
+unique_name_in_owner = true
+position = Vector2(0, -16)
+texture = ExtResource("2_8nuem")
+hframes = 5

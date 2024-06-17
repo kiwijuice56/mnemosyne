@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dr0dug4ga4q3a"]
+
+[ext_resource type="Script" path="res://main/decoration/decoration.gd" id="1_dd1pr"]
+
+[node name="Decoration" type="Sprite2D" groups=["Evolving"]]
+script = ExtResource("1_dd1pr")
