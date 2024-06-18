@@ -43,7 +43,7 @@ func _physics_process(delta: float) -> void:
 	tentacle_time += tentacle_speed * delta
 	tentacle_material.set_shader_parameter("s", tentacle_time)
 	
-	if is_instance_valid(target):
+	if is_instance_valid(target) and not dead:
 		var dist: float = (target.global_position - global_position).length() 
 		approach = lerp(approach, dist - (64.0 if target is Player else 56.0), delta)
 		approach = clamp(approach, -1, 1)
@@ -58,3 +58,21 @@ func retarget() -> void:
 		if test_dist < dist:
 			dist = test_dist
 			target = actor
+
+func hurt(damage: float, hurt_dir: Vector2, knockback_extra: float = 1.0) -> bool:
+	if super.hurt(damage, hurt_dir, knockback_extra):
+		if health > 0:
+			%AnimationPlayer.stop()
+			%AnimationPlayer.play("hurt")
+		return true
+	return false
+
+func kill() -> void:
+	if dead:
+		return
+	died.emit(global_position)
+	%AnimationPlayer.stop()
+	%AnimationPlayer.play("die")
+	dead = true
+	await %AnimationPlayer.animation_finished
+	queue_free()

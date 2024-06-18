@@ -134,3 +134,16 @@ position = Vector2(129, -216)
 
 [node name="Daemon" parent="Daemons" instance=ExtResource("8_cqb1t")]
 position = Vector2(71, -152)
+tentacle_speed = 16.0
+
+[node name="Daemon2" parent="Daemons" instance=ExtResource("8_cqb1t")]
+position = Vector2(18, -180)
+tentacle_speed = 16.0
+
+[node name="Daemon3" parent="Daemons" instance=ExtResource("8_cqb1t")]
+position = Vector2(56, -180)
+tentacle_speed = 16.0
+
+[node name="Daemon4" parent="Daemons" instance=ExtResource("8_cqb1t")]
+position = Vector2(25, -220)
+tentacle_speed = 16.0
