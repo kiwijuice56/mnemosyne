@@ -1,5 +1,82 @@
-[gd_scene load_steps=2 format=3 uid="uid://0qwy7ejm4p2r"]
+[gd_scene load_steps=9 format=3 uid="uid://0qwy7ejm4p2r"]
 
 [ext_resource type="PackedScene" uid="uid://c5lbqx8a61pyi" path="res://main/actor/actor.tscn" id="1_niu7q"]
+[ext_resource type="Texture2D" uid="uid://x3e8lonyrtgd" path="res://main/assets/sprites/circle.png" id="2_mpgev"]
+[ext_resource type="Material" uid="uid://wavqql72q6up" path="res://main/actor/daemon/tentacle_material_daemon.tres" id="2_r8hq3"]
+[ext_resource type="Script" path="res://main/actor/daemon/daemon.gd" id="2_upoli"]
+[ext_resource type="Texture2D" uid="uid://b1iiiey1nto1t" path="res://main/assets/sprites/rectangle.png" id="3_aatdq"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_jeb0k"]
+radius = 4.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_jjs1a"]
+radius = 7.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_dvgtk"]
+radius = 128.0
 
 [node name="Daemon" instance=ExtResource("1_niu7q")]
+collision_layer = 8
+collision_mask = 9
+script = ExtResource("2_upoli")
+tentacle_speed = 16.0
+tentacle_material = ExtResource("2_r8hq3")
+max_health = 6.0
+speed = 32.0
+
+[node name="TentacleHolder" type="Node2D" parent="SpriteHolder" index="0"]
+unique_name_in_owner = true
+rotation = 0.678933
+
+[node name="Tentacle" type="Sprite2D" parent="SpriteHolder/TentacleHolder" index="0"]
+material = ExtResource("2_r8hq3")
+scale = Vector2(1.6, 1.6)
+texture = ExtResource("3_aatdq")
+
+[node name="Tentacle2" type="Sprite2D" parent="SpriteHolder/TentacleHolder" index="1"]
+material = ExtResource("2_r8hq3")
+rotation = 1.5708
+scale = Vector2(1.6, 1.6)
+texture = ExtResource("3_aatdq")
+
+[node name="Sprite2D" parent="SpriteHolder" index="1"]
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("2_mpgev")
+
+[node name="EyeLeft" type="Sprite2D" parent="SpriteHolder/Sprite2D" index="0"]
+self_modulate = Color(0, 0, 0, 1)
+position = Vector2(-20, -10)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("2_mpgev")
+
+[node name="EyeRight" type="Sprite2D" parent="SpriteHolder/Sprite2D" index="1"]
+self_modulate = Color(0, 0, 0, 1)
+position = Vector2(20, -10)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("2_mpgev")
+
+[node name="Mouth" type="Sprite2D" parent="SpriteHolder/Sprite2D" index="2"]
+self_modulate = Color(0, 0, 0, 1)
+position = Vector2(0, 20)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("2_mpgev")
+
+[node name="CollisionShape2D" parent="." index="2"]
+shape = SubResource("CircleShape2D_jeb0k")
+
+[node name="CollisionShape2D" parent="HurtArea2D" index="0"]
+shape = SubResource("CircleShape2D_jjs1a")
+
+[node name="DetectionArea2D" type="Area2D" parent="." index="4"]
+unique_name_in_owner = true
+collision_layer = 0
+collision_mask = 6
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea2D" index="0"]
+shape = SubResource("CircleShape2D_dvgtk")
+
+[node name="RetargetTimer" type="Timer" parent="." index="5"]
+unique_name_in_owner = true
+wait_time = 0.4
+autostart = true

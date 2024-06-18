@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://cv8wagch44eli"]
+[gd_scene load_steps=25 format=3 uid="uid://cv8wagch44eli"]
 
 [ext_resource type="PackedScene" uid="uid://c5lbqx8a61pyi" path="res://main/actor/actor.tscn" id="1_nisst"]
 [ext_resource type="Script" path="res://main/actor/player/player.gd" id="2_r6spv"]
@@ -10,6 +10,7 @@
 [ext_resource type="Script" path="res://main/actor/player/iris.gd" id="6_r0w64"]
 [ext_resource type="Script" path="res://main/actor/player/shake_camera.gd" id="9_71eu6"]
 [ext_resource type="Texture2D" uid="uid://dbcwvffvu5thv" path="res://main/assets/sprites/light.webp" id="9_ks0yu"]
+[ext_resource type="AudioStream" uid="uid://6ypse2ipnd7g" path="res://main/actor/player/shoot.ogg" id="11_3w2hi"]
 
 [sub_resource type="Curve" id="Curve_1jduo"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -149,6 +150,18 @@ tracks/0/keys = {
 "points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
 "times": PackedFloat32Array(0)
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ShootPlayer:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="Animation_23xkw"]
 resource_name = "shoot"
@@ -164,6 +177,18 @@ tracks/0/keys = {
 "points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 6.283, -0.25, 0, 0.25, 0),
 "times": PackedFloat32Array(0, 0.2)
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ShootPlayer:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_q0j1w"]
 _data = {
@@ -171,7 +196,14 @@ _data = {
 "shoot": SubResource("Animation_23xkw")
 }
 
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_qsvsj"]
+random_pitch = 1.3
+streams_count = 1
+stream_0/stream = ExtResource("11_3w2hi")
+stream_0/weight = 1.0
+
 [node name="Player" instance=ExtResource("1_nisst")]
+collision_layer = 2
 script = ExtResource("2_r6spv")
 primary_bullet_scene = ExtResource("3_0cv6q")
 tentacle_scene = ExtResource("4_3rm2x")
@@ -249,3 +281,8 @@ unique_name_in_owner = true
 libraries = {
 "": SubResource("AnimationLibrary_q0j1w")
 }
+
+[node name="ShootPlayer" type="AudioStreamPlayer" parent="." index="9"]
+stream = SubResource("AudioStreamRandomizer_qsvsj")
+volume_db = -20.0
+bus = &"sfx"

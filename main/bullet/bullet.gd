@@ -27,6 +27,9 @@ func _on_body_entered(_body: Node) -> void:
 	destroy()
 
 func _physics_process(delta: float) -> void:
+	if destroyed:
+		return
+	
 	velocity = dir.normalized() * speed 
 	var collision: KinematicCollision2D = move_and_collide(velocity)
 	if collision:
@@ -34,6 +37,7 @@ func _physics_process(delta: float) -> void:
 			destroy()
 		bounces += 1
 		dir = dir.bounce(collision.get_normal())
+		bounce()
 
 func shoot(shoot_dir: Vector2, velocity: Vector2) -> void:
 	dir = shoot_dir
@@ -49,3 +53,6 @@ func destroy() -> void:
 		return
 	destroyed = true
 	queue_free()
+
+func bounce() -> void:
+	pass

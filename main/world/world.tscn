@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://b6wtebxe1yih7"]
+[gd_scene load_steps=10 format=3 uid="uid://b6wtebxe1yih7"]
 
 [ext_resource type="Script" path="res://main/world/world.gd" id="1_48bnx"]
 [ext_resource type="TileSet" uid="uid://c8p0cdh6sv0vc" path="res://main/world/basic_tileset.tres" id="1_w88bs"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://b8qxm7rwjhsbb" path="res://main/actor/human/human.tscn" id="4_yj1dv"]
 [ext_resource type="PackedScene" uid="uid://5s0ql846b3kx" path="res://main/decoration/debris/debris.tscn" id="5_bnmmv"]
 [ext_resource type="PackedScene" uid="uid://bqqdv4hwam3i3" path="res://main/decoration/home/home.tscn" id="5_db5go"]
+[ext_resource type="PackedScene" uid="uid://0qwy7ejm4p2r" path="res://main/actor/daemon/daemon.tscn" id="8_cqb1t"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_43a5g"]
 shader = ExtResource("1_xj2l8")
@@ -128,3 +129,8 @@ position = Vector2(96, -187)
 
 [node name="Spike3" parent="Spikes" instance=ExtResource("4_eu3nu")]
 position = Vector2(129, -216)
+
+[node name="Daemons" type="Node2D" parent="."]
+
+[node name="Daemon" parent="Daemons" instance=ExtResource("8_cqb1t")]
+position = Vector2(71, -152)

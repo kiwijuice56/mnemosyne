@@ -9,3 +9,5 @@ func destroy() -> void:
 	await $AnimationPlayer.animation_finished
 	queue_free()
 
+func bounce() -> void:
+	%ClangPlayer.play()

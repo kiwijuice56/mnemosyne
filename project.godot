@@ -23,9 +23,8 @@ Ref="*res://main/ref.gd"
 
 window/size/viewport_width=350
 window/size/viewport_height=263
-window/size/window_width_override=1200
-window/size/window_height_override=900
 window/stretch/mode="canvas_items"
+window/stretch/aspect="keep_width"
 
 [file_customization]
 
@@ -89,4 +88,7 @@ shoot={
 textures/canvas_textures/default_texture_filter=0
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
+textures/default_filters/use_nearest_mipmap_filter=true
 environment/defaults/default_clear_color=Color(0.19, 0.0988, 0.17632, 1)
+viewport/hdr_2d=true
+2d/snap/snap_2d_transforms_to_pixel=true
