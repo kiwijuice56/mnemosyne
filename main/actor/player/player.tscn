@@ -307,3 +307,9 @@ shape = SubResource("CircleShape2D_6exls")
 unique_name_in_owner = true
 wait_time = 0.5
 autostart = true
+
+[node name="HealthBar" parent="." index="12"]
+offset_left = -12.0
+offset_top = 4.0
+offset_right = 28.0
+offset_bottom = 44.0

@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://ci1s5x44x1t0a"]
+
+[ext_resource type="Texture2D" uid="uid://b0qghf0558cqo" path="res://main/actor/player/under.png" id="1_kre4k"]
+[ext_resource type="Texture2D" uid="uid://bpw5f2xuicld2" path="res://main/actor/player/progress.png" id="2_kkv2v"]
+[ext_resource type="Script" path="res://main/ui/health_bar.gd" id="3_7pra6"]
+
+[node name="HealthBar" type="TextureProgressBar"]
+modulate = Color(0.847059, 0.219608, 0.745098, 0.8)
+offset_left = -11.0
+offset_top = 4.0
+offset_right = 29.0
+offset_bottom = 44.0
+scale = Vector2(0.25, 0.25)
+max_value = 1.2
+step = 0.1
+value = 1.2
+fill_mode = 5
+texture_under = ExtResource("1_kre4k")
+texture_progress = ExtResource("2_kkv2v")
+script = ExtResource("3_7pra6")

@@ -132,6 +132,7 @@ script = ExtResource("3_1rx3v")
 unique_name_in_owner = true
 stream = ExtResource("4_yal8j")
 volume_db = -8.0
+pitch_scale = 1.1
 autoplay = true
 bus = &"music"
 
@@ -139,6 +140,7 @@ bus = &"music"
 unique_name_in_owner = true
 stream = ExtResource("5_l64p7")
 volume_db = -64.0
+pitch_scale = 1.1
 autoplay = true
 bus = &"music"
 
@@ -146,6 +148,7 @@ bus = &"music"
 unique_name_in_owner = true
 stream = ExtResource("7_4joml")
 volume_db = -64.0
+pitch_scale = 1.1
 autoplay = true
 bus = &"music"
 

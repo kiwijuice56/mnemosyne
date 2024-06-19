@@ -13,6 +13,7 @@ var potential_targets: Array[Actor]
 
 func _ready() -> void:
 	super._ready()
+	%HealthBar.hide_bar()
 	
 	%ScreamPlayer.pitch_scale = randf_range(0.6, 1.1)
 	%DetectionArea2D.body_entered.connect(_on_body_entered)
@@ -27,6 +28,8 @@ func _ready() -> void:
 func _on_body_entered(node: Node) -> void:
 	if node in potential_targets or node.dead:
 		return
+	if node is Player:
+		%HealthBar.show_bar()
 	node.died.connect(_on_target_died.bind(node))
 	potential_targets.append(node)
 	retarget()
@@ -35,6 +38,9 @@ func _on_body_exited(node: Node) -> void:
 	if node == target:
 		target = null
 	if node in potential_targets:
+		if node is Player:
+			%HealthBar.hide_bar()
+		
 		node.died.disconnect(_on_target_died)
 		potential_targets.remove_at(potential_targets.find(node))
 	retarget()
@@ -80,6 +86,7 @@ func hurt(damage: float, hurt_dir: Vector2, knockback_extra: float = 1.0) -> boo
 	return false
 
 func kill() -> void:
+	%HealthBar.hide_bar()
 	if dead:
 		return
 	died.emit(global_position)

@@ -6,7 +6,11 @@ extends CharacterBody2D
 @export var accel: float = 16.0
 @export var knockback_scale: float = 1.0
 
-var health: float = 0
+var health: float = 0:
+	set(val):
+		health = val
+		%HealthBar.max_value = max_health
+		%HealthBar.value = health
 var dead: bool = false
 
 var locked: bool = false
@@ -56,6 +60,7 @@ func reset() -> void:
 	pass
 
 func kill() -> void:
+	%HealthBar.visible = false
 	if dead:
 		return
 	died.emit(global_position)

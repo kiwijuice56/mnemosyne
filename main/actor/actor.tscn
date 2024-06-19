@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://c5lbqx8a61pyi"]
+[gd_scene load_steps=3 format=3 uid="uid://c5lbqx8a61pyi"]
 
 [ext_resource type="Script" path="res://main/actor/actor.gd" id="1_15cy5"]
+[ext_resource type="PackedScene" uid="uid://ci1s5x44x1t0a" path="res://main/ui/health_bar.tscn" id="2_mn67j"]
 
 [node name="Actor" type="CharacterBody2D" groups=["Evolving"]]
 collision_layer = 0
@@ -23,3 +24,11 @@ collision_mask = 17
 monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtArea2D"]
+
+[node name="HealthBar" parent="." instance=ExtResource("2_mn67j")]
+unique_name_in_owner = true
+offset_left = -9.0
+offset_top = 1.0
+offset_right = 31.0
+offset_bottom = 41.0
+value = 1.0
