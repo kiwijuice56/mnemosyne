@@ -37,6 +37,7 @@ func _on_body_exited(node: Node) -> void:
 	if node in potential_targets:
 		node.died.disconnect(_on_target_died)
 		potential_targets.remove_at(potential_targets.find(node))
+	retarget()
 
 func _on_target_died(_position: Vector2, actor: Actor) -> void:
 	_on_body_exited(actor)

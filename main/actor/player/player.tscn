@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://cv8wagch44eli"]
+[gd_scene load_steps=26 format=3 uid="uid://cv8wagch44eli"]
 
 [ext_resource type="PackedScene" uid="uid://c5lbqx8a61pyi" path="res://main/actor/actor.tscn" id="1_nisst"]
 [ext_resource type="Script" path="res://main/actor/player/player.gd" id="2_r6spv"]
@@ -202,6 +202,9 @@ streams_count = 1
 stream_0/stream = ExtResource("11_3w2hi")
 stream_0/weight = 1.0
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_6exls"]
+radius = 90.0
+
 [node name="Player" instance=ExtResource("1_nisst")]
 collision_layer = 2
 script = ExtResource("2_r6spv")
@@ -291,3 +294,16 @@ stream = SubResource("AudioStreamRandomizer_qsvsj")
 volume_db = -17.0
 pitch_scale = 0.8
 bus = &"sfx"
+
+[node name="DetectionArea2D" type="Area2D" parent="." index="10"]
+unique_name_in_owner = true
+collision_layer = 0
+collision_mask = 12
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea2D" index="0"]
+shape = SubResource("CircleShape2D_6exls")
+
+[node name="RetargetTimer" type="Timer" parent="." index="11"]
+unique_name_in_owner = true
+wait_time = 0.5
+autostart = true

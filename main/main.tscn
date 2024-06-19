@@ -1,9 +1,13 @@
-[gd_scene load_steps=12 format=3 uid="uid://bmip1vhc7m4m6"]
+[gd_scene load_steps=16 format=3 uid="uid://bmip1vhc7m4m6"]
 
 [ext_resource type="Script" path="res://main/main.gd" id="1_1wch7"]
 [ext_resource type="PackedScene" uid="uid://cv8wagch44eli" path="res://main/actor/player/player.tscn" id="2_aeni1"]
+[ext_resource type="Script" path="res://main/music/music.gd" id="3_1rx3v"]
+[ext_resource type="AudioStream" uid="uid://brgutk5ebd61g" path="res://main/music/ac.ogg" id="3_gdgrb"]
 [ext_resource type="Texture2D" uid="uid://gn4bx3xw7um3" path="res://main/background/background2.png" id="4_bjlk0"]
 [ext_resource type="PackedScene" uid="uid://b6wtebxe1yih7" path="res://main/world/world.tscn" id="4_hfrpo"]
+[ext_resource type="AudioStream" uid="uid://dmh1mlh07fno3" path="res://main/music/normal.ogg" id="4_yal8j"]
+[ext_resource type="AudioStream" uid="uid://c17m2vso3gby6" path="res://main/music/battle.ogg" id="5_l64p7"]
 [ext_resource type="Script" path="res://main/ui/hurt_effect.gd" id="6_adgd6"]
 [ext_resource type="Texture2D" uid="uid://d1jvoay2qfkl0" path="res://main/background/background_neutral.png" id="6_im74b"]
 [ext_resource type="Shader" path="res://main/ui/crt.gdshader" id="6_pu8ya"]
@@ -112,6 +116,30 @@ audio_listener_enable_2d = true
 size = Vector2i(350, 263)
 size_2d_override_stretch = true
 render_target_update_mode = 4
+
+[node name="AC" type="AudioStreamPlayer" parent="SubViewportContainer/SubViewport"]
+stream = ExtResource("3_gdgrb")
+volume_db = -48.0
+autoplay = true
+bus = &"music"
+
+[node name="Music" type="Node" parent="SubViewportContainer/SubViewport"]
+unique_name_in_owner = true
+script = ExtResource("3_1rx3v")
+
+[node name="Normal" type="AudioStreamPlayer" parent="SubViewportContainer/SubViewport/Music"]
+unique_name_in_owner = true
+stream = ExtResource("4_yal8j")
+volume_db = -8.0
+autoplay = true
+bus = &"music"
+
+[node name="Battle" type="AudioStreamPlayer" parent="SubViewportContainer/SubViewport/Music"]
+unique_name_in_owner = true
+stream = ExtResource("5_l64p7")
+volume_db = -64.0
+autoplay = true
+bus = &"music"
 
 [node name="Player" parent="SubViewportContainer/SubViewport" instance=ExtResource("2_aeni1")]
 unique_name_in_owner = true

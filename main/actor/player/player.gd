@@ -12,6 +12,32 @@ var tentacle_time: float = 0.0
 var tentacle_speed: float = 8.0
 var tentacle_count: int = 8
 
+var mood_potential_targets: Array[Actor]
+var mood_target: Actor
+
+func _ready() -> void:
+	super._ready()
+	%DetectionArea2D.body_entered.connect(_on_body_entered)
+	%DetectionArea2D.body_exited.connect(_on_body_exited)
+	%RetargetTimer.timeout.connect(retarget)
+
+func _on_body_entered(node: Node) -> void:
+	if node in mood_potential_targets or node.dead:
+		return
+	node.died.connect(_on_target_died.bind(node))
+	mood_potential_targets.append(node)
+	retarget()
+
+func _on_body_exited(node: Node) -> void:
+	if node == mood_target:
+		mood_target = null
+	if node in mood_potential_targets:
+		node.died.disconnect(_on_target_died)
+		mood_potential_targets.remove_at(mood_potential_targets.find(node))
+	retarget()
+
+func _on_target_died(_position: Vector2, actor: Actor) -> void:
+	_on_body_exited(actor)
 
 func _physics_process(delta: float) -> void:
 	dir = Vector2()
@@ -59,6 +85,25 @@ func hurt(damage: float, hurt_dir: Vector2, knockback_extra: float = 1.0) -> boo
 		Ref.hurt_effect.hurt()
 		return true
 	return false
+
+func retarget() -> void:
+	var old_target: Actor = mood_target
+	var dist: float = INF
+	for actor in mood_potential_targets:
+		var test_dist: float = (actor.global_position - global_position).length()
+		if test_dist < dist:
+			dist = test_dist
+			mood_target = actor
+	
+	if mood_target == null:
+		Ref.music.set_lead("normal")
+		return
+	
+	if not old_target == mood_target:
+		if mood_target is Daemon:
+			Ref.music.set_lead("battle")
+		else:
+			Ref.music.set_lead("normal")
 
 func hit_enemy() -> void:
 	pass

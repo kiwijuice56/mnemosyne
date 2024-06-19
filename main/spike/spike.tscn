@@ -1,9 +1,10 @@
-[gd_scene load_steps=11 format=3 uid="uid://cldebfhty1gio"]
+[gd_scene load_steps=12 format=3 uid="uid://cldebfhty1gio"]
 
 [ext_resource type="Script" path="res://main/spike/spike.gd" id="1_x5tda"]
 [ext_resource type="Texture2D" uid="uid://emxr7yki1j14" path="res://main/spike/spike.png" id="1_xu4uh"]
 [ext_resource type="PackedScene" uid="uid://d2xy3fdq4duqk" path="res://main/bullet/pellet/destroy_particles.tscn" id="3_c8toc"]
 [ext_resource type="AudioStream" uid="uid://cpfgb6asbutty" path="res://main/bullet/pellet/clang.wav" id="3_kf2t2"]
+[ext_resource type="AudioStream" uid="uid://dne67gvfan4wg" path="res://main/spike/heli.ogg" id="5_vau5h"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ini8t"]
 radius = 3.0
@@ -108,6 +109,15 @@ stream = SubResource("AudioStreamRandomizer_8flek")
 volume_db = -20.0
 max_distance = 128.0
 attenuation = 2.54912
+bus = &"sfx"
+
+[node name="HeliPlayer" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_vau5h")
+volume_db = -12.0
+pitch_scale = 0.83
+autoplay = true
+max_distance = 92.0
+attenuation = 3.03143
 bus = &"sfx"
 
 [editable path="DestroyParticles"]
