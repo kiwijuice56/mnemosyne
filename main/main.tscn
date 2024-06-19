@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://bmip1vhc7m4m6"]
+[gd_scene load_steps=17 format=3 uid="uid://bmip1vhc7m4m6"]
 
 [ext_resource type="Script" path="res://main/main.gd" id="1_1wch7"]
 [ext_resource type="PackedScene" uid="uid://cv8wagch44eli" path="res://main/actor/player/player.tscn" id="2_aeni1"]
@@ -11,6 +11,7 @@
 [ext_resource type="Script" path="res://main/ui/hurt_effect.gd" id="6_adgd6"]
 [ext_resource type="Texture2D" uid="uid://d1jvoay2qfkl0" path="res://main/background/background_neutral.png" id="6_im74b"]
 [ext_resource type="Shader" path="res://main/ui/crt.gdshader" id="6_pu8ya"]
+[ext_resource type="AudioStream" uid="uid://dtq7dprtlx566" path="res://main/music/human.ogg" id="7_4joml"]
 
 [sub_resource type="Animation" id="Animation_ymvtj"]
 length = 0.001
@@ -137,6 +138,13 @@ bus = &"music"
 [node name="Battle" type="AudioStreamPlayer" parent="SubViewportContainer/SubViewport/Music"]
 unique_name_in_owner = true
 stream = ExtResource("5_l64p7")
+volume_db = -64.0
+autoplay = true
+bus = &"music"
+
+[node name="Human" type="AudioStreamPlayer" parent="SubViewportContainer/SubViewport/Music"]
+unique_name_in_owner = true
+stream = ExtResource("7_4joml")
 volume_db = -64.0
 autoplay = true
 bus = &"music"

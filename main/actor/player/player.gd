@@ -102,6 +102,8 @@ func retarget() -> void:
 	if not old_target == mood_target:
 		if mood_target is Daemon:
 			Ref.music.set_lead("battle")
+		elif mood_target is Human:
+			Ref.music.set_lead("human")
 		else:
 			Ref.music.set_lead("normal")
 

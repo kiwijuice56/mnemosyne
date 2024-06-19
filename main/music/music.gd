@@ -6,6 +6,7 @@ var lead: AudioStreamPlayer
 func _ready() -> void:
 	%Normal.volume_db = -16
 	%Battle.volume_db = -64
+	%Human.volume_db = -64
 	lead = %Normal
 
 func _process(delta: float) -> void:
