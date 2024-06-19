@@ -29,10 +29,12 @@ func _on_area_entered_hurt(area: Area2D) -> void:
 		var bullet: Bullet = area.get_parent() as Bullet
 		if bullet.destroyed or bullet.shooter == self:
 			return
+		if bullet.shooter == Ref.player:
+			Ref.player.hit_enemy()
 		hurt(bullet.damage, (global_position - area.global_position).normalized())
 		bullet.hit(self)
 	if area.get_parent() is Spike:
-		hurt(max_health * 0.25, (global_position - area.global_position).normalized(), 4.0)
+		hurt(max_health * 0.25, (global_position - area.global_position).normalized(), 2.0)
 		area.get_parent().slice()
 
 func _physics_process(delta: float) -> void:
@@ -70,6 +72,7 @@ func hurt(damage: float, hurt_dir: Vector2, knockback_extra: float = 1.0) -> boo
 	health = max(0, min(max_health, health))
 	if health == 0:
 		kill()
+		knockback *= 1.5
 	return true
 
 func shoot(bullet_scene: PackedScene, shoot_dir: Vector2) -> bool:

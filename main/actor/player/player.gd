@@ -33,6 +33,10 @@ func _physics_process(delta: float) -> void:
 	tentacle_time += tentacle_speed * delta
 	tentacle_material.set_shader_parameter("s", tentacle_time)
 	
+	var look_dir: Vector2 = get_global_mouse_position() - global_position
+	look_dir = min(64, look_dir.length()) * look_dir.normalized()
+	%ShakeCamera.center = lerp(%ShakeCamera.center, look_dir * 0.2, delta * 4)
+	
 	super._physics_process(delta)
 
 func initialize(time: int) -> void:
@@ -43,6 +47,7 @@ func initialize(time: int) -> void:
 
 func shoot(bullet_scene: PackedScene, shoot_dir: Vector2) -> bool:
 	if super.shoot(bullet_scene, shoot_dir):
+		%ShakeCamera.push = 6 * (global_position - get_global_mouse_position()).normalized()
 		%SecondaryAnimationPlayer.play("shoot")
 		return true
 	return false
@@ -50,7 +55,11 @@ func shoot(bullet_scene: PackedScene, shoot_dir: Vector2) -> bool:
 func hurt(damage: float, hurt_dir: Vector2, knockback_extra: float = 1.0) -> bool:
 	if super.hurt(damage, hurt_dir, knockback_extra):
 		%TertiaryAnimationPlayer.play("hurt")
-		%ShakeCamera.shake(1.5)
+		%ShakeCamera.shake(2.0)
 		Ref.hurt_effect.hurt()
 		return true
 	return false
+
+func hit_enemy() -> void:
+	pass
+	#%ShakeCamera.shake(0.9)

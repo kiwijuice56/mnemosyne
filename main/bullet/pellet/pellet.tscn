@@ -3,6 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://nd2re4kr63gu" path="res://main/bullet/bullet.tscn" id="1_8jywf"]
 [ext_resource type="Texture2D" uid="uid://b5b4qv7ykx2gf" path="res://main/assets/sprites/cross.png" id="2_5dcdl"]
 [ext_resource type="Script" path="res://main/bullet/pellet/pellet.gd" id="2_5s7i2"]
+[ext_resource type="PackedScene" uid="uid://d2xy3fdq4duqk" path="res://main/bullet/pellet/destroy_particles.tscn" id="4_34dj4"]
 [ext_resource type="AudioStream" uid="uid://cpfgb6asbutty" path="res://main/bullet/pellet/clang.wav" id="4_h4qau"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_0stpw"]
@@ -98,25 +99,21 @@ _data = {
 "rotate": SubResource("Animation_2jkwh")
 }
 
-[sub_resource type="Curve" id="Curve_5x2xm"]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
-point_count = 2
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_hdkgx"]
-radius = 6.0
-
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_6i168"]
 random_pitch = 1.3
 streams_count = 1
 stream_0/stream = ExtResource("4_h4qau")
 stream_0/weight = 1.0
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_hdkgx"]
+radius = 6.0
+
 [node name="Pellet" instance=ExtResource("1_8jywf")]
 script = ExtResource("2_5s7i2")
-speed = 4.0
+speed = 7.0
 damage = 1.0
 pierce = 1
-lifetime = 1.5
+lifetime = 1.0
 bounce_amount = 1
 cooldown = 0.5
 
@@ -126,6 +123,11 @@ wait_time = 0.6
 [node name="Sprite2D" parent="SpriteHolder" index="0"]
 scale = Vector2(1.3, 1.3)
 texture = ExtResource("2_5dcdl")
+
+[node name="TrailParticles" type="CPUParticles2D" parent="SpriteHolder" index="1"]
+amount = 32
+lifetime = 0.5
+gravity = Vector2(0, 0)
 
 [node name="CollisionShape2D" parent="." index="2"]
 shape = SubResource("CircleShape2D_0stpw")
@@ -137,26 +139,7 @@ libraries = {
 autoplay = "rotate"
 speed_scale = 3.0
 
-[node name="DestroyParticles" type="CPUParticles2D" parent="." index="4"]
-emitting = false
-amount = 6
-one_shot = true
-speed_scale = 1.25
-explosiveness = 1.0
-texture = ExtResource("2_5dcdl")
-direction = Vector2(0, -1)
-spread = 180.0
-gravity = Vector2(0, 180)
-initial_velocity_min = 32.0
-initial_velocity_max = 64.0
-angular_velocity_min = 512.0
-angular_velocity_max = 512.0
-scale_amount_min = 0.6
-scale_amount_max = 0.8
-scale_amount_curve = SubResource("Curve_5x2xm")
-
-[node name="CollisionShape2D" parent="HitArea2D" index="0"]
-shape = SubResource("CircleShape2D_hdkgx")
+[node name="DestroyParticles" parent="." index="4" instance=ExtResource("4_34dj4")]
 
 [node name="ClangPlayer" type="AudioStreamPlayer2D" parent="." index="6"]
 unique_name_in_owner = true
@@ -165,3 +148,6 @@ volume_db = -28.0
 max_distance = 256.0
 attenuation = 2.46229
 bus = &"sfx"
+
+[node name="CollisionShape2D" parent="HitArea2D" index="0"]
+shape = SubResource("CircleShape2D_hdkgx")

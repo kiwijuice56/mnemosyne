@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://byximaryj8h0h"]
+
+[node name="ClangParticles" type="CPUParticles2D"]
+amount = 32
+lifetime = 0.5
+gravity = Vector2(0, 0)

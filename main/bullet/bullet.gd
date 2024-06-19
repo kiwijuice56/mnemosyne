@@ -40,6 +40,13 @@ func _physics_process(delta: float) -> void:
 		bounce()
 
 func shoot(shoot_dir: Vector2, velocity: Vector2) -> void:
+	var flash: Sprite2D = %Flash
+	remove_child(flash)
+	get_parent().add_child(flash)
+	get_parent().move_child(flash, get_index())
+	flash.global_position = global_position + shoot_dir * 12.0
+	
+	
 	dir = shoot_dir
 	shooter_velocity = velocity
 

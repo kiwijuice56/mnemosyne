@@ -1,6 +1,7 @@
 class_name Daemon
 extends Actor
 
+@export var gravity: float = 400.0
 @export var tentacle_speed: float = 16.0
 @export var tentacle_material: ShaderMaterial
 
@@ -13,6 +14,7 @@ var potential_targets: Array[Actor]
 func _ready() -> void:
 	super._ready()
 	
+	%ScreamPlayer.pitch_scale = randf_range(0.6, 1.1)
 	%DetectionArea2D.body_entered.connect(_on_body_entered)
 	%DetectionArea2D.body_exited.connect(_on_body_exited)
 	
@@ -49,7 +51,16 @@ func _physics_process(delta: float) -> void:
 		approach = clamp(approach, -1, 1)
 		dir = (target.global_position - global_position).normalized() * approach + Vector2(cos(tentacle_time * 0.2), sin(tentacle_time * 0.2)) * 0.36
 	
-	super._physics_process(delta)
+	if dead:
+		if not is_on_floor():
+			dir.y += gravity * delta
+		else:
+			dir.y = 8
+		velocity = dir + knockback
+		knockback = lerp(knockback, Vector2(), delta * accel * 0.25)
+		move_and_slide()
+	else:
+		super._physics_process(delta)
 
 func retarget() -> void:
 	var dist: float = INF
@@ -75,4 +86,3 @@ func kill() -> void:
 	%AnimationPlayer.play("die")
 	dead = true
 	await %AnimationPlayer.animation_finished
-	queue_free()

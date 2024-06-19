@@ -55,14 +55,14 @@ func _physics_process(delta: float) -> void:
 	else:
 		velocity.y = 8
 	
-	if state == "idle":
+	if state == "idle" and not dead:
 		if dir.x == 1 and (not %RightFloor.is_colliding() or %RightForward.is_colliding()):
 			dir.x = 0
 		if dir.x == -1 and (not %LeftFloor.is_colliding() or %LeftForward.is_colliding()):
 			dir.x = 0
 		velocity.x = dir.x * speed
 	
-	if state == "scared":
+	if state == "scared" and not dead:
 		dir.x = sign(global_position.x - fear_spot.x)
 		if dir.x == 1 and %RightForward.is_colliding():
 			dir.x = 0
@@ -71,6 +71,10 @@ func _physics_process(delta: float) -> void:
 		if fear_spot.distance_to(global_position) > 128.0:
 			state = "idle" 
 		velocity.x = dir.x * fear_speed
+	
+	if dead:
+		dir = Vector2()
+		velocity.x = lerp(velocity.x, 0.0, delta * 16)
 	
 	velocity += knockback
 	knockback = lerp(knockback, Vector2(), delta * accel * 0.75)

@@ -1,0 +1,59 @@
+[gd_scene load_steps=7 format=3 uid="uid://b5nir4asipth4"]
+
+[ext_resource type="Texture2D" uid="uid://x3e8lonyrtgd" path="res://main/assets/sprites/circle.png" id="1_ep0eb"]
+[ext_resource type="Script" path="res://main/bullet/flash.gd" id="2_nvsll"]
+[ext_resource type="Texture2D" uid="uid://dbcwvffvu5thv" path="res://main/assets/sprites/light.webp" id="2_x5poi"]
+
+[sub_resource type="Animation" id="Animation_5jclr"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.3, 0.3)]
+}
+
+[sub_resource type="Animation" id="Animation_1go5x"]
+resource_name = "flash"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0.02, 0.02), Vector2(0.2, 0.2), Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ta0xt"]
+_data = {
+"RESET": SubResource("Animation_5jclr"),
+"flash": SubResource("Animation_1go5x")
+}
+
+[node name="Flash" type="Sprite2D"]
+modulate = Color(1.5, 1.5, 2, 1)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("1_ep0eb")
+script = ExtResource("2_nvsll")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+range_layer_min = -2
+range_layer_max = 2
+texture = ExtResource("2_x5poi")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_ta0xt")
+}
+autoplay = "flash"
+speed_scale = 2.0

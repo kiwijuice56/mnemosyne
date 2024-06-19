@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://nd2re4kr63gu"]
+[gd_scene load_steps=3 format=3 uid="uid://nd2re4kr63gu"]
 
 [ext_resource type="Script" path="res://main/bullet/bullet.gd" id="1_r4p2m"]
+[ext_resource type="PackedScene" uid="uid://b5nir4asipth4" path="res://main/bullet/flash.tscn" id="2_dwxbr"]
 
 [node name="Bullet" type="CharacterBody2D"]
 collision_layer = 16
@@ -15,6 +16,9 @@ one_shot = true
 [node name="Sprite2D" type="Sprite2D" parent="SpriteHolder"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+
+[node name="Flash" parent="." instance=ExtResource("2_dwxbr")]
+unique_name_in_owner = true
 
 [node name="HitArea2D" type="Area2D" parent="."]
 unique_name_in_owner = true

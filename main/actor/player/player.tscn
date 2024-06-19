@@ -247,6 +247,7 @@ texture = ExtResource("4_48ieq")
 hframes = 2
 
 [node name="CollisionShape2D" parent="." index="2"]
+visible = false
 shape = SubResource("CircleShape2D_8f8lk")
 
 [node name="HurtArea2D" parent="." index="3"]
@@ -260,7 +261,10 @@ unique_name_in_owner = true
 script = ExtResource("9_71eu6")
 
 [node name="PointLight2D" type="PointLight2D" parent="." index="5"]
-energy = 3.0
+enabled = false
+energy = 0.1
+range_layer_min = -2
+range_layer_max = 2
 texture = ExtResource("9_ks0yu")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." index="6"]
@@ -284,5 +288,6 @@ libraries = {
 
 [node name="ShootPlayer" type="AudioStreamPlayer" parent="." index="9"]
 stream = SubResource("AudioStreamRandomizer_qsvsj")
-volume_db = -20.0
+volume_db = -17.0
+pitch_scale = 0.8
 bus = &"sfx"
