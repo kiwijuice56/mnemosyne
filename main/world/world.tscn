@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://b6wtebxe1yih7"]
+[gd_scene load_steps=17 format=3 uid="uid://b6wtebxe1yih7"]
 
 [ext_resource type="Script" path="res://main/world/world.gd" id="1_48bnx"]
 [ext_resource type="TileSet" uid="uid://c8p0cdh6sv0vc" path="res://main/world/basic_tileset.tres" id="1_w88bs"]
@@ -8,9 +8,13 @@
 [ext_resource type="PackedScene" uid="uid://5s0ql846b3kx" path="res://main/decoration/debris/debris.tscn" id="5_bnmmv"]
 [ext_resource type="PackedScene" uid="uid://bqqdv4hwam3i3" path="res://main/decoration/home/home.tscn" id="5_db5go"]
 [ext_resource type="PackedScene" uid="uid://0qwy7ejm4p2r" path="res://main/actor/daemon/daemon.tscn" id="8_cqb1t"]
+[ext_resource type="PackedScene" uid="uid://dmq1mf1ygf2vn" path="res://main/target/exclaim.tscn" id="9_fjtqr"]
 [ext_resource type="Texture2D" uid="uid://ckgoja6kvv0d" path="res://main/decoration/stalactite/stalactite1.png" id="9_fvi0n"]
 [ext_resource type="Texture2D" uid="uid://cuamkd5htfbk0" path="res://main/decoration/stalactite/stalactite4.png" id="10_bpjek"]
+[ext_resource type="Texture2D" uid="uid://bpkcm0y5t7k6q" path="res://main/decoration/stalactite/stalactite2.png" id="10_jci31"]
+[ext_resource type="Texture2D" uid="uid://dm3mxaub6rpb4" path="res://main/decoration/shrine.png" id="10_yc1px"]
 [ext_resource type="Texture2D" uid="uid://b8g0k1dti0wvi" path="res://main/decoration/stalactite/stalactite3.png" id="11_722su"]
+[ext_resource type="Texture2D" uid="uid://dbcwvffvu5thv" path="res://main/assets/sprites/light.webp" id="11_s6254"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_43a5g"]
 shader = ExtResource("1_xj2l8")
@@ -138,10 +142,95 @@ init_velocity = Vector2(-48, 0)
 
 [node name="Daemon" parent="Daemons" instance=ExtResource("8_cqb1t")]
 position = Vector2(-362, -258)
+exclain_scene = ExtResource("9_fjtqr")
 
 [node name="Stalactite1" type="Sprite2D" parent="."]
 position = Vector2(154, -260)
 texture = ExtResource("9_fvi0n")
+
+[node name="Shrine" type="Sprite2D" parent="."]
+position = Vector2(105, 320)
+texture = ExtResource("10_yc1px")
+
+[node name="PointLight2D" type="PointLight2D" parent="Shrine"]
+color = Color(1, 0.741176, 0.482353, 1)
+energy = 3.0
+range_layer_min = -3
+range_layer_max = 3
+texture = ExtResource("11_s6254")
+
+[node name="Stalactite8" type="Sprite2D" parent="."]
+position = Vector2(140, 221)
+texture = ExtResource("10_jci31")
+
+[node name="Stalactite18" type="Sprite2D" parent="."]
+position = Vector2(87, 205)
+texture = ExtResource("10_jci31")
+
+[node name="Stalactite19" type="Sprite2D" parent="."]
+position = Vector2(142, 93)
+texture = ExtResource("10_jci31")
+
+[node name="Stalactite20" type="Sprite2D" parent="."]
+position = Vector2(64, 61)
+texture = ExtResource("11_722su")
+
+[node name="Stalactite9" type="Sprite2D" parent="."]
+position = Vector2(149, 237)
+texture = ExtResource("10_bpjek")
+
+[node name="Stalactite10" type="Sprite2D" parent="."]
+position = Vector2(48, 237)
+texture = ExtResource("10_bpjek")
+
+[node name="Stalactite11" type="Sprite2D" parent="."]
+position = Vector2(32, 253)
+texture = ExtResource("11_722su")
+
+[node name="Stalactite12" type="Sprite2D" parent="."]
+position = Vector2(97, 323)
+scale = Vector2(1, -1)
+texture = ExtResource("11_722su")
+
+[node name="Stalactite13" type="Sprite2D" parent="."]
+position = Vector2(128, 323)
+scale = Vector2(-1, -1)
+texture = ExtResource("11_722su")
+
+[node name="Stalactite14" type="Sprite2D" parent="."]
+position = Vector2(150, 307)
+scale = Vector2(-1, -1)
+texture = ExtResource("10_jci31")
+
+[node name="Stalactite15" type="Sprite2D" parent="."]
+position = Vector2(170, 291)
+scale = Vector2(-1, -1)
+texture = ExtResource("9_fvi0n")
+
+[node name="Stalactite16" type="Sprite2D" parent="."]
+position = Vector2(52, 307)
+scale = Vector2(-1, -1)
+texture = ExtResource("9_fvi0n")
+
+[node name="Stalactite21" type="Sprite2D" parent="."]
+position = Vector2(84, 131)
+scale = Vector2(-1, -1)
+texture = ExtResource("9_fvi0n")
+
+[node name="Stalactite22" type="Sprite2D" parent="."]
+position = Vector2(67, 98)
+scale = Vector2(-1, -1)
+texture = ExtResource("10_jci31")
+
+[node name="Stalactite23" type="Sprite2D" parent="."]
+position = Vector2(135, 130)
+scale = Vector2(-1, -1)
+texture = ExtResource("10_jci31")
+
+[node name="Stalactite17" type="Sprite2D" parent="."]
+position = Vector2(43, 291)
+scale = Vector2(-1, -1)
+texture = ExtResource("10_bpjek")
 
 [node name="Stalactite6" type="Sprite2D" parent="."]
 position = Vector2(219, -195)
@@ -153,6 +242,10 @@ texture = ExtResource("10_bpjek")
 
 [node name="Stalactite3" type="Sprite2D" parent="."]
 position = Vector2(100, -258)
+texture = ExtResource("11_722su")
+
+[node name="Stalactite24" type="Sprite2D" parent="."]
+position = Vector2(155, -3)
 texture = ExtResource("11_722su")
 
 [node name="Stalactite4" type="Sprite2D" parent="."]
@@ -171,4 +264,4 @@ texture = ExtResource("10_bpjek")
 
 [node name="Spawn" type="Node2D" parent="."]
 unique_name_in_owner = true
-position = Vector2(-362, -201)
+position = Vector2(-229, -193)

@@ -15,6 +15,9 @@ var tentacle_count: int = 8
 var mood_potential_targets: Array[Actor]
 var mood_target: Actor
 
+var human_alignment: float = 0.0
+var daemon_alignment: float = 0.0
+
 func _ready() -> void:
 	super._ready()
 	%DetectionArea2D.body_entered.connect(_on_body_entered)

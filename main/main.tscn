@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://bmip1vhc7m4m6"]
+[gd_scene load_steps=22 format=3 uid="uid://bmip1vhc7m4m6"]
 
 [ext_resource type="Script" path="res://main/main.gd" id="1_1wch7"]
 [ext_resource type="PackedScene" uid="uid://cv8wagch44eli" path="res://main/actor/player/player.tscn" id="2_aeni1"]
@@ -12,6 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://d1jvoay2qfkl0" path="res://main/background/background_neutral.png" id="6_im74b"]
 [ext_resource type="Shader" path="res://main/ui/crt.gdshader" id="6_pu8ya"]
 [ext_resource type="AudioStream" uid="uid://dtq7dprtlx566" path="res://main/music/human.ogg" id="7_4joml"]
+[ext_resource type="FontFile" uid="uid://dqn0furiqxfi" path="res://main/ui/sharp-crt.ttf" id="12_xyycy"]
 
 [sub_resource type="Animation" id="Animation_ymvtj"]
 length = 0.001
@@ -73,6 +74,26 @@ _data = {
 "hurt": SubResource("Animation_ii5nm")
 }
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bnttq"]
+content_margin_left = 48.0
+content_margin_top = 48.0
+content_margin_right = 48.0
+content_margin_bottom = 48.0
+bg_color = Color(0.22308, 0.0924, 0.33, 0.8)
+
+[sub_resource type="FontVariation" id="FontVariation_winir"]
+base_font = ExtResource("12_xyycy")
+spacing_space = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b0w71"]
+bg_color = Color(0.118581, 0.118581, 0.118581, 0.690196)
+expand_margin_top = 4.0
+expand_margin_bottom = 4.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b2j5w"]
+expand_margin_top = 4.0
+expand_margin_bottom = 4.0
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_o0f53"]
 shader = ExtResource("6_pu8ya")
 shader_parameter/overlay = true
@@ -107,6 +128,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 0
 stretch = true
 
 [node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
@@ -191,6 +213,95 @@ libraries = {
 }
 speed_scale = 4.0
 
+[node name="PanelContainer" type="PanelContainer" parent="SubViewportContainer/SubViewport/UI"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_bnttq")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="SubViewportContainer/SubViewport/UI/PanelContainer"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Label" type="Label" parent="SubViewportContainer/SubViewport/UI/PanelContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = SubResource("FontVariation_winir")
+theme_override_font_sizes/font_size = 14
+text = "PAUSE
+"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="SubViewportContainer/SubViewport/UI/PanelContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_constants/separation = 16
+
+[node name="Label" type="Label" parent="SubViewportContainer/SubViewport/UI/PanelContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(64, 0)
+layout_mode = 2
+theme_override_fonts/font = SubResource("FontVariation_winir")
+theme_override_font_sizes/font_size = 14
+text = "SFX"
+
+[node name="SFX" type="HSlider" parent="SubViewportContainer/SubViewport/UI/PanelContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(-0.055, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+focus_mode = 0
+theme_override_styles/slider = SubResource("StyleBoxFlat_b0w71")
+theme_override_styles/grabber_area = SubResource("StyleBoxFlat_b2j5w")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxFlat_b2j5w")
+min_value = -32.0
+max_value = 16.0
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="SubViewportContainer/SubViewport/UI/PanelContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_constants/separation = 16
+
+[node name="Label" type="Label" parent="SubViewportContainer/SubViewport/UI/PanelContainer/VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(64, 0)
+layout_mode = 2
+theme_override_fonts/font = SubResource("FontVariation_winir")
+theme_override_font_sizes/font_size = 14
+text = "Music "
+
+[node name="SFX" type="HSlider" parent="SubViewportContainer/SubViewport/UI/PanelContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+focus_mode = 0
+theme_override_styles/slider = SubResource("StyleBoxFlat_b0w71")
+theme_override_styles/grabber_area = SubResource("StyleBoxFlat_b2j5w")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxFlat_b2j5w")
+min_value = -32.0
+max_value = 16.0
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="SubViewportContainer/SubViewport/UI/PanelContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_constants/separation = 16
+
+[node name="Label" type="Label" parent="SubViewportContainer/SubViewport/UI/PanelContainer/VBoxContainer/HBoxContainer3"]
+custom_minimum_size = Vector2(64, 0)
+layout_mode = 2
+theme_override_fonts/font = SubResource("FontVariation_winir")
+theme_override_font_sizes/font_size = 14
+text = "SCreen ShAKE"
+
+[node name="CheckButton" type="CheckButton" parent="SubViewportContainer/SubViewport/UI/PanelContainer/VBoxContainer/HBoxContainer3"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 6
+button_pressed = true
+
+[node name="CheckBox" type="CheckBox" parent="SubViewportContainer/SubViewport/UI/PanelContainer/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+size_flags_horizontal = 6
+focus_mode = 0
+
 [node name="Filter" type="CanvasLayer" parent="."]
 
 [node name="CRTEffect" type="ColorRect" parent="Filter"]
@@ -200,3 +311,4 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2

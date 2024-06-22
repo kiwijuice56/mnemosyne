@@ -75,11 +75,14 @@ func _physics_process(delta: float) -> void:
 
 func retarget() -> void:
 	var dist: float = INF
+	var old_target: Actor = target
 	for actor in potential_targets:
 		var test_dist: float = (actor.global_position - global_position).length()
 		if test_dist < dist:
 			dist = test_dist
 			target = actor
+	if not old_target == target:
+		lock_on(target)
 
 func hurt(damage: float, hurt_dir: Vector2, knockback_extra: float = 1.0) -> bool:
 	if super.hurt(damage, hurt_dir, knockback_extra):
