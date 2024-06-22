@@ -7,7 +7,7 @@ extends CharacterBody2D
 @export var knockback_scale: float = 1.0
 
 @export var target_scene: PackedScene = preload("res://main/target/target.tscn")
-@export var exclaim_scene: PackedScene = preload("res://main/target/exclaim.tscn")
+@export var exclaim_scene: PackedScene = preload("res://main/exclaim/exclaim.tscn")
 
 var health: float = 0:
 	set(val):
@@ -84,13 +84,15 @@ func hurt(damage: float, hurt_dir: Vector2, knockback_extra: float = 1.0) -> boo
 	return true
 
 func lock_on(other_target: Actor) -> void:
-	var my_target: Target = exclaim_scene.instantiate()
+	var my_target: Exclaim = exclaim_scene.instantiate()
+	my_target.target = self
 	get_parent().add_child(my_target)
-	my_target.offset = Vector2(0, -5.0)
+	my_target.offset_p = Vector2(0, -8.0)
 	
 	var their_target: Target = target_scene.instantiate()
+	their_target.target = other_target
 	get_parent().add_child(their_target)
-	their_target.offset = Vector2(randf() - 0.5, randf() - 0.5) * 8.0
+	their_target.offset_p = Vector2(randf() - 0.5, randf() - 0.5) * 8.0
 
 func shoot(bullet_scene: PackedScene, shoot_dir: Vector2) -> bool:
 	if dead:

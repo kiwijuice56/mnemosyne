@@ -1,4 +1,4 @@
-class_name Target
+class_name Exclaim
 extends Sprite2D
 
 var target: Actor

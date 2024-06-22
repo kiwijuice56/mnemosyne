@@ -1,10 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://dmq1mf1ygf2vn"]
+[gd_scene load_steps=8 format=3 uid="uid://be6x7alhqs8fp"]
 
-[ext_resource type="Texture2D" uid="uid://dabtn8mc6qbbn" path="res://main/target/exclaim.png" id="1_ao7rj"]
-[ext_resource type="Script" path="res://main/target/target.gd" id="1_j5teu"]
-[ext_resource type="Texture2D" uid="uid://b1iiiey1nto1t" path="res://main/assets/sprites/rectangle.png" id="2_uf71n"]
-[ext_resource type="Texture2D" uid="uid://bkj1hssl4ujtj" path="res://main/assets/sprites/ring.png" id="3_1yu82"]
-[ext_resource type="Texture2D" uid="uid://x3e8lonyrtgd" path="res://main/assets/sprites/circle.png" id="4_5uutr"]
+[ext_resource type="Texture2D" uid="uid://b1iiiey1nto1t" path="res://main/assets/sprites/rectangle.png" id="1_4vmwy"]
+[ext_resource type="Script" path="res://main/exclaim/exclaim.gd" id="1_le15e"]
+[ext_resource type="Texture2D" uid="uid://dabtn8mc6qbbn" path="res://main/target/exclaim.png" id="3_s07cm"]
+[ext_resource type="Texture2D" uid="uid://x3e8lonyrtgd" path="res://main/assets/sprites/circle.png" id="3_x1q4e"]
 
 [sub_resource type="Animation" id="Animation_053uc"]
 length = 0.001
@@ -44,9 +43,9 @@ _data = {
 }
 
 [node name="Exclaim" type="Sprite2D"]
-scale = Vector2(0.2, 0.2)
-texture = ExtResource("1_ao7rj")
-script = ExtResource("1_j5teu")
+z_index = 1
+scale = Vector2(0.6, 0.6)
+script = ExtResource("1_le15e")
 metadata/_edit_horizontal_guides_ = [-8.0]
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -54,40 +53,39 @@ unique_name_in_owner = true
 libraries = {
 "": SubResource("AnimationLibrary_rytne")
 }
-speed_scale = 3.0
+speed_scale = 2.0
 
 [node name="Sprite2D2" type="Sprite2D" parent="."]
 visible = false
 position = Vector2(6, 1)
 scale = Vector2(0.3, 2)
-texture = ExtResource("2_uf71n")
+texture = ExtResource("1_4vmwy")
 
 [node name="Sprite2D4" type="Sprite2D" parent="."]
 visible = false
 position = Vector2(-1, 6)
 rotation = 1.5708
 scale = Vector2(0.3, 2)
-texture = ExtResource("2_uf71n")
+texture = ExtResource("1_4vmwy")
 
 [node name="Sprite2D5" type="Sprite2D" parent="."]
 visible = false
 position = Vector2(-1, -6)
 rotation = 1.5708
 scale = Vector2(0.3, 2)
-texture = ExtResource("2_uf71n")
+texture = ExtResource("1_4vmwy")
 
 [node name="Sprite2D3" type="Sprite2D" parent="."]
 visible = false
 position = Vector2(-6, 1)
 scale = Vector2(0.3, 2)
-texture = ExtResource("2_uf71n")
+texture = ExtResource("1_4vmwy")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-visible = false
-scale = Vector2(0.1, 0.1)
-texture = ExtResource("3_1yu82")
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("3_s07cm")
 
 [node name="Sprite2D6" type="Sprite2D" parent="."]
 visible = false
 scale = Vector2(0.02, 0.02)
-texture = ExtResource("4_5uutr")
+texture = ExtResource("3_x1q4e")
