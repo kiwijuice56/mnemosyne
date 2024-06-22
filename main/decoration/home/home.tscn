@@ -31,4 +31,4 @@ scale_amount_curve = SubResource("Curve_k55cg")
 unique_name_in_owner = true
 position = Vector2(0, -16)
 texture = ExtResource("2_x7vxx")
-hframes = 3
+hframes = 5

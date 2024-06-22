@@ -1,6 +1,8 @@
 class_name Daemon
 extends Actor
 
+
+@export var primary_bullet_scene: PackedScene
 @export var gravity: float = 400.0
 @export var tentacle_speed: float = 16.0
 @export var tentacle_material: ShaderMaterial
@@ -28,7 +30,7 @@ func _ready() -> void:
 func _on_body_entered(node: Node) -> void:
 	if node in potential_targets or node.dead:
 		return
-	if node is Player:
+	if node is Player and not dead:
 		%HealthBar.show_bar()
 	node.died.connect(_on_target_died.bind(node))
 	potential_targets.append(node)
@@ -53,6 +55,8 @@ func _physics_process(delta: float) -> void:
 	tentacle_material.set_shader_parameter("s", tentacle_time)
 	
 	if is_instance_valid(target) and not dead:
+		shoot(primary_bullet_scene, (target.global_position - global_position).normalized())
+		
 		var dist: float = (target.global_position - global_position).length() 
 		approach = lerp(approach, dist - (64.0 if target is Player else 56.0), delta)
 		approach = clamp(approach, -1, 1)
@@ -94,3 +98,9 @@ func kill() -> void:
 	%AnimationPlayer.play("die")
 	dead = true
 	await %AnimationPlayer.animation_finished
+
+func shoot(bullet_scene: PackedScene, shoot_dir: Vector2) -> bool:
+	if super.shoot(bullet_scene, shoot_dir):
+		# do something later
+		return true
+	return false

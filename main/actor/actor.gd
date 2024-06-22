@@ -31,7 +31,7 @@ func _on_area_entered_hurt(area: Area2D) -> void:
 	
 	if area.get_parent() is Bullet:
 		var bullet: Bullet = area.get_parent() as Bullet
-		if bullet.destroyed or bullet.shooter == self:
+		if bullet.destroyed or bullet.shooter == self or self in bullet.has_hit:
 			return
 		if bullet.shooter == Ref.player:
 			Ref.player.hit_enemy()

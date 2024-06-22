@@ -1,0 +1,164 @@
+[gd_scene load_steps=14 format=3 uid="uid://dr5b5f8omluud"]
+
+[ext_resource type="PackedScene" uid="uid://nd2re4kr63gu" path="res://main/bullet/bullet.tscn" id="1_xea6a"]
+[ext_resource type="Script" path="res://main/bullet/energy/energy.gd" id="2_gsedx"]
+[ext_resource type="Texture2D" uid="uid://bkj1hssl4ujtj" path="res://main/assets/sprites/ring.png" id="2_mbkqp"]
+[ext_resource type="Texture2D" uid="uid://dbcwvffvu5thv" path="res://main/assets/sprites/light.webp" id="3_obpw7"]
+[ext_resource type="Texture2D" uid="uid://x3e8lonyrtgd" path="res://main/assets/sprites/circle.png" id="5_y0nry"]
+
+[sub_resource type="Gradient" id="Gradient_lsmdk"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="Curve" id="Curve_c6jlf"]
+_data = [Vector2(0, 0.742504), 0.0, 0.0, 0, 0, Vector2(0.295082, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_83mbw"]
+radius = 1.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_v6rbo"]
+radius = 2.0
+
+[sub_resource type="Animation" id="Animation_t4vtk"]
+resource_name = "pulsate"
+length = 0.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SpriteHolder:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.2, 1.2), Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_y7at5"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SpriteHolder:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CPUParticles2D2:emitting")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_myy2c"]
+resource_name = "destroy"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SpriteHolder:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CPUParticles2D2:emitting")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_4m5kt"]
+_data = {
+"RESET": SubResource("Animation_y7at5"),
+"destroy": SubResource("Animation_myy2c"),
+"pulsate": SubResource("Animation_t4vtk")
+}
+
+[node name="Energy" instance=ExtResource("1_xea6a")]
+script = ExtResource("2_gsedx")
+speed = 1.0
+damage = 0.5
+pierce = 2
+lifetime = 1.5
+cooldown = 1.7
+
+[node name="PointLight2D" type="PointLight2D" parent="." index="1"]
+scale = Vector2(0.056522, 0.056522)
+color = Color(1, 0, 0, 1)
+range_layer_min = -3
+range_layer_max = 3
+texture = ExtResource("3_obpw7")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="." index="2"]
+modulate = Color(0.77, 0.4389, 0.648597, 1)
+amount = 4
+lifetime = 0.3
+texture = ExtResource("2_mbkqp")
+gravity = Vector2(0, 0)
+scale_amount_min = 0.05
+scale_amount_max = 0.05
+color_ramp = SubResource("Gradient_lsmdk")
+
+[node name="CPUParticles2D2" type="CPUParticles2D" parent="." index="3"]
+modulate = Color(0.77, 0.4389, 0.648597, 1)
+amount = 16
+lifetime = 0.3
+one_shot = true
+explosiveness = 1.0
+texture = ExtResource("2_mbkqp")
+direction = Vector2(0, -1)
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 16.0
+initial_velocity_max = 32.0
+scale_amount_min = 0.05
+scale_amount_max = 0.05
+scale_amount_curve = SubResource("Curve_c6jlf")
+color_ramp = SubResource("Gradient_lsmdk")
+
+[node name="Sprite2D" parent="SpriteHolder" index="0"]
+modulate = Color(0.99, 0.87318, 0.8712, 1)
+scale = Vector2(0.05, 0.05)
+texture = ExtResource("5_y0nry")
+
+[node name="CollisionShape2D" parent="." index="5"]
+shape = SubResource("CircleShape2D_83mbw")
+
+[node name="Flash" parent="." index="6"]
+visible = false
+modulate = Color(1, 0.529412, 0.529412, 1)
+
+[node name="CollisionShape2D" parent="HitArea2D" index="0"]
+shape = SubResource("CircleShape2D_v6rbo")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="8"]
+unique_name_in_owner = true
+libraries = {
+"": SubResource("AnimationLibrary_4m5kt")
+}
+autoplay = "pulsate"
+speed_scale = 2.0

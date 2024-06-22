@@ -283,6 +283,7 @@ tentacle_speed_min = 5.0
 tentacle_speed_max = 16.0
 max_health = 3.0
 speed = 48.0
+knockback_scale = 1.5
 
 [node name="Trail" type="CPUParticles2D" parent="SpriteHolder" index="0"]
 lifetime = 0.8

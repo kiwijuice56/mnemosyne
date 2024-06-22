@@ -168,7 +168,7 @@ texture = ExtResource("4_bjlk0")
 layer = -1
 
 [node name="Sprite2D" type="Sprite2D" parent="SubViewportContainer/SubViewport/Background"]
-modulate = Color(1, 1, 1, 0.831373)
+modulate = Color(0.6, 1, 1, 0.831373)
 texture = ExtResource("6_im74b")
 centered = false
 

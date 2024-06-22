@@ -137,16 +137,7 @@ init_velocity = Vector2(-48, 0)
 [node name="Daemons" type="Node2D" parent="."]
 
 [node name="Daemon" parent="Daemons" instance=ExtResource("8_cqb1t")]
-position = Vector2(-56, -548)
-
-[node name="Daemon2" parent="Daemons" instance=ExtResource("8_cqb1t")]
-position = Vector2(-260, -572)
-
-[node name="Daemon3" parent="Daemons" instance=ExtResource("8_cqb1t")]
-position = Vector2(-135, -548)
-
-[node name="Daemon4" parent="Daemons" instance=ExtResource("8_cqb1t")]
-position = Vector2(-194, -201)
+position = Vector2(-362, -258)
 
 [node name="Stalactite1" type="Sprite2D" parent="."]
 position = Vector2(154, -260)

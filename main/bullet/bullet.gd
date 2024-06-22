@@ -11,6 +11,8 @@ extends CharacterBody2D
 var bounces: int = 0
 var hits: int = 0
 
+var has_hit: Array[Actor]
+
 # unused for now
 var shooter_velocity: Vector2
 
@@ -22,6 +24,7 @@ func _ready() -> void:
 	%HitArea2D.body_entered.connect(_on_body_entered)
 	%LifeTimer.timeout.connect(destroy)
 	%LifeTimer.start(lifetime)
+	has_hit = []
 
 func _on_body_entered(_body: Node) -> void:
 	destroy()
@@ -46,11 +49,11 @@ func shoot(shoot_dir: Vector2, velocity: Vector2) -> void:
 	get_parent().move_child(flash, get_index())
 	flash.global_position = global_position + shoot_dir * 12.0
 	
-	
 	dir = shoot_dir
 	shooter_velocity = velocity
 
 func hit(target: Actor) -> void:
+	has_hit.append(target)
 	hits += 1
 	if hits >= pierce:
 		destroy()
