@@ -1,9 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://be6x7alhqs8fp"]
+[gd_scene load_steps=6 format=3 uid="uid://be6x7alhqs8fp"]
 
-[ext_resource type="Texture2D" uid="uid://b1iiiey1nto1t" path="res://main/assets/sprites/rectangle.png" id="1_4vmwy"]
 [ext_resource type="Script" path="res://main/exclaim/exclaim.gd" id="1_le15e"]
 [ext_resource type="Texture2D" uid="uid://dabtn8mc6qbbn" path="res://main/target/exclaim.png" id="3_s07cm"]
-[ext_resource type="Texture2D" uid="uid://x3e8lonyrtgd" path="res://main/assets/sprites/circle.png" id="3_x1q4e"]
 
 [sub_resource type="Animation" id="Animation_053uc"]
 length = 0.001
@@ -36,7 +34,7 @@ tracks/0/keys = {
 "values": [Color(1, 0, 0, 1), Color(1, 0.764706, 0, 1), Color(1, 0, 0, 1), Color(1, 0.764706, 0, 1), Color(1, 0, 0, 1), Color(1, 0.764706, 0, 1), Color(1, 0, 0, 1), Color(1, 0.764706, 0, 1), Color(1, 0, 0, 0)]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_rytne"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_3i6tj"]
 _data = {
 "RESET": SubResource("Animation_053uc"),
 "target": SubResource("Animation_5kswg")
@@ -51,41 +49,10 @@ metadata/_edit_horizontal_guides_ = [-8.0]
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 unique_name_in_owner = true
 libraries = {
-"": SubResource("AnimationLibrary_rytne")
+"": SubResource("AnimationLibrary_3i6tj")
 }
 speed_scale = 2.0
-
-[node name="Sprite2D2" type="Sprite2D" parent="."]
-visible = false
-position = Vector2(6, 1)
-scale = Vector2(0.3, 2)
-texture = ExtResource("1_4vmwy")
-
-[node name="Sprite2D4" type="Sprite2D" parent="."]
-visible = false
-position = Vector2(-1, 6)
-rotation = 1.5708
-scale = Vector2(0.3, 2)
-texture = ExtResource("1_4vmwy")
-
-[node name="Sprite2D5" type="Sprite2D" parent="."]
-visible = false
-position = Vector2(-1, -6)
-rotation = 1.5708
-scale = Vector2(0.3, 2)
-texture = ExtResource("1_4vmwy")
-
-[node name="Sprite2D3" type="Sprite2D" parent="."]
-visible = false
-position = Vector2(-6, 1)
-scale = Vector2(0.3, 2)
-texture = ExtResource("1_4vmwy")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.4, 0.4)
 texture = ExtResource("3_s07cm")
-
-[node name="Sprite2D6" type="Sprite2D" parent="."]
-visible = false
-scale = Vector2(0.02, 0.02)
-texture = ExtResource("3_x1q4e")

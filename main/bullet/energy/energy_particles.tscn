@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://cy5torayi04d"]
+
+[ext_resource type="Texture2D" uid="uid://bkj1hssl4ujtj" path="res://main/assets/sprites/ring.png" id="1_6tw88"]
+
+[sub_resource type="Gradient" id="Gradient_lsmdk"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[node name="CPUParticles2D" type="CPUParticles2D"]
+modulate = Color(0.77, 0.4389, 0.648597, 1)
+amount = 4
+lifetime = 0.3
+texture = ExtResource("1_6tw88")
+gravity = Vector2(0, 0)
+scale_amount_min = 0.05
+scale_amount_max = 0.05
+color_ramp = SubResource("Gradient_lsmdk")

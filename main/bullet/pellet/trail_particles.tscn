@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://csrf2rbxbndow"]
+
+[node name="TrailParticles" type="CPUParticles2D"]
+amount = 32
+lifetime = 0.5
+gravity = Vector2(0, 0)

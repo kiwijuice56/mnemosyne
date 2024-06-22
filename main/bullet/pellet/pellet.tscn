@@ -1,10 +1,11 @@
-[gd_scene load_steps=13 format=3 uid="uid://bmdnwia8jf7af"]
+[gd_scene load_steps=14 format=3 uid="uid://bmdnwia8jf7af"]
 
 [ext_resource type="PackedScene" uid="uid://nd2re4kr63gu" path="res://main/bullet/bullet.tscn" id="1_8jywf"]
 [ext_resource type="Texture2D" uid="uid://b5b4qv7ykx2gf" path="res://main/assets/sprites/cross.png" id="2_5dcdl"]
 [ext_resource type="Script" path="res://main/bullet/pellet/pellet.gd" id="2_5s7i2"]
 [ext_resource type="PackedScene" uid="uid://d2xy3fdq4duqk" path="res://main/bullet/pellet/destroy_particles.tscn" id="4_34dj4"]
 [ext_resource type="AudioStream" uid="uid://cpfgb6asbutty" path="res://main/bullet/pellet/clang.wav" id="4_h4qau"]
+[ext_resource type="PackedScene" uid="uid://csrf2rbxbndow" path="res://main/bullet/pellet/trail_particles.tscn" id="4_oktv1"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_0stpw"]
 radius = 1.0
@@ -124,10 +125,7 @@ wait_time = 0.6
 scale = Vector2(1.3, 1.3)
 texture = ExtResource("2_5dcdl")
 
-[node name="TrailParticles" type="CPUParticles2D" parent="SpriteHolder" index="1"]
-amount = 32
-lifetime = 0.5
-gravity = Vector2(0, 0)
+[node name="TrailParticles" parent="SpriteHolder" index="1" instance=ExtResource("4_oktv1")]
 
 [node name="CollisionShape2D" parent="." index="2"]
 shape = SubResource("CircleShape2D_0stpw")

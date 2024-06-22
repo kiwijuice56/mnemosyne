@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://b6wtebxe1yih7"]
+[gd_scene load_steps=16 format=3 uid="uid://b6wtebxe1yih7"]
 
 [ext_resource type="Script" path="res://main/world/world.gd" id="1_48bnx"]
 [ext_resource type="TileSet" uid="uid://c8p0cdh6sv0vc" path="res://main/world/basic_tileset.tres" id="1_w88bs"]
@@ -8,7 +8,6 @@
 [ext_resource type="PackedScene" uid="uid://5s0ql846b3kx" path="res://main/decoration/debris/debris.tscn" id="5_bnmmv"]
 [ext_resource type="PackedScene" uid="uid://bqqdv4hwam3i3" path="res://main/decoration/home/home.tscn" id="5_db5go"]
 [ext_resource type="PackedScene" uid="uid://0qwy7ejm4p2r" path="res://main/actor/daemon/daemon.tscn" id="8_cqb1t"]
-[ext_resource type="PackedScene" uid="uid://dmq1mf1ygf2vn" path="res://main/target/exclaim.tscn" id="9_fjtqr"]
 [ext_resource type="Texture2D" uid="uid://ckgoja6kvv0d" path="res://main/decoration/stalactite/stalactite1.png" id="9_fvi0n"]
 [ext_resource type="Texture2D" uid="uid://cuamkd5htfbk0" path="res://main/decoration/stalactite/stalactite4.png" id="10_bpjek"]
 [ext_resource type="Texture2D" uid="uid://bpkcm0y5t7k6q" path="res://main/decoration/stalactite/stalactite2.png" id="10_jci31"]
@@ -142,7 +141,6 @@ init_velocity = Vector2(-48, 0)
 
 [node name="Daemon" parent="Daemons" instance=ExtResource("8_cqb1t")]
 position = Vector2(-362, -258)
-exclain_scene = ExtResource("9_fjtqr")
 
 [node name="Stalactite1" type="Sprite2D" parent="."]
 position = Vector2(154, -260)

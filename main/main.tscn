@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://bmip1vhc7m4m6"]
+[gd_scene load_steps=30 format=3 uid="uid://bmip1vhc7m4m6"]
 
 [ext_resource type="Script" path="res://main/main.gd" id="1_1wch7"]
 [ext_resource type="PackedScene" uid="uid://cv8wagch44eli" path="res://main/actor/player/player.tscn" id="2_aeni1"]
@@ -13,6 +13,14 @@
 [ext_resource type="Shader" path="res://main/ui/crt.gdshader" id="6_pu8ya"]
 [ext_resource type="AudioStream" uid="uid://dtq7dprtlx566" path="res://main/music/human.ogg" id="7_4joml"]
 [ext_resource type="FontFile" uid="uid://dqn0furiqxfi" path="res://main/ui/sharp-crt.ttf" id="12_xyycy"]
+[ext_resource type="Script" path="res://main/particle_loader.gd" id="14_b24jk"]
+[ext_resource type="PackedScene" uid="uid://d2xy3fdq4duqk" path="res://main/bullet/pellet/destroy_particles.tscn" id="15_sdhmh"]
+[ext_resource type="PackedScene" uid="uid://byximaryj8h0h" path="res://main/bullet/pellet/clang_particles.tscn" id="16_4tm48"]
+[ext_resource type="PackedScene" uid="uid://b5nir4asipth4" path="res://main/bullet/flash.tscn" id="16_fjikr"]
+[ext_resource type="PackedScene" uid="uid://csrf2rbxbndow" path="res://main/bullet/pellet/trail_particles.tscn" id="17_wqtrd"]
+[ext_resource type="PackedScene" uid="uid://b5mnu3d6vwom5" path="res://main/actor/human/blood_particles.tscn" id="18_cvbwf"]
+[ext_resource type="PackedScene" uid="uid://cy5torayi04d" path="res://main/bullet/energy/energy_particles.tscn" id="19_j45ch"]
+[ext_resource type="PackedScene" uid="uid://dgv1mhiwpp56x" path="res://main/bullet/energy/energy_particles2.tscn" id="20_gejph"]
 
 [sub_resource type="Animation" id="Animation_ymvtj"]
 length = 0.001
@@ -177,6 +185,11 @@ bus = &"music"
 [node name="Player" parent="SubViewportContainer/SubViewport" instance=ExtResource("2_aeni1")]
 unique_name_in_owner = true
 position = Vector2(86, 300)
+
+[node name="ParticleLoader" type="Node2D" parent="SubViewportContainer/SubViewport/Player"]
+position = Vector2(-86, -300)
+script = ExtResource("14_b24jk")
+scenes = Array[PackedScene]([ExtResource("15_sdhmh"), ExtResource("16_4tm48"), ExtResource("17_wqtrd"), ExtResource("18_cvbwf"), ExtResource("19_j45ch"), ExtResource("20_gejph"), ExtResource("16_fjikr")])
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="SubViewportContainer/SubViewport"]
 

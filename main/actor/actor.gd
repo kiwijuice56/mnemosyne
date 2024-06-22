@@ -6,8 +6,8 @@ extends CharacterBody2D
 @export var accel: float = 16.0
 @export var knockback_scale: float = 1.0
 
-@export var target_scene: PackedScene = preload("res://main/target/target.tscn")
-@export var exclaim_scene: PackedScene = preload("res://main/exclaim/exclaim.tscn")
+var target_scene: PackedScene = preload("res://main/target/target.tscn")
+var exclaim_scene: PackedScene = preload("res://main/exclaim/exclaim.tscn")
 
 var health: float = 0:
 	set(val):
