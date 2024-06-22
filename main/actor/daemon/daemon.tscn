@@ -454,10 +454,15 @@ shape = SubResource("CircleShape2D_dvgtk")
 
 [node name="RetargetTimer" type="Timer" parent="." index="5"]
 unique_name_in_owner = true
-wait_time = 0.4
+wait_time = 3.0
 autostart = true
 
-[node name="ScreamPlayer" type="AudioStreamPlayer2D" parent="." index="6"]
+[node name="ShootBeforeTimer" type="Timer" parent="." index="6"]
+unique_name_in_owner = true
+wait_time = 0.5
+one_shot = true
+
+[node name="ScreamPlayer" type="AudioStreamPlayer2D" parent="." index="7"]
 unique_name_in_owner = true
 stream = ExtResource("6_dc3x0")
 volume_db = -20.0
@@ -466,7 +471,7 @@ max_distance = 200.0
 attenuation = 2.92817
 bus = &"sfx"
 
-[node name="ScreamPlayer2" type="AudioStreamPlayer2D" parent="." index="7"]
+[node name="ScreamPlayer2" type="AudioStreamPlayer2D" parent="." index="8"]
 stream = SubResource("AudioStreamRandomizer_sbjnn")
 volume_db = -20.0
 pitch_scale = 1.2
@@ -474,7 +479,7 @@ max_distance = 200.0
 attenuation = 2.92817
 bus = &"sfx"
 
-[node name="ScreamPlayer3" type="AudioStreamPlayer2D" parent="." index="8"]
+[node name="ScreamPlayer3" type="AudioStreamPlayer2D" parent="." index="9"]
 stream = SubResource("AudioStreamRandomizer_mqw5o")
 volume_db = -12.0
 pitch_scale = 1.3
@@ -482,7 +487,7 @@ max_distance = 200.0
 attenuation = 2.92817
 bus = &"sfx"
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="9"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="10"]
 unique_name_in_owner = true
 libraries = {
 "": SubResource("AnimationLibrary_s4vro")

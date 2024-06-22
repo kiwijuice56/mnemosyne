@@ -76,12 +76,18 @@ func _physics_process(delta: float) -> void:
 func retarget() -> void:
 	var dist: float = INF
 	var old_target: Actor = target
+	target = null
 	for actor in potential_targets:
 		var test_dist: float = (actor.global_position - global_position).length()
 		if test_dist < dist:
+			if actor is Player:
+				if randf() < actor.daemon_alignment + 0.3:
+					continue
+			
 			dist = test_dist
 			target = actor
-	if not old_target == target:
+	
+	if old_target != target and target:
 		lock_on(target)
 
 func hurt(damage: float, hurt_dir: Vector2, knockback_extra: float = 1.0) -> bool:
@@ -103,6 +109,11 @@ func kill() -> void:
 	await %AnimationPlayer.animation_finished
 
 func shoot(bullet_scene: PackedScene, shoot_dir: Vector2) -> bool:
+	if %ShootBeforeTimer.is_stopped():
+		%ShootBeforeTimer.start(0.5)
+	else:
+		return false
+	await %ShootBeforeTimer.timeout
 	if super.shoot(bullet_scene, shoot_dir):
 		# do something later
 		return true
