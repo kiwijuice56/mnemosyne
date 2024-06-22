@@ -79,8 +79,8 @@ func retarget() -> void:
 	target = null
 	for actor in potential_targets:
 		var test_dist: float = (actor.global_position - global_position).length()
-		if test_dist < dist:
-			if actor is Player:
+		if test_dist < dist or actor in hurt_by:
+			if actor is Player and not actor in hurt_by:
 				if randf() < actor.daemon_alignment + 0.3:
 					continue
 			

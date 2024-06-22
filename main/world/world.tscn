@@ -141,6 +141,8 @@ init_velocity = Vector2(-48, 0)
 
 [node name="Daemon" parent="Daemons" instance=ExtResource("8_cqb1t")]
 position = Vector2(-362, -258)
+gravity = null
+accel = null
 
 [node name="Stalactite1" type="Sprite2D" parent="."]
 position = Vector2(154, -260)

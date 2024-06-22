@@ -16,7 +16,7 @@ var mood_potential_targets: Array[Actor]
 var mood_target: Actor
 
 var human_alignment: float = 0.0
-var daemon_alignment: float = -1.0
+var daemon_alignment: float = 1.0
 
 func _ready() -> void:
 	super._ready()

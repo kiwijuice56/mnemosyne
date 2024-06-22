@@ -8,6 +8,8 @@ extends CharacterBody2D
 
 var target_scene: PackedScene = preload("res://main/target/target.tscn")
 var exclaim_scene: PackedScene = preload("res://main/exclaim/exclaim.tscn")
+var hurt_by: Array[Actor]
+
 
 var health: float = 0:
 	set(val):
@@ -25,6 +27,7 @@ signal died(global_death_position: Vector2)
 
 func _ready() -> void:
 	health = max_health
+	hurt_by = []
 	
 	%HurtArea2D.area_entered.connect(_on_area_entered_hurt)
 
@@ -38,6 +41,7 @@ func _on_area_entered_hurt(area: Area2D) -> void:
 			return
 		if bullet.shooter == Ref.player:
 			Ref.player.hit_enemy()
+		hurt_by.append(bullet.shooter)
 		hurt(bullet.damage, (global_position - area.global_position).normalized())
 		bullet.hit(self)
 	if area.get_parent() is Spike:
