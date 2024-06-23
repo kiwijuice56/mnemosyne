@@ -120,4 +120,8 @@ max_distance = 92.0
 attenuation = 3.03143
 bus = &"sfx"
 
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+unique_name_in_owner = true
+rect = Rect2(-64, -64, 128, 128)
+
 [editable path="DestroyParticles"]

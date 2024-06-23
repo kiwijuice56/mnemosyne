@@ -170,12 +170,9 @@ stream_0/weight = 1.0
 collision_layer = 4
 script = ExtResource("2_fvux4")
 fear_speed = 22.0
-gravity = null
+gravity = 128.0
 max_health = 1.0
 speed = 16.0
-accel = null
-knockback_scale = null
-shoot_offset = null
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." index="1"]
 unique_name_in_owner = true
@@ -265,4 +262,4 @@ bus = &"sfx"
 visible = false
 
 [node name="VisibleOnScreenNotifier2D" parent="." index="17"]
-rect = Rect2(-4, -4, 8, 8)
+rect = Rect2(-64, -64, 128, 128)
