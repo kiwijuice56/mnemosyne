@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://dra0o138wotko"]
+
+[ext_resource type="PackedScene" uid="uid://be7sln5yboj7l" path="res://main/bullet/spear/spear.tscn" id="1_5akpn"]
+[ext_resource type="Texture2D" uid="uid://x3e8lonyrtgd" path="res://main/assets/sprites/circle.png" id="2_w7fog"]
+
+[node name="Ball" instance=ExtResource("1_5akpn")]
+speed = 2.8
+damage = 0.1
+
+[node name="Sprite2D" parent="SpriteHolder" index="0"]
+scale = Vector2(0.02, 0.02)
+texture = ExtResource("2_w7fog")

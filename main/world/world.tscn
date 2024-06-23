@@ -76,129 +76,51 @@ position = Vector2(-296, -174)
 
 [node name="Human" parent="Humans" instance=ExtResource("4_yj1dv")]
 position = Vector2(1, -126)
-gravity = null
-old_weapon = null
-mid_weapon = null
-new_weapon = null
-accel = null
-knockback_scale = null
 
 [node name="Human2" parent="Humans" instance=ExtResource("4_yj1dv")]
 position = Vector2(1, -126)
-gravity = null
-old_weapon = null
-mid_weapon = null
-new_weapon = null
 max_health = null
-accel = null
-knockback_scale = null
 
 [node name="Human3" parent="Humans" instance=ExtResource("4_yj1dv")]
 position = Vector2(15, -120)
-gravity = null
-old_weapon = null
-mid_weapon = null
-new_weapon = null
 max_health = null
-accel = null
-knockback_scale = null
 
 [node name="Human4" parent="Humans" instance=ExtResource("4_yj1dv")]
 position = Vector2(-22, -123)
-gravity = null
-old_weapon = null
-mid_weapon = null
-new_weapon = null
 max_health = null
-accel = null
-knockback_scale = null
 
 [node name="Human5" parent="Humans" instance=ExtResource("4_yj1dv")]
 position = Vector2(-42, -133)
-gravity = null
-old_weapon = null
-mid_weapon = null
-new_weapon = null
 max_health = null
-accel = null
-knockback_scale = null
 
 [node name="Human6" parent="Humans" instance=ExtResource("4_yj1dv")]
 position = Vector2(-72, -150)
-gravity = null
-old_weapon = null
-mid_weapon = null
-new_weapon = null
 max_health = null
-accel = null
-knockback_scale = null
 
 [node name="Human7" parent="Humans" instance=ExtResource("4_yj1dv")]
 position = Vector2(-91, -182)
-gravity = null
-old_weapon = null
-mid_weapon = null
-new_weapon = null
 max_health = null
-accel = null
-knockback_scale = null
 
 [node name="Human8" parent="Humans" instance=ExtResource("4_yj1dv")]
 position = Vector2(-59, -142)
-gravity = null
-old_weapon = null
-mid_weapon = null
-new_weapon = null
-accel = null
-knockback_scale = null
 
 [node name="Human9" parent="Humans" instance=ExtResource("4_yj1dv")]
 position = Vector2(-136, -183)
-gravity = null
-old_weapon = null
-mid_weapon = null
-new_weapon = null
-accel = null
-knockback_scale = null
 
 [node name="Human11" parent="Humans" instance=ExtResource("4_yj1dv")]
 position = Vector2(66, -113)
-gravity = null
-old_weapon = null
-mid_weapon = null
-new_weapon = null
-accel = null
-knockback_scale = null
 
 [node name="Human12" parent="Humans" instance=ExtResource("4_yj1dv")]
 position = Vector2(86, -100)
-gravity = null
-old_weapon = null
-mid_weapon = null
-new_weapon = null
 max_health = null
-accel = null
-knockback_scale = null
 
 [node name="Human13" parent="Humans" instance=ExtResource("4_yj1dv")]
 position = Vector2(151, -105)
-gravity = null
-old_weapon = null
-mid_weapon = null
-new_weapon = null
 max_health = null
-accel = null
-knockback_scale = null
 
 [node name="Human14" parent="Humans" instance=ExtResource("4_yj1dv")]
 position = Vector2(177, -121)
-gravity = null
-old_weapon = null
-mid_weapon = null
-new_weapon = null
 max_health = null
-accel = null
-knockback_scale = null
 
 [node name="Spikes" type="Node2D" parent="."]
 
@@ -218,9 +140,7 @@ init_velocity = Vector2(-48, 0)
 [node name="Daemons" type="Node2D" parent="."]
 
 [node name="Daemon" parent="Daemons" instance=ExtResource("8_cqb1t")]
-position = Vector2(-362, -258)
-gravity = null
-accel = null
+position = Vector2(-51, -172)
 
 [node name="Stalactite1" type="Sprite2D" parent="."]
 position = Vector2(154, -260)

@@ -4,7 +4,7 @@ extends Actor
 @export var fear_speed: float
 @export var gravity: float = 128
 
-@onready var old_weapon: PackedScene = preload("res://main/bullet/spear/spear.tscn")
+@onready var old_weapon: PackedScene = preload("res://main/bullet/ball/ball.tscn")
 @onready var mid_weapon: PackedScene = preload("res://main/bullet/spear/spear.tscn")
 @onready var new_weapon: PackedScene = preload("res://main/bullet/spear/spear.tscn")
 
@@ -170,7 +170,7 @@ func initialize(time: int) -> void:
 	else:
 		weapon = new_weapon
 		
-	can_fight = randf() < 0.3
+	can_fight = randf() < 0.4 - Ref.player.human_alignment * 0.25
 
 func shoot(bullet_scene: PackedScene, shoot_dir: Vector2) -> bool:
 	if %ShootBeforeTimer.is_stopped():
