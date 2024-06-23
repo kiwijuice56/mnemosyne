@@ -27,15 +27,19 @@ func _ready() -> void:
 		child.material = tentacle_material
 
 func _on_body_entered(node: Node) -> void:
+	if is_instance_valid(node) and node is Daemon:
+		return
 	if node in potential_targets or node.dead:
 		return
 	if node is Player and not dead:
 		%HealthBar.show_bar()
+	
 	node.died.connect(_on_target_died.bind(node))
 	potential_targets.append(node)
-	retarget()
 
 func _on_body_exited(node: Node) -> void:
+	if is_instance_valid(node) and node is Daemon:
+		return
 	if node == target:
 		target = null
 	if node in potential_targets:
@@ -44,7 +48,6 @@ func _on_body_exited(node: Node) -> void:
 		
 		node.died.disconnect(_on_target_died)
 		potential_targets.remove_at(potential_targets.find(node))
-	retarget()
 
 
 func _on_area_entered_hurt(area: Area2D) -> void:
@@ -69,6 +72,7 @@ func _on_area_entered_hurt(area: Area2D) -> void:
 
 func _on_target_died(_position: Vector2, actor: Actor) -> void:
 	_on_body_exited(actor)
+	retarget()
 
 func _physics_process(delta: float) -> void:
 	if not on_screen:
@@ -146,3 +150,7 @@ func shoot(bullet_scene: PackedScene, shoot_dir: Vector2) -> bool:
 		# do something later
 		return true
 	return false
+
+func initialize(time: int) -> void:
+	if randf() < 0.2:
+		queue_free()

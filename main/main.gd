@@ -4,7 +4,7 @@ extends Node
 @export var world_scene: PackedScene
 
 var world: World
-var time: int = 8
+var time: int = 7
 
 func _ready() -> void:
 	Ref.player.died.connect(_on_player_died)

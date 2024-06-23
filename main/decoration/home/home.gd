@@ -11,13 +11,13 @@ func initialize(time: int) -> void:
 	if randf() < 0.15:
 		queue_free()
 	
-	time += randi() % 2 
+	time += randi() % 3 - 1
 	
 	if time <= 2:
 		%Tent.frame = randi() % %Tent.hframes
 		%Tent.visible = true
 		%Smoke.visible = randf() < 0.3
-	elif time <= 6:
+	elif time <= 5:
 		%Middle.frame = randi() % %Middle.hframes
 		%Middle.visible = true
 		%Smoke.visible = randf() < 0.3

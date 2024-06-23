@@ -44,7 +44,6 @@ func _on_body_entered_detection(body: Node) -> void:
 			return
 		body.died.connect(_on_target_died.bind(body))
 		potential_targets.append(body)
-		retarget()
 
 func _on_body_exited_detection(body: Node) -> void:
 	if body is Human:
@@ -61,7 +60,6 @@ func _on_body_exited_detection(body: Node) -> void:
 		if body in potential_targets:
 			body.died.disconnect(_on_target_died)
 			potential_targets.remove_at(potential_targets.find(body))
-		retarget()
 
 func _on_area_entered_hurt(area: Area2D) -> void:
 	if dead:
@@ -85,6 +83,7 @@ func _on_area_entered_hurt(area: Area2D) -> void:
 
 func _on_target_died(_position: Vector2, actor: Actor) -> void:
 	_on_body_exited_detection(actor)
+	retarget()
 
 func _on_friend_died(global_death_position: Vector2) -> void:
 	if can_fight:
@@ -168,7 +167,7 @@ func kill() -> void:
 	queue_free()
 
 func initialize(time: int) -> void:
-	if randf() < 0.35:
+	if randf() < 0.42:
 		queue_free()
 	
 	var weapon_bank: Array[PackedScene] = []

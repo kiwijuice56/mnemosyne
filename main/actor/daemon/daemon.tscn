@@ -25,7 +25,7 @@ radius = 1.5
 radius = 7.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_dvgtk"]
-radius = 128.0
+radius = 92.0
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_sbjnn"]
 random_pitch = 1.3
@@ -372,14 +372,12 @@ collision_layer = 8
 collision_mask = 15
 script = ExtResource("2_upoli")
 primary_bullet_scene = ExtResource("3_6mjak")
-gravity = null
+gravity = 400.0
 tentacle_speed = 16.0
 tentacle_material = ExtResource("2_r8hq3")
 max_health = 4.0
 speed = 32.0
-accel = null
 knockback_scale = 2.0
-shoot_offset = null
 
 [node name="Blood" type="CPUParticles2D" parent="SpriteHolder" index="0"]
 emitting = false
@@ -446,7 +444,6 @@ shape = SubResource("CircleShape2D_jjs1a")
 
 [node name="DetectionArea2D" type="Area2D" parent="." index="4"]
 unique_name_in_owner = true
-visible = false
 collision_layer = 0
 collision_mask = 6
 monitorable = false
@@ -494,3 +491,6 @@ unique_name_in_owner = true
 libraries = {
 "": SubResource("AnimationLibrary_s4vro")
 }
+
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="." index="13"]
+rect = Rect2(-16, -16, 32, 32)
