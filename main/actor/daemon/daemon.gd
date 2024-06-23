@@ -50,6 +50,9 @@ func _on_target_died(_position: Vector2, actor: Actor) -> void:
 	_on_body_exited(actor)
 
 func _physics_process(delta: float) -> void:
+	if not on_screen:
+		return
+	
 	tentacle_time += tentacle_speed * delta
 	tentacle_material.set_shader_parameter("s", tentacle_time)
 	

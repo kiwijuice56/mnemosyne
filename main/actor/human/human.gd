@@ -97,6 +97,9 @@ func _on_idle_timeout() -> void:
 		dir.x = (-1 if randf() < 0.5 else 1) if randf() < 0.5 else 0
 
 func _physics_process(delta: float) -> void:
+	if not on_screen:
+		return
+	
 	if not is_on_floor():
 		velocity.y += gravity * delta
 	else:

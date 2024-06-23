@@ -9,7 +9,7 @@ extends CharacterBody2D
 var target_scene: PackedScene = preload("res://main/target/target.tscn")
 var exclaim_scene: PackedScene = preload("res://main/exclaim/exclaim.tscn")
 var hurt_by: Array[Actor]
-
+var on_screen: bool = false
 
 var health: float = 0:
 	set(val):
@@ -32,6 +32,14 @@ func _ready() -> void:
 	hurt_by = []
 	
 	%HurtArea2D.area_entered.connect(_on_area_entered_hurt)
+	%VisibleOnScreenNotifier2D.screen_entered.connect(_on_screen_entered)
+	%VisibleOnScreenNotifier2D.screen_exited.connect(_on_screen_exited)
+
+func _on_screen_entered():
+	on_screen = true
+
+func _on_screen_exited():
+	on_screen = false
 
 func _on_area_entered_hurt(area: Area2D) -> void:
 	if dead:

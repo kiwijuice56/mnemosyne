@@ -32,3 +32,7 @@ offset_top = 1.0
 offset_right = 31.0
 offset_bottom = 41.0
 value = 1.0
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+unique_name_in_owner = true
+rect = Rect2(-16, -16, 32, 32)

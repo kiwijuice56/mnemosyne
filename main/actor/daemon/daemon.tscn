@@ -372,12 +372,14 @@ collision_layer = 8
 collision_mask = 15
 script = ExtResource("2_upoli")
 primary_bullet_scene = ExtResource("3_6mjak")
-gravity = 400.0
+gravity = null
 tentacle_speed = 16.0
 tentacle_material = ExtResource("2_r8hq3")
 max_health = 4.0
 speed = 32.0
+accel = null
 knockback_scale = 2.0
+shoot_offset = null
 
 [node name="Blood" type="CPUParticles2D" parent="SpriteHolder" index="0"]
 emitting = false

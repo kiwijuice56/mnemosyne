@@ -170,9 +170,12 @@ stream_0/weight = 1.0
 collision_layer = 4
 script = ExtResource("2_fvux4")
 fear_speed = 22.0
-gravity = 128.0
+gravity = null
 max_health = 1.0
 speed = 16.0
+accel = null
+knockback_scale = null
+shoot_offset = null
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." index="1"]
 unique_name_in_owner = true
