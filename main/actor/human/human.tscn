@@ -169,13 +169,13 @@ stream_0/weight = 1.0
 [node name="Human" instance=ExtResource("1_7wykg")]
 collision_layer = 4
 script = ExtResource("2_fvux4")
-fear_speed = 22.0
-gravity = null
 max_health = 1.0
 speed = 16.0
 accel = null
 knockback_scale = null
 shoot_offset = null
+fear_speed = 22.0
+gravity = null
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." index="1"]
 unique_name_in_owner = true

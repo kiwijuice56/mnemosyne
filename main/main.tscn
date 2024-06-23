@@ -200,6 +200,7 @@ scenes = Array[PackedScene]([ExtResource("15_sdhmh"), ExtResource("16_4tm48"), E
 [node name="ParallaxBackground" type="ParallaxBackground" parent="SubViewportContainer/SubViewport"]
 
 [node name="ParallaxLayer" type="ParallaxLayer" parent="SubViewportContainer/SubViewport/ParallaxBackground"]
+position = Vector2(512, 0)
 motion_scale = Vector2(0.2, 0.2)
 
 [node name="Sprite2D" type="Sprite2D" parent="SubViewportContainer/SubViewport/ParallaxBackground/ParallaxLayer"]
