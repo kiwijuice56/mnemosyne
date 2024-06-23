@@ -62,7 +62,7 @@ func show_lines(lines: Array[String]) -> void:
 	await get_tree().create_timer(1.0).timeout
 	
 	for line in lines:
-		line = "[shake][center]" + line
+		line = "[shake][center]" + line + "[/center][/shake]" 
 		%Text.text = line 
 		pause_indices = {}
 		var bb_free_text: String = %Text.get_parsed_text()

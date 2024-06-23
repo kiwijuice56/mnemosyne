@@ -98,8 +98,10 @@ func reset() -> void:
 
 func shoot(bullet_scene: PackedScene, shoot_dir: Vector2) -> bool:
 	if super.shoot(bullet_scene, shoot_dir):
+		%ShootPlayer.stop()
 		%ShakeCamera.push = 6 * (global_position - get_global_mouse_position()).normalized()
 		%SecondaryAnimationPlayer.play("shoot")
+		%ShootPlayer.play()
 		return true
 	return false
 

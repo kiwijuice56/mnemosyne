@@ -58,7 +58,7 @@ func _on_area_entered_hurt(area: Area2D) -> void:
 		hurt(bullet.damage, (global_position - area.global_position).normalized())
 		bullet.hit(self)
 	if area.get_parent() is Spike:
-		hurt(max_health * 0.25, (global_position - area.global_position).normalized(), 2.0)
+		hurt(1.0, (global_position - area.global_position).normalized(), 2.0)
 		area.get_parent().slice()
 
 func _physics_process(delta: float) -> void:

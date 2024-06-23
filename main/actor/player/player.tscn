@@ -393,7 +393,7 @@ tracks/0/keys = {
 }
 tracks/1/type = "value"
 tracks/1/imported = false
-tracks/1/enabled = true
+tracks/1/enabled = false
 tracks/1/path = NodePath("ShootPlayer:playing")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
@@ -525,6 +525,7 @@ libraries = {
 }
 
 [node name="ShootPlayer" type="AudioStreamPlayer" parent="." index="10"]
+unique_name_in_owner = true
 stream = SubResource("AudioStreamRandomizer_qsvsj")
 volume_db = -17.0
 pitch_scale = 0.8

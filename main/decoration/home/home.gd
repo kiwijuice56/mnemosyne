@@ -8,16 +8,16 @@ func reset() -> void:
 	%New.visible = false
 
 func initialize(time: int) -> void:
-	if randf() < 0.3:
+	if randf() < 0.15:
 		queue_free()
 	
-	time += randi() % 3 - 1
+	time += randi() % 2 
 	
 	if time <= 2:
 		%Tent.frame = randi() % %Tent.hframes
 		%Tent.visible = true
 		%Smoke.visible = randf() < 0.3
-	elif time <= 3:
+	elif time <= 6:
 		%Middle.frame = randi() % %Middle.hframes
 		%Middle.visible = true
 		%Smoke.visible = randf() < 0.3

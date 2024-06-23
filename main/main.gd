@@ -4,7 +4,7 @@ extends Node
 @export var world_scene: PackedScene
 
 var world: World
-var time: int = 1
+var time: int = 8
 
 func _ready() -> void:
 	Ref.player.died.connect(_on_player_died)
@@ -25,7 +25,7 @@ func _ready() -> void:
 		"or as a catalyst of savage chaos?___",
 		"._._.__",
 		"come, to the throne of creation.___"]
-	await %Cutscene.show_lines(intro_lines)
+	#await %Cutscene.show_lines(intro_lines)
 	await %Cutscene.trans_out()
 	get_tree().paused = false
 	
