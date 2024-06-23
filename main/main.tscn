@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://bmip1vhc7m4m6"]
+[gd_scene load_steps=44 format=3 uid="uid://bmip1vhc7m4m6"]
 
 [ext_resource type="Script" path="res://main/main.gd" id="1_1wch7"]
 [ext_resource type="PackedScene" uid="uid://cv8wagch44eli" path="res://main/actor/player/player.tscn" id="2_aeni1"]
@@ -149,6 +149,9 @@ expand_margin_bottom = 4.0
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b2j5w"]
 expand_margin_top = 4.0
 expand_margin_bottom = 4.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0jsay"]
+bg_color = Color(0, 0, 0, 0.419608)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_847f2"]
 bg_color = Color(0, 0, 0, 1)
@@ -390,10 +393,42 @@ size_flags_horizontal = 6
 focus_mode = 0
 button_pressed = true
 
+[node name="Help" type="PanelContainer" parent="SubViewportContainer/SubViewport/UI"]
+unique_name_in_owner = true
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -95.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 3
+size_flags_vertical = 10
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_0jsay")
+
+[node name="Text2" type="RichTextLabel" parent="SubViewportContainer/SubViewport/UI/Help"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+mouse_filter = 2
+theme_override_fonts/normal_font = SubResource("FontVariation_winir")
+theme_override_font_sizes/normal_font_size = 16
+bbcode_enabled = true
+text = "[center]
+[WASD/arrow keys] to move
+[mouse + left click] to shoot
+[esc/P] to pause
+
+"
+fit_content = true
+scroll_active = false
+autowrap_mode = 2
+visible_characters_behavior = 1
+
 [node name="Cutscene" type="PanelContainer" parent="SubViewportContainer/SubViewport/UI"]
 unique_name_in_owner = true
 process_mode = 3
-visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0

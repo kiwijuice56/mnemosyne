@@ -11,6 +11,7 @@ var is_progressing: bool = false
 var is_pausing: bool = false
 var is_odd: bool = false
 var is_sped_up: bool = false
+var i_can_skip: bool = true
 
 const SPEED_UP_MULT: float = 7.0
 
@@ -23,7 +24,7 @@ func _ready() -> void:
 	%Skip.visible = false
 
 func _unhandled_key_input(event: InputEvent) -> void:
-	if event.is_pressed():
+	if i_can_skip and event.is_pressed():
 		%Skip.visible = true
 
 func _input(event: InputEvent) -> void:
@@ -57,10 +58,10 @@ func _physics_process(delta: float) -> void:
 		if characters_advanced >= len(message_text):
 			finished_progressing.emit()
 
-func show_lines(lines: Array[String]) -> void:
+func show_lines(lines: Array[String], can_skip: bool = true) -> void:
 	%Text.visible_characters = 0
 	await get_tree().create_timer(1.0).timeout
-	
+	i_can_skip = can_skip
 	for line in lines:
 		line = "[shake][center]" + line + "[/center][/shake]" 
 		%Text.text = line 
@@ -90,9 +91,11 @@ func show_lines(lines: Array[String]) -> void:
 	await get_tree().create_timer(1.0).timeout
 
 func trans_in() -> void:
+	i_can_skip = false
 	%Text.visible_characters = 0
 	%Skip.visible = false
 	get_tree().create_tween().set_pause_mode(Tween.TWEEN_PAUSE_PROCESS).tween_property(self, "modulate:a", 1.0, 0.5)
 
 func trans_out() -> void:
+	i_can_skip = false
 	get_tree().create_tween().set_pause_mode(Tween.TWEEN_PAUSE_PROCESS).tween_property(self, "modulate:a", 0.0, 0.5)

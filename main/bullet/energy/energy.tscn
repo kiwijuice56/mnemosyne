@@ -121,7 +121,6 @@ texture = ExtResource("5_y0nry")
 shape = SubResource("CircleShape2D_83mbw")
 
 [node name="Flash" parent="." index="6"]
-visible = false
 modulate = Color(1, 0.529412, 0.529412, 1)
 
 [node name="CollisionShape2D" parent="HitArea2D" index="0"]

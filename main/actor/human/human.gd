@@ -177,7 +177,7 @@ func initialize(time: int) -> void:
 	if time >= 4:
 		weapon_bank.append(new_weapon)
 	weapon = weapon_bank.pick_random()
-	can_fight = randf() < 0.4 - Ref.player.alignment * 0.25
+	can_fight = randf() < 0.7 - Ref.player.alignment * 0.25
 
 func shoot(bullet_scene: PackedScene, shoot_dir: Vector2) -> bool:
 	if %ShootBeforeTimer.is_stopped():

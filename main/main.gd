@@ -4,10 +4,11 @@ extends Node
 @export var world_scene: PackedScene
 
 var world: World
-var time: int = 7
+var time: int = 3
 
 func _ready() -> void:
 	Ref.player.died.connect(_on_player_died)
+	%Help.modulate.a = 0.0
 	
 	get_tree().paused = true
 	%PauseMenu.can_pause = false
@@ -25,12 +26,19 @@ func _ready() -> void:
 		"or as a catalyst of savage chaos?___",
 		"._._.__",
 		"come, to the throne of creation.___"]
-	#await %Cutscene.show_lines(intro_lines)
+	await %Cutscene.show_lines(intro_lines)
 	await %Cutscene.trans_out()
 	get_tree().paused = false
 	
 	start_level()
 	%PauseMenu.can_pause = true
+	
+	
+	var tween: Tween = get_tree().create_tween().set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
+	await tween.tween_property(%Help, "modulate:a", 1.0, 0.5)
+	await get_tree().create_timer(7.0).timeout
+	tween = get_tree().create_tween().set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
+	await tween.tween_property(%Help, "modulate:a", 0.0, 0.5)
 
 func _on_player_died(_p: Vector2) -> void:
 	time += 1
@@ -39,7 +47,7 @@ func _on_player_died(_p: Vector2) -> void:
 	await %Cutscene.trans_in()
 	get_tree().paused = true
 	var before_lines: Array[String] = [
-		"oh?___ back so soon.___",
+		"oh?___ back so soon?___",
 		"come,_ now._._._ you aren't quite ready to meet the infinite void.___",
 	]
 	await %Cutscene.show_lines(before_lines)
@@ -86,6 +94,22 @@ func _on_player_died(_p: Vector2) -> void:
 	get_tree().paused = false
 	
 	await %Cutscene.trans_out()
+
+
+func end() -> void:
+	get_tree().paused = true
+	await %Cutscene.trans_in()
+	%Music.set_lead("")
+	var done_lines: Array[String] = [
+			"you finally made it._._.___",
+			"is this what you wanted?___",
+			"._._.___",
+			"i'm proud of you anyways._____",
+			"you're ready to shape the world._____",
+			"*_t_h_e_ e_n_d_*___"
+		]
+	await %Cutscene.show_lines(done_lines, false)
+	
 
 func start_level() -> void:
 	if is_instance_valid(world):
