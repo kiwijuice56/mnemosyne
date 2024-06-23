@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://cv8wagch44eli"]
+[gd_scene load_steps=34 format=3 uid="uid://cv8wagch44eli"]
 
 [ext_resource type="PackedScene" uid="uid://c5lbqx8a61pyi" path="res://main/actor/actor.tscn" id="1_nisst"]
 [ext_resource type="Script" path="res://main/actor/player/player.gd" id="2_r6spv"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://do0l2t7e75n2x" path="res://main/actor/player/player.png" id="4_48ieq"]
 [ext_resource type="Material" uid="uid://160dgmvru7sp" path="res://main/actor/player/tentacle_material.tres" id="5_0l8la"]
 [ext_resource type="Script" path="res://main/actor/player/iris.gd" id="6_r0w64"]
+[ext_resource type="PackedScene" uid="uid://djniytk6cr3ae" path="res://main/actor/player/blood_particles_large.tscn" id="6_ywd4b"]
 [ext_resource type="Script" path="res://main/actor/player/shake_camera.gd" id="9_71eu6"]
 [ext_resource type="Texture2D" uid="uid://dbcwvffvu5thv" path="res://main/assets/sprites/light.webp" id="9_ks0yu"]
 [ext_resource type="AudioStream" uid="uid://6ypse2ipnd7g" path="res://main/actor/player/shoot.ogg" id="11_3w2hi"]
@@ -142,6 +143,66 @@ tracks/3/keys = {
 "update": 1,
 "values": [false]
 }
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("HurtPlayer:pitch_scale")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("SpriteHolder:modulate")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("SpriteHolder:scale")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("HealthBar:modulate")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.847059, 0.219608, 0.745098, 0.8)]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("CPUParticles2D:emitting")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="Animation_syxj5"]
 resource_name = "hurt"
@@ -183,9 +244,110 @@ tracks/2/keys = {
 "values": [true]
 }
 
+[sub_resource type="Animation" id="Animation_2amck"]
+resource_name = "death"
+length = 4.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SpriteHolder/Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("HurtPlayer:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("HurtPlayer2:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("HurtPlayer:pitch_scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [1.0, 0.3]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("SpriteHolder:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 1.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("SpriteHolder:scale")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 1.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0, 0)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("HealthBar:modulate")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0.847059, 0.219608, 0.745098, 0.8), Color(0.847059, 0.219608, 0.745098, 0)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("CPUParticles2D:emitting")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_yej6k"]
 _data = {
 "RESET": SubResource("Animation_v740b"),
+"death": SubResource("Animation_2amck"),
 "hurt": SubResource("Animation_syxj5")
 }
 
@@ -281,9 +443,11 @@ tentacle_scene = ExtResource("4_3rm2x")
 tentacle_material = ExtResource("5_0l8la")
 tentacle_speed_min = 5.0
 tentacle_speed_max = 16.0
-max_health = 3.0
-speed = 48.0
+max_health = 0.2
+speed = 256.0
 knockback_scale = 1.5
+
+[node name="CPUParticles2D" parent="." index="0" instance=ExtResource("6_ywd4b")]
 
 [node name="Trail" type="CPUParticles2D" parent="SpriteHolder" index="0"]
 lifetime = 0.8
@@ -318,53 +482,53 @@ scale = Vector2(0.15, 0.15)
 texture = ExtResource("4_48ieq")
 hframes = 2
 
-[node name="CollisionShape2D" parent="." index="2"]
+[node name="CollisionShape2D" parent="." index="3"]
 visible = false
 shape = SubResource("CircleShape2D_8f8lk")
 
-[node name="HurtArea2D" parent="." index="3"]
+[node name="HurtArea2D" parent="." index="4"]
 collision_mask = 49
 
 [node name="CollisionShape2D" parent="HurtArea2D" index="0"]
 shape = SubResource("CircleShape2D_ojln1")
 
-[node name="ShakeCamera" type="Camera2D" parent="." index="4"]
+[node name="ShakeCamera" type="Camera2D" parent="." index="5"]
 unique_name_in_owner = true
 script = ExtResource("9_71eu6")
 
-[node name="PointLight2D" type="PointLight2D" parent="." index="5"]
+[node name="PointLight2D" type="PointLight2D" parent="." index="6"]
 enabled = false
 energy = 0.1
 range_layer_min = -2
 range_layer_max = 2
 texture = ExtResource("9_ks0yu")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="6"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="7"]
 unique_name_in_owner = true
 libraries = {
 "": SubResource("AnimationLibrary_c1qjm")
 }
 autoplay = "idle"
 
-[node name="TertiaryAnimationPlayer" type="AnimationPlayer" parent="." index="7"]
+[node name="TertiaryAnimationPlayer" type="AnimationPlayer" parent="." index="8"]
 unique_name_in_owner = true
 libraries = {
 "": SubResource("AnimationLibrary_yej6k")
 }
 
-[node name="SecondaryAnimationPlayer" type="AnimationPlayer" parent="." index="8"]
+[node name="SecondaryAnimationPlayer" type="AnimationPlayer" parent="." index="9"]
 unique_name_in_owner = true
 libraries = {
 "": SubResource("AnimationLibrary_q0j1w")
 }
 
-[node name="ShootPlayer" type="AudioStreamPlayer" parent="." index="9"]
+[node name="ShootPlayer" type="AudioStreamPlayer" parent="." index="10"]
 stream = SubResource("AudioStreamRandomizer_qsvsj")
 volume_db = -17.0
 pitch_scale = 0.8
 bus = &"sfx"
 
-[node name="DetectionArea2D" type="Area2D" parent="." index="10"]
+[node name="DetectionArea2D" type="Area2D" parent="." index="11"]
 unique_name_in_owner = true
 collision_layer = 0
 collision_mask = 12
@@ -372,23 +536,23 @@ collision_mask = 12
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea2D" index="0"]
 shape = SubResource("CircleShape2D_6exls")
 
-[node name="RetargetTimer" type="Timer" parent="." index="11"]
+[node name="RetargetTimer" type="Timer" parent="." index="12"]
 unique_name_in_owner = true
 wait_time = 0.5
 autostart = true
 
-[node name="HealthBar" parent="." index="12"]
+[node name="HealthBar" parent="." index="13"]
 offset_left = -12.0
 offset_top = 4.0
 offset_right = 28.0
 offset_bottom = 44.0
 
-[node name="HurtPlayer" type="AudioStreamPlayer" parent="." index="13"]
+[node name="HurtPlayer" type="AudioStreamPlayer" parent="." index="14"]
 stream = SubResource("AudioStreamRandomizer_fxmp1")
 volume_db = -12.0
 bus = &"sfx"
 
-[node name="HurtPlayer2" type="AudioStreamPlayer" parent="." index="14"]
+[node name="HurtPlayer2" type="AudioStreamPlayer" parent="." index="15"]
 stream = SubResource("AudioStreamRandomizer_ru522")
 volume_db = -16.0
 bus = &"sfx"

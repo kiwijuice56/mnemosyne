@@ -10,11 +10,15 @@ func _ready() -> void:
 	lead = %Normal
 
 func _process(delta: float) -> void:
-	lead.volume_db = lerp(lead.volume_db, -16.0, delta * 2)
+	if is_instance_valid(lead):
+		lead.volume_db = lerp(lead.volume_db, -16.0, delta * 2)
 	for child in get_children():
 		if child == lead:
 			continue
 		child.volume_db = lerp(child.volume_db, -64.0, delta * 0.3)
 
 func set_lead(lead_name: String) -> void:
-	lead = get_node(lead_name.capitalize())
+	if lead_name == "":
+		lead = null
+	else:
+		lead = get_node(lead_name.capitalize())

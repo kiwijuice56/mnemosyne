@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://bmip1vhc7m4m6"]
+[gd_scene load_steps=35 format=3 uid="uid://bmip1vhc7m4m6"]
 
 [ext_resource type="Script" path="res://main/main.gd" id="1_1wch7"]
 [ext_resource type="PackedScene" uid="uid://cv8wagch44eli" path="res://main/actor/player/player.tscn" id="2_aeni1"]
@@ -19,10 +19,12 @@
 [ext_resource type="PackedScene" uid="uid://b5nir4asipth4" path="res://main/bullet/flash.tscn" id="16_fjikr"]
 [ext_resource type="PackedScene" uid="uid://dfbxirwq8vy4" path="res://main/bullet/rifle/rifle_particles.tscn" id="17_skmru"]
 [ext_resource type="PackedScene" uid="uid://csrf2rbxbndow" path="res://main/bullet/pellet/trail_particles.tscn" id="17_wqtrd"]
+[ext_resource type="PackedScene" uid="uid://djniytk6cr3ae" path="res://main/actor/player/blood_particles_large.tscn" id="18_65a58"]
 [ext_resource type="PackedScene" uid="uid://b5mnu3d6vwom5" path="res://main/actor/human/blood_particles.tscn" id="18_cvbwf"]
 [ext_resource type="PackedScene" uid="uid://cy5torayi04d" path="res://main/bullet/energy/energy_particles.tscn" id="19_j45ch"]
 [ext_resource type="PackedScene" uid="uid://dgv1mhiwpp56x" path="res://main/bullet/energy/energy_particles2.tscn" id="20_gejph"]
 [ext_resource type="Script" path="res://main/ui/pause_menu.gd" id="21_h4bov"]
+[ext_resource type="Script" path="res://main/cutscene.gd" id="23_828ns"]
 
 [sub_resource type="Animation" id="Animation_ymvtj"]
 length = 0.001
@@ -103,6 +105,9 @@ expand_margin_bottom = 4.0
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b2j5w"]
 expand_margin_top = 4.0
 expand_margin_bottom = 4.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_847f2"]
+bg_color = Color(0, 0, 0, 1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_o0f53"]
 shader = ExtResource("6_pu8ya")
@@ -196,7 +201,7 @@ position = Vector2(86, 300)
 [node name="ParticleLoader" type="Node2D" parent="SubViewportContainer/SubViewport/Player"]
 position = Vector2(-86, -300)
 script = ExtResource("14_b24jk")
-scenes = Array[PackedScene]([ExtResource("15_sdhmh"), ExtResource("16_4tm48"), ExtResource("17_wqtrd"), ExtResource("18_cvbwf"), ExtResource("19_j45ch"), ExtResource("20_gejph"), ExtResource("16_fjikr"), ExtResource("17_skmru")])
+scenes = Array[PackedScene]([ExtResource("15_sdhmh"), ExtResource("16_4tm48"), ExtResource("17_wqtrd"), ExtResource("18_cvbwf"), ExtResource("19_j45ch"), ExtResource("20_gejph"), ExtResource("16_fjikr"), ExtResource("17_skmru"), ExtResource("18_65a58")])
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="SubViewportContainer/SubViewport"]
 
@@ -322,6 +327,31 @@ layout_mode = 2
 size_flags_horizontal = 6
 focus_mode = 0
 button_pressed = true
+
+[node name="Cutscene" type="PanelContainer" parent="SubViewportContainer/SubViewport/UI"]
+unique_name_in_owner = true
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_847f2")
+script = ExtResource("23_828ns")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="SubViewportContainer/SubViewport/UI/Cutscene"]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_fonts/normal_font = SubResource("FontVariation_winir")
+theme_override_font_sizes/normal_font_size = 14
+bbcode_enabled = true
+text = "[center][shake]
+
+come, now... you aren't quite ready to meet the infinite void."
+fit_content = true
+autowrap_mode = 2
 
 [node name="Filter" type="CanvasLayer" parent="."]
 

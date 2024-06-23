@@ -93,9 +93,10 @@ func hurt(damage: float, hurt_dir: Vector2, knockback_extra: float = 1.0) -> boo
 	
 	health -= damage
 	health = max(0, min(max_health, health))
-	if health == 0:
+	if health <= 0:
 		kill()
 		knockback *= 1.5
+		return false
 	return true
 
 func lock_on(other_target: Actor) -> void:

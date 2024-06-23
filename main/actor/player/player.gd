@@ -45,6 +45,9 @@ func _on_target_died(_position: Vector2, actor: Actor) -> void:
 	_on_body_exited(actor)
 
 func _physics_process(delta: float) -> void:
+	if dead:
+		return
+	
 	dir = Vector2()
 	if Input.is_action_pressed("ui_left"):
 		dir.x -= 1
@@ -76,6 +79,15 @@ func initialize(time: int) -> void:
 		%TentacleHolder.add_child(new_tentacle)
 		new_tentacle.rotation = i * 2 * PI / tentacle_count
 
+func reset() -> void:
+	super.reset()
+	dead = false
+	health = max_health
+	%AnimationPlayer.play("RESET")
+	%SecondaryAnimationPlayer.play("RESET")
+	%TertiaryAnimationPlayer.play("RESET")
+	Ref.music.set_lead("normal")
+
 func shoot(bullet_scene: PackedScene, shoot_dir: Vector2) -> bool:
 	if super.shoot(bullet_scene, shoot_dir):
 		%ShakeCamera.push = 6 * (global_position - get_global_mouse_position()).normalized()
@@ -92,6 +104,9 @@ func hurt(damage: float, hurt_dir: Vector2, knockback_extra: float = 1.0) -> boo
 	return false
 
 func retarget() -> void:
+	if dead:
+		return
+	
 	var old_target: Actor = mood_target
 	var dist: float = INF
 	for actor in mood_potential_targets:
@@ -115,3 +130,15 @@ func retarget() -> void:
 func hit_enemy() -> void:
 	pass
 	#%ShakeCamera.shake(0.9)
+
+func kill() -> void:
+	if dead:
+		return
+	Ref.music.set_lead("")
+	dead = true
+	%ShakeCamera.shake(3.0)
+	Ref.hurt_effect.hurt()
+	%TertiaryAnimationPlayer.stop()
+	%TertiaryAnimationPlayer.play("death")
+	await %TertiaryAnimationPlayer.animation_finished
+	died.emit(global_position)
