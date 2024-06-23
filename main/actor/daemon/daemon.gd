@@ -46,6 +46,26 @@ func _on_body_exited(node: Node) -> void:
 		potential_targets.remove_at(potential_targets.find(node))
 	retarget()
 
+
+func _on_area_entered_hurt(area: Area2D) -> void:
+	if dead:
+		return
+	
+	if area.get_parent() is Bullet:
+		var bullet: Bullet = area.get_parent() as Bullet
+		if bullet.destroyed or bullet.shooter == self or self in bullet.has_hit:
+			return
+		if bullet.shooter is Daemon:
+			return
+		if bullet.shooter == Ref.player:
+			Ref.player.hit_enemy()
+		hurt_by.append(bullet.shooter)
+		hurt(bullet.damage, (global_position - area.global_position).normalized())
+		bullet.hit(self)
+	if area.get_parent() is Spike:
+		hurt(max_health * 0.25, (global_position - area.global_position).normalized(), 2.0)
+		area.get_parent().slice()
+
 func _on_target_died(_position: Vector2, actor: Actor) -> void:
 	_on_body_exited(actor)
 

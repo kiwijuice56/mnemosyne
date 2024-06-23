@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://b6wtebxe1yih7"]
+[gd_scene load_steps=17 format=3 uid="uid://b6wtebxe1yih7"]
 
 [ext_resource type="Script" path="res://main/world/world.gd" id="1_48bnx"]
 [ext_resource type="TileSet" uid="uid://c8p0cdh6sv0vc" path="res://main/world/basic_tileset.tres" id="1_w88bs"]
@@ -14,6 +14,7 @@
 [ext_resource type="Texture2D" uid="uid://dm3mxaub6rpb4" path="res://main/decoration/shrine.png" id="10_yc1px"]
 [ext_resource type="Texture2D" uid="uid://b8g0k1dti0wvi" path="res://main/decoration/stalactite/stalactite3.png" id="11_722su"]
 [ext_resource type="Texture2D" uid="uid://dbcwvffvu5thv" path="res://main/assets/sprites/light.webp" id="11_s6254"]
+[ext_resource type="PackedScene" uid="uid://cf3kfpvug77y0" path="res://main/actor/daemon/bomb_daemon.tscn" id="15_rcu3t"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_43a5g"]
 shader = ExtResource("1_xj2l8")
@@ -31,10 +32,10 @@ layer_0/tile_data = PackedInt32Array(393219, 720896, 2, 458755, 393216, 1, 45875
 [node name="Decoration" type="Node2D" parent="."]
 
 [node name="Home" parent="Decoration" instance=ExtResource("5_db5go")]
-position = Vector2(-25, -110)
+position = Vector2(-29, -110)
 
 [node name="Home2" parent="Decoration" instance=ExtResource("5_db5go")]
-position = Vector2(-6, -110)
+position = Vector2(-4, -110)
 
 [node name="Home3" parent="Decoration" instance=ExtResource("5_db5go")]
 position = Vector2(22, -110)
@@ -43,10 +44,10 @@ position = Vector2(22, -110)
 position = Vector2(58, -94)
 
 [node name="Home5" parent="Decoration" instance=ExtResource("5_db5go")]
-position = Vector2(183, -110)
+position = Vector2(178, -110)
 
 [node name="Home6" parent="Decoration" instance=ExtResource("5_db5go")]
-position = Vector2(203, -126)
+position = Vector2(207, -126)
 
 [node name="Debris" parent="Decoration" instance=ExtResource("5_bnmmv")]
 position = Vector2(-239, -174)
@@ -247,6 +248,7 @@ max_health = null
 [node name="Spike" parent="Spikes" instance=ExtResource("4_eu3nu")]
 position = Vector2(-329, -293)
 init_velocity = Vector2(-48, 0)
+reflect_h = true
 
 [node name="Spike2" parent="Spikes" instance=ExtResource("4_eu3nu")]
 position = Vector2(-390, -380)
@@ -256,11 +258,44 @@ reflect_h = true
 [node name="Spike3" parent="Spikes" instance=ExtResource("4_eu3nu")]
 position = Vector2(-329, -477)
 init_velocity = Vector2(-48, 0)
+reflect_h = true
+
+[node name="Spike4" parent="Spikes" instance=ExtResource("4_eu3nu")]
+position = Vector2(-315, -681)
+init_velocity = Vector2(-48, 0)
+reflect_h = true
 
 [node name="Daemons" type="Node2D" parent="."]
 
 [node name="Daemon" parent="Daemons" instance=ExtResource("8_cqb1t")]
 position = Vector2(-51, -172)
+
+[node name="Daemon2" parent="Daemons" instance=ExtResource("8_cqb1t")]
+position = Vector2(-375, -601)
+
+[node name="Daemon3" parent="Daemons" instance=ExtResource("8_cqb1t")]
+position = Vector2(-313, -603)
+
+[node name="Daemon4" parent="Daemons" instance=ExtResource("8_cqb1t")]
+position = Vector2(-379, -745)
+
+[node name="Daemon5" parent="Daemons" instance=ExtResource("8_cqb1t")]
+position = Vector2(-307, -748)
+
+[node name="Daemon6" parent="Daemons" instance=ExtResource("8_cqb1t")]
+position = Vector2(-337, -817)
+
+[node name="Daemon7" parent="Daemons" instance=ExtResource("8_cqb1t")]
+position = Vector2(288, -927)
+
+[node name="Daemon8" parent="Daemons" instance=ExtResource("8_cqb1t")]
+position = Vector2(474, -784)
+
+[node name="BombDaemon" parent="Daemons" instance=ExtResource("15_rcu3t")]
+position = Vector2(-104, -203)
+
+[node name="Daemon9" parent="Daemons" instance=ExtResource("8_cqb1t")]
+position = Vector2(693, -603)
 
 [node name="Spawn" type="Node2D" parent="."]
 unique_name_in_owner = true
