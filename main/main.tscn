@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://bmip1vhc7m4m6"]
+[gd_scene load_steps=32 format=3 uid="uid://bmip1vhc7m4m6"]
 
 [ext_resource type="Script" path="res://main/main.gd" id="1_1wch7"]
 [ext_resource type="PackedScene" uid="uid://cv8wagch44eli" path="res://main/actor/player/player.tscn" id="2_aeni1"]
@@ -22,6 +22,7 @@
 [ext_resource type="PackedScene" uid="uid://b5mnu3d6vwom5" path="res://main/actor/human/blood_particles.tscn" id="18_cvbwf"]
 [ext_resource type="PackedScene" uid="uid://cy5torayi04d" path="res://main/bullet/energy/energy_particles.tscn" id="19_j45ch"]
 [ext_resource type="PackedScene" uid="uid://dgv1mhiwpp56x" path="res://main/bullet/energy/energy_particles2.tscn" id="20_gejph"]
+[ext_resource type="Script" path="res://main/ui/pause_menu.gd" id="21_h4bov"]
 
 [sub_resource type="Animation" id="Animation_ymvtj"]
 length = 0.001
@@ -132,6 +133,7 @@ script = ExtResource("1_1wch7")
 world_scene = ExtResource("4_hfrpo")
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+process_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -142,6 +144,7 @@ stretch = true
 
 [node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
 unique_name_in_owner = true
+process_mode = 1
 handle_input_locally = false
 use_hdr_2d = true
 audio_listener_enable_2d = true
@@ -150,6 +153,7 @@ size_2d_override_stretch = true
 render_target_update_mode = 4
 
 [node name="AC" type="AudioStreamPlayer" parent="SubViewportContainer/SubViewport"]
+process_mode = 3
 stream = ExtResource("3_gdgrb")
 volume_db = -48.0
 autoplay = true
@@ -157,6 +161,7 @@ bus = &"music"
 
 [node name="Music" type="Node" parent="SubViewportContainer/SubViewport"]
 unique_name_in_owner = true
+process_mode = 3
 script = ExtResource("3_1rx3v")
 
 [node name="Normal" type="AudioStreamPlayer" parent="SubViewportContainer/SubViewport/Music"]
@@ -210,6 +215,7 @@ centered = false
 
 [node name="UI" type="CanvasLayer" parent="SubViewportContainer/SubViewport"]
 unique_name_in_owner = true
+process_mode = 3
 
 [node name="HurtEffect" type="ColorRect" parent="SubViewportContainer/SubViewport/UI"]
 unique_name_in_owner = true
@@ -227,7 +233,7 @@ libraries = {
 }
 speed_scale = 4.0
 
-[node name="PanelContainer" type="PanelContainer" parent="SubViewportContainer/SubViewport/UI"]
+[node name="PauseMenu" type="PanelContainer" parent="SubViewportContainer/SubViewport/UI"]
 visible = false
 anchors_preset = 15
 anchor_right = 1.0
@@ -235,12 +241,13 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_bnttq")
+script = ExtResource("21_h4bov")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="SubViewportContainer/SubViewport/UI/PanelContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="SubViewportContainer/SubViewport/UI/PauseMenu"]
 layout_mode = 2
 theme_override_constants/separation = 8
 
-[node name="Label" type="Label" parent="SubViewportContainer/SubViewport/UI/PanelContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="SubViewportContainer/SubViewport/UI/PauseMenu/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_fonts/font = SubResource("FontVariation_winir")
@@ -248,19 +255,19 @@ theme_override_font_sizes/font_size = 14
 text = "PAUSE
 "
 
-[node name="HBoxContainer" type="HBoxContainer" parent="SubViewportContainer/SubViewport/UI/PanelContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="SubViewportContainer/SubViewport/UI/PauseMenu/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 0
 theme_override_constants/separation = 16
 
-[node name="Label" type="Label" parent="SubViewportContainer/SubViewport/UI/PanelContainer/VBoxContainer/HBoxContainer"]
+[node name="Label" type="Label" parent="SubViewportContainer/SubViewport/UI/PauseMenu/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(64, 0)
 layout_mode = 2
 theme_override_fonts/font = SubResource("FontVariation_winir")
 theme_override_font_sizes/font_size = 14
 text = "SFX"
 
-[node name="SFX" type="HSlider" parent="SubViewportContainer/SubViewport/UI/PanelContainer/VBoxContainer/HBoxContainer"]
+[node name="SfxSlider" type="HSlider" parent="SubViewportContainer/SubViewport/UI/PauseMenu/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(-0.055, 0)
 layout_mode = 2
@@ -272,19 +279,20 @@ theme_override_styles/grabber_area_highlight = SubResource("StyleBoxFlat_b2j5w")
 min_value = -32.0
 max_value = 16.0
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="SubViewportContainer/SubViewport/UI/PanelContainer/VBoxContainer"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="SubViewportContainer/SubViewport/UI/PauseMenu/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 0
 theme_override_constants/separation = 16
 
-[node name="Label" type="Label" parent="SubViewportContainer/SubViewport/UI/PanelContainer/VBoxContainer/HBoxContainer2"]
+[node name="Label" type="Label" parent="SubViewportContainer/SubViewport/UI/PauseMenu/VBoxContainer/HBoxContainer2"]
 custom_minimum_size = Vector2(64, 0)
 layout_mode = 2
 theme_override_fonts/font = SubResource("FontVariation_winir")
 theme_override_font_sizes/font_size = 14
 text = "Music "
 
-[node name="SFX" type="HSlider" parent="SubViewportContainer/SubViewport/UI/PanelContainer/VBoxContainer/HBoxContainer2"]
+[node name="MusicSlider" type="HSlider" parent="SubViewportContainer/SubViewport/UI/PauseMenu/VBoxContainer/HBoxContainer2"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 focus_mode = 0
@@ -294,28 +302,24 @@ theme_override_styles/grabber_area_highlight = SubResource("StyleBoxFlat_b2j5w")
 min_value = -32.0
 max_value = 16.0
 
-[node name="HBoxContainer3" type="HBoxContainer" parent="SubViewportContainer/SubViewport/UI/PanelContainer/VBoxContainer"]
+[node name="HBoxContainer3" type="HBoxContainer" parent="SubViewportContainer/SubViewport/UI/PauseMenu/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 0
 theme_override_constants/separation = 16
 
-[node name="Label" type="Label" parent="SubViewportContainer/SubViewport/UI/PanelContainer/VBoxContainer/HBoxContainer3"]
+[node name="Label" type="Label" parent="SubViewportContainer/SubViewport/UI/PauseMenu/VBoxContainer/HBoxContainer3"]
 custom_minimum_size = Vector2(64, 0)
 layout_mode = 2
 theme_override_fonts/font = SubResource("FontVariation_winir")
 theme_override_font_sizes/font_size = 14
 text = "SCreen ShAKE"
 
-[node name="CheckButton" type="CheckButton" parent="SubViewportContainer/SubViewport/UI/PanelContainer/VBoxContainer/HBoxContainer3"]
-visible = false
-layout_mode = 2
-size_flags_horizontal = 6
-button_pressed = true
-
-[node name="CheckBox" type="CheckBox" parent="SubViewportContainer/SubViewport/UI/PanelContainer/VBoxContainer/HBoxContainer3"]
+[node name="ShakeBox" type="CheckBox" parent="SubViewportContainer/SubViewport/UI/PauseMenu/VBoxContainer/HBoxContainer3"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 6
 focus_mode = 0
+button_pressed = true
 
 [node name="Filter" type="CanvasLayer" parent="."]
 

@@ -18,6 +18,8 @@ var mood_target: Actor
 var human_alignment: float = -1.0
 var daemon_alignment: float = 0.0
 
+var shake: bool = true
+
 func _ready() -> void:
 	super._ready()
 	%DetectionArea2D.body_entered.connect(_on_body_entered)

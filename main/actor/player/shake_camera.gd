@@ -7,6 +7,8 @@ var dir: Vector2
 var center: Vector2
 
 func shake(magnitude):
+	if not get_parent().shake:
+		return
 	var initial_transform: Transform2D = self.transform # Store the full initial transform of the camera
 	var elapsed_time: float = 0.0
 	while elapsed_time < period:
@@ -20,6 +22,9 @@ func shake(magnitude):
 		self.transform = initial_transform # Reset back to the original transform 
 
 func _physics_process(delta: float) -> void:
+	if not get_parent().shake:
+		push = Vector2()
+	
 	position = center + dir
 	dir = lerp(dir, push, delta * 7)
 	push = lerp(push, Vector2(), delta * 5)
