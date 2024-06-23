@@ -113,7 +113,7 @@ texture = ExtResource("3_obpw7")
 emitting = true
 
 [node name="Sprite2D" parent="SpriteHolder" index="0"]
-modulate = Color(0.99, 0.87318, 0.8712, 1)
+modulate = Color(0.988235, 0.796078, 0.870588, 1)
 scale = Vector2(0.05, 0.05)
 texture = ExtResource("5_y0nry")
 

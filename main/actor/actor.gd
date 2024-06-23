@@ -25,6 +25,8 @@ var dir: Vector2
 
 signal died(global_death_position: Vector2)
 
+@export var shoot_offset: Vector2
+
 func _ready() -> void:
 	health = max_health
 	hurt_by = []
@@ -39,6 +41,7 @@ func _on_area_entered_hurt(area: Area2D) -> void:
 		var bullet: Bullet = area.get_parent() as Bullet
 		if bullet.destroyed or bullet.shooter == self or self in bullet.has_hit:
 			return
+		
 		if bullet.shooter == Ref.player:
 			Ref.player.hit_enemy()
 		hurt_by.append(bullet.shooter)
@@ -108,7 +111,7 @@ func shoot(bullet_scene: PackedScene, shoot_dir: Vector2) -> bool:
 	var new_bullet: Bullet = bullet_scene.instantiate()
 	get_parent().add_child(new_bullet)
 	get_parent().move_child(new_bullet, get_index())
-	new_bullet.global_position = global_position
+	new_bullet.global_position = global_position + shoot_offset
 	new_bullet.shooter = self
 	new_bullet.shoot(shoot_dir, velocity)
 	

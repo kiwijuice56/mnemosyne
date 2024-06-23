@@ -1,0 +1,76 @@
+[gd_scene load_steps=9 format=3 uid="uid://be7sln5yboj7l"]
+
+[ext_resource type="PackedScene" uid="uid://nd2re4kr63gu" path="res://main/bullet/bullet.tscn" id="1_2a28n"]
+[ext_resource type="Texture2D" uid="uid://nqhlgbr42hb6" path="res://main/bullet/spear/spear.png" id="2_0ixkt"]
+[ext_resource type="Script" path="res://main/bullet/spear/spear.gd" id="2_twy27"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ceweq"]
+radius = 0.5
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_qhsli"]
+radius = 1.5
+
+[sub_resource type="Animation" id="Animation_ryo0r"]
+resource_name = "destroy"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SpriteHolder/Sprite2D:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_b0ytm"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SpriteHolder/Sprite2D:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.988235, 0.686275, 0.756863, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_osx5i"]
+_data = {
+"RESET": SubResource("Animation_b0ytm"),
+"destroy": SubResource("Animation_ryo0r")
+}
+
+[node name="Spear" instance=ExtResource("1_2a28n")]
+script = ExtResource("2_twy27")
+speed = 3.0
+damage = 0.1
+pierce = 1
+lifetime = 2.0
+cooldown = 1.4
+
+[node name="Sprite2D" parent="SpriteHolder" index="0"]
+modulate = Color(0.988235, 0.686275, 0.756863, 1)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("2_0ixkt")
+
+[node name="CollisionShape2D" parent="." index="2"]
+shape = SubResource("CircleShape2D_ceweq")
+
+[node name="Flash" parent="." index="3"]
+visible = false
+
+[node name="CollisionShape2D" parent="HitArea2D" index="0"]
+shape = SubResource("CircleShape2D_qhsli")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="5"]
+unique_name_in_owner = true
+libraries = {
+"": SubResource("AnimationLibrary_osx5i")
+}
+speed_scale = 5.0

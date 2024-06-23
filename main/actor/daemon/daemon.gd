@@ -1,7 +1,6 @@
 class_name Daemon
 extends Actor
 
-
 @export var primary_bullet_scene: PackedScene
 @export var gravity: float = 400.0
 @export var tentacle_speed: float = 16.0

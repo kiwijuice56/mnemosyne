@@ -169,10 +169,15 @@ stream_0/weight = 1.0
 [node name="Human" instance=ExtResource("1_7wykg")]
 collision_layer = 4
 script = ExtResource("2_fvux4")
-fear_speed = 22.0
-gravity = 128.0
 max_health = 1.0
 speed = 16.0
+accel = null
+knockback_scale = null
+fear_speed = 22.0
+gravity = null
+old_weapon = null
+mid_weapon = null
+new_weapon = null
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." index="1"]
 unique_name_in_owner = true
@@ -183,7 +188,16 @@ libraries = {
 [node name="MoveTimer" type="Timer" parent="." index="2"]
 unique_name_in_owner = true
 
-[node name="SpriteHolder" parent="." index="3"]
+[node name="RetargetTimer" type="Timer" parent="." index="3"]
+unique_name_in_owner = true
+wait_time = 3.0
+autostart = true
+
+[node name="ShootBeforeTimer" type="Timer" parent="." index="4"]
+unique_name_in_owner = true
+one_shot = true
+
+[node name="SpriteHolder" parent="." index="5"]
 position = Vector2(0, -5)
 
 [node name="Sprite2D" parent="SpriteHolder" index="0"]
@@ -191,42 +205,42 @@ scale = Vector2(0.3, 0.3)
 texture = ExtResource("2_cf3wo")
 hframes = 3
 
-[node name="CollisionShape2D" parent="." index="4"]
+[node name="CollisionShape2D" parent="." index="6"]
 position = Vector2(0, -3.18)
 shape = SubResource("RectangleShape2D_tptly")
 
-[node name="HurtArea2D" parent="." index="5"]
+[node name="HurtArea2D" parent="." index="7"]
 position = Vector2(0, -5)
 
 [node name="CollisionShape2D" parent="HurtArea2D" index="0"]
 position = Vector2(0, 1.55)
 shape = SubResource("CircleShape2D_hns7j")
 
-[node name="CPUParticles2D" parent="." index="6" instance=ExtResource("4_53ojg")]
+[node name="CPUParticles2D" parent="." index="8" instance=ExtResource("4_53ojg")]
 
-[node name="RightFloor" type="RayCast2D" parent="." index="7"]
+[node name="RightFloor" type="RayCast2D" parent="." index="9"]
 unique_name_in_owner = true
 position = Vector2(4, -4)
 target_position = Vector2(0, 8)
 
-[node name="RightForward" type="RayCast2D" parent="." index="8"]
+[node name="RightForward" type="RayCast2D" parent="." index="10"]
 unique_name_in_owner = true
 position = Vector2(0, -4)
 target_position = Vector2(4, 0)
 collision_mask = 4
 
-[node name="LeftForward" type="RayCast2D" parent="." index="9"]
+[node name="LeftForward" type="RayCast2D" parent="." index="11"]
 unique_name_in_owner = true
 position = Vector2(0, -4)
 target_position = Vector2(-4, 0)
 collision_mask = 4
 
-[node name="LeftFloor" type="RayCast2D" parent="." index="10"]
+[node name="LeftFloor" type="RayCast2D" parent="." index="12"]
 unique_name_in_owner = true
 position = Vector2(-4, -4)
 target_position = Vector2(0, 8)
 
-[node name="DetectionArea2D" type="Area2D" parent="." index="11"]
+[node name="DetectionArea2D" type="Area2D" parent="." index="13"]
 unique_name_in_owner = true
 visible = false
 collision_layer = 0
@@ -235,19 +249,19 @@ collision_mask = 6
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea2D" index="0"]
 shape = SubResource("CircleShape2D_khxoh")
 
-[node name="DeathSound" type="AudioStreamPlayer2D" parent="." index="12"]
+[node name="DeathSound" type="AudioStreamPlayer2D" parent="." index="14"]
 stream = SubResource("AudioStreamRandomizer_u882q")
 volume_db = -6.0
 max_distance = 256.0
 attenuation = 4.0
 bus = &"sfx"
 
-[node name="DeathSound2" type="AudioStreamPlayer2D" parent="." index="13"]
+[node name="DeathSound2" type="AudioStreamPlayer2D" parent="." index="15"]
 stream = SubResource("AudioStreamRandomizer_vo401")
 volume_db = -16.0
 max_distance = 256.0
 attenuation = 6.06286
 bus = &"sfx"
 
-[node name="HealthBar" parent="." index="14"]
+[node name="HealthBar" parent="." index="16"]
 visible = false
