@@ -330,7 +330,6 @@ button_pressed = true
 
 [node name="Cutscene" type="PanelContainer" parent="SubViewportContainer/SubViewport/UI"]
 unique_name_in_owner = true
-visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -339,7 +338,8 @@ grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_847f2")
 script = ExtResource("23_828ns")
 
-[node name="RichTextLabel" type="RichTextLabel" parent="SubViewportContainer/SubViewport/UI/Cutscene"]
+[node name="Text" type="RichTextLabel" parent="SubViewportContainer/SubViewport/UI/Cutscene"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -352,6 +352,28 @@ text = "[center][shake]
 come, now... you aren't quite ready to meet the infinite void."
 fit_content = true
 autowrap_mode = 2
+visible_characters_behavior = 1
+
+[node name="Skip" type="RichTextLabel" parent="SubViewportContainer/SubViewport/UI/Cutscene"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+theme_override_fonts/normal_font = SubResource("FontVariation_winir")
+theme_override_font_sizes/normal_font_size = 14
+bbcode_enabled = true
+text = "[center][shake]
+>> hold space to skip
+
+"
+fit_content = true
+autowrap_mode = 2
+visible_characters_behavior = 1
+
+[node name="CharPlayer" type="AudioStreamPlayer" parent="SubViewportContainer/SubViewport/UI/Cutscene"]
+unique_name_in_owner = true
+bus = &"sfx"
 
 [node name="Filter" type="CanvasLayer" parent="."]
 
