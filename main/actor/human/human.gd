@@ -6,7 +6,7 @@ extends Actor
 
 @onready var old_weapon: PackedScene = preload("res://main/bullet/ball/ball.tscn")
 @onready var mid_weapon: PackedScene = preload("res://main/bullet/spear/spear.tscn")
-@onready var new_weapon: PackedScene = preload("res://main/bullet/spear/spear.tscn")
+@onready var new_weapon: PackedScene = preload("res://main/bullet/rifle/rifle.tscn")
 
 var weapon: PackedScene
 
@@ -131,6 +131,8 @@ func _physics_process(delta: float) -> void:
 		move_and_slide()
 
 func retarget() -> void:
+	if dead:
+		return
 	if not can_fight:
 		return
 	
@@ -163,13 +165,13 @@ func initialize(time: int) -> void:
 	if randf() < 0.35:
 		queue_free()
 	
-	if time <= 2:
-		weapon = old_weapon
-	elif time <= 4:
-		weapon = mid_weapon
-	else:
-		weapon = new_weapon
-		
+	var weapon_bank: Array[PackedScene] = []
+	weapon_bank.append(old_weapon)
+	if time >= 2:
+		weapon_bank.append(mid_weapon)
+	if time >= 4:
+		weapon_bank.append(new_weapon)
+	weapon = weapon_bank.pick_random()
 	can_fight = randf() < 0.4 - Ref.player.human_alignment * 0.25
 
 func shoot(bullet_scene: PackedScene, shoot_dir: Vector2) -> bool:

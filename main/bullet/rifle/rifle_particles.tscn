@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://dfbxirwq8vy4"]
+
+[node name="RifleParticles" type="CPUParticles2D"]
+modulate = Color(1, 0.643137, 0.603922, 1)
+amount = 16
+lifetime = 0.5
+gravity = Vector2(0, 0)

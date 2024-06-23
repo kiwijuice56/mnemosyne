@@ -73,6 +73,9 @@ func _physics_process(delta: float) -> void:
 		super._physics_process(delta)
 
 func retarget() -> void:
+	if dead:
+		return
+	
 	var dist: float = INF
 	var old_target: Actor = target
 	target = null

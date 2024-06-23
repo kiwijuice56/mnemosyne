@@ -32,3 +32,4 @@ unique_name_in_owner = true
 position = Vector2(0, -16)
 texture = ExtResource("2_x7vxx")
 hframes = 5
+frame = 3

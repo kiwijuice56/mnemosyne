@@ -10,6 +10,7 @@ extends CharacterBody2D
 
 var bounces: int = 0
 var hits: int = 0
+var flash_range: float = 12.0
 
 var has_hit: Array[Actor]
 
@@ -47,7 +48,7 @@ func shoot(shoot_dir: Vector2, velocity: Vector2) -> void:
 	remove_child(flash)
 	get_parent().add_child(flash)
 	get_parent().move_child(flash, get_index())
-	flash.global_position = global_position + shoot_dir * 12.0
+	flash.global_position = global_position + shoot_dir * flash_range
 	
 	dir = shoot_dir
 	shooter_velocity = velocity
