@@ -31,7 +31,6 @@ scale_amount_curve = SubResource("Curve_k55cg")
 
 [node name="Tent" type="Sprite2D" parent="." index="1"]
 unique_name_in_owner = true
-visible = false
 position = Vector2(0, -16)
 texture = ExtResource("2_x7vxx")
 hframes = 5
@@ -39,7 +38,6 @@ frame = 3
 
 [node name="Middle" type="Sprite2D" parent="." index="2"]
 unique_name_in_owner = true
-visible = false
 position = Vector2(0, -16)
 texture = ExtResource("5_4gn58")
 hframes = 8
