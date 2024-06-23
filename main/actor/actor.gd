@@ -23,6 +23,8 @@ var locked: bool = false
 var knockback: Vector2
 var dir: Vector2 
 
+var shoot_cooldown_mult: float = 1.0
+
 signal died(global_death_position: Vector2)
 
 @export var shoot_offset: Vector2
@@ -100,6 +102,9 @@ func hurt(damage: float, hurt_dir: Vector2, knockback_extra: float = 1.0) -> boo
 	return true
 
 func lock_on(other_target: Actor) -> void:
+	if not is_inside_tree() or dead:
+		return 
+	
 	var my_target: Exclaim = exclaim_scene.instantiate()
 	my_target.target = self
 	get_parent().add_child(my_target)
@@ -124,5 +129,5 @@ func shoot(bullet_scene: PackedScene, shoot_dir: Vector2) -> bool:
 	new_bullet.shooter = self
 	new_bullet.shoot(shoot_dir, velocity)
 	
-	%ShootCooldownTimer.start(new_bullet.cooldown)
+	%ShootCooldownTimer.start(new_bullet.cooldown * shoot_cooldown_mult)
 	return true

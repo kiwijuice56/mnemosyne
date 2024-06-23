@@ -7,7 +7,7 @@ extends Actor
 @export var tentacle_material: ShaderMaterial
 
 var tentacle_time: float
-var target: Actor
+var target: Actor = null
 var approach: float = 0
 
 var potential_targets: Array[Actor]
@@ -55,11 +55,12 @@ func _on_area_entered_hurt(area: Area2D) -> void:
 		var bullet: Bullet = area.get_parent() as Bullet
 		if bullet.destroyed or bullet.shooter == self or self in bullet.has_hit:
 			return
-		if bullet.shooter is Daemon:
+		if is_instance_valid(bullet.shooter) and bullet.shooter is Daemon:
 			return
 		if bullet.shooter == Ref.player:
 			Ref.player.hit_enemy()
-		hurt_by.append(bullet.shooter)
+		if bullet.shooter:
+			hurt_by.append(bullet.shooter)
 		hurt(bullet.damage, (global_position - area.global_position).normalized())
 		bullet.hit(self)
 	if area.get_parent() is Spike:
@@ -106,7 +107,7 @@ func retarget() -> void:
 		var test_dist: float = (actor.global_position - global_position).length()
 		if test_dist < dist or actor in hurt_by:
 			if actor is Player and not actor in hurt_by:
-				if randf() < actor.daemon_alignment + 0.3:
+				if randf() < 0.3 - actor.alignment:
 					continue
 			
 			dist = test_dist
@@ -124,9 +125,11 @@ func hurt(damage: float, hurt_dir: Vector2, knockback_extra: float = 1.0) -> boo
 	return false
 
 func kill() -> void:
-	%HealthBar.hide_bar()
 	if dead:
 		return
+	%HealthBar.hide_bar()
+	if Ref.player in hurt_by:
+		Ref.player.alignment += 0.05
 	died.emit(global_position)
 	%AnimationPlayer.stop()
 	%AnimationPlayer.play("die")

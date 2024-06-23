@@ -16,7 +16,7 @@ var can_fight: bool = false
 var fear_spot: Vector2
 
 var potential_targets: Array[Actor]
-var target: Actor
+var target: Actor = null
 
 func _ready() -> void:
 	super._ready()
@@ -71,11 +71,12 @@ func _on_area_entered_hurt(area: Area2D) -> void:
 		var bullet: Bullet = area.get_parent() as Bullet
 		if bullet.destroyed or bullet.shooter == self or self in bullet.has_hit:
 			return
-		if bullet.shooter is Human:
+		if is_instance_valid(bullet.shooter) and bullet.shooter is Human:
 			return
 		if bullet.shooter == Ref.player:
 			Ref.player.hit_enemy()
-		hurt_by.append(bullet.shooter)
+		if bullet.shooter:
+			hurt_by.append(bullet.shooter)
 		hurt(bullet.damage, (global_position - area.global_position).normalized())
 		bullet.hit(self)
 	if area.get_parent() is Spike:
@@ -146,7 +147,7 @@ func retarget() -> void:
 		var test_dist: float = (actor.global_position - global_position).length()
 		if test_dist < dist or actor in hurt_by:
 			if actor is Player and not actor in hurt_by:
-				if randf() < actor.human_alignment + 0.5:
+				if randf() < actor.alignment + 0.5:
 					continue
 			
 			dist = test_dist
@@ -158,6 +159,8 @@ func retarget() -> void:
 func kill() -> void:
 	if dead:
 		return
+	if Ref.player in hurt_by:
+		Ref.player.alignment -= 0.05
 	died.emit(global_position)
 	dead = true
 	%AnimationPlayer.play("die")
@@ -175,7 +178,7 @@ func initialize(time: int) -> void:
 	if time >= 4:
 		weapon_bank.append(new_weapon)
 	weapon = weapon_bank.pick_random()
-	can_fight = randf() < 0.4 - Ref.player.human_alignment * 0.25
+	can_fight = randf() < 0.4 - Ref.player.alignment * 0.25
 
 func shoot(bullet_scene: PackedScene, shoot_dir: Vector2) -> bool:
 	if %ShootBeforeTimer.is_stopped():

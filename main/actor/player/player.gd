@@ -15,8 +15,7 @@ var tentacle_count: int = 8
 var mood_potential_targets: Array[Actor]
 var mood_target: Actor
 
-var human_alignment: float = 0.0
-var daemon_alignment: float = 0.0
+var alignment: float = 0.0
 
 var shake: bool = true
 
@@ -74,6 +73,15 @@ func _physics_process(delta: float) -> void:
 	super._physics_process(delta)
 
 func initialize(time: int) -> void:
+	tentacle_count = 5 + time
+	speed = 56.0 + 16 * (time - 1)
+	max_health = 2.0 + 1.0 * (time - 1)
+	health = max_health
+	shoot_cooldown_mult = 1.0 - (time - 1) * 0.1
+	shoot_cooldown_mult = clamp(shoot_cooldown_mult, 0.2, 1.0)
+	
+	for child in %TentacleHolder.get_children():
+		child.queue_free()
 	for i in range(tentacle_count):
 		var new_tentacle: Sprite2D = tentacle_scene.instantiate()
 		%TentacleHolder.add_child(new_tentacle)

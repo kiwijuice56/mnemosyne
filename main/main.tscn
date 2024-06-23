@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://bmip1vhc7m4m6"]
+[gd_scene load_steps=37 format=3 uid="uid://bmip1vhc7m4m6"]
 
 [ext_resource type="Script" path="res://main/main.gd" id="1_1wch7"]
 [ext_resource type="PackedScene" uid="uid://cv8wagch44eli" path="res://main/actor/player/player.tscn" id="2_aeni1"]
@@ -12,7 +12,6 @@
 [ext_resource type="Texture2D" uid="uid://d1jvoay2qfkl0" path="res://main/background/background_neutral.png" id="6_im74b"]
 [ext_resource type="Shader" path="res://main/ui/crt.gdshader" id="6_pu8ya"]
 [ext_resource type="AudioStream" uid="uid://dtq7dprtlx566" path="res://main/music/human.ogg" id="7_4joml"]
-[ext_resource type="FontFile" uid="uid://dqn0furiqxfi" path="res://main/ui/sharp-crt.ttf" id="12_xyycy"]
 [ext_resource type="Script" path="res://main/particle_loader.gd" id="14_b24jk"]
 [ext_resource type="PackedScene" uid="uid://d2xy3fdq4duqk" path="res://main/bullet/pellet/destroy_particles.tscn" id="15_sdhmh"]
 [ext_resource type="PackedScene" uid="uid://byximaryj8h0h" path="res://main/bullet/pellet/clang_particles.tscn" id="16_4tm48"]
@@ -25,6 +24,8 @@
 [ext_resource type="PackedScene" uid="uid://dgv1mhiwpp56x" path="res://main/bullet/energy/energy_particles2.tscn" id="20_gejph"]
 [ext_resource type="Script" path="res://main/ui/pause_menu.gd" id="21_h4bov"]
 [ext_resource type="Script" path="res://main/cutscene.gd" id="23_828ns"]
+[ext_resource type="FontFile" uid="uid://df2krxjry6qpy" path="res://main/ui/VCR_OSD_MONO_1.001.ttf" id="23_thd4k"]
+[ext_resource type="AudioStream" uid="uid://ctvfmk13m0m56" path="res://main/ui/select.ogg" id="25_momml"]
 
 [sub_resource type="Animation" id="Animation_ymvtj"]
 length = 0.001
@@ -94,8 +95,10 @@ content_margin_bottom = 48.0
 bg_color = Color(0.22308, 0.0924, 0.33, 0.8)
 
 [sub_resource type="FontVariation" id="FontVariation_winir"]
-base_font = ExtResource("12_xyycy")
+base_font = ExtResource("23_thd4k")
 spacing_space = 8
+spacing_top = 2
+spacing_bottom = 2
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b0w71"]
 bg_color = Color(0.118581, 0.118581, 0.118581, 0.690196)
@@ -108,6 +111,12 @@ expand_margin_bottom = 4.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_847f2"]
 bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_pb8hl"]
+random_pitch = 1.3
+streams_count = 1
+stream_0/stream = ExtResource("25_momml")
+stream_0/weight = 1.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_o0f53"]
 shader = ExtResource("6_pu8ya")
@@ -173,7 +182,7 @@ script = ExtResource("3_1rx3v")
 [node name="Normal" type="AudioStreamPlayer" parent="SubViewportContainer/SubViewport/Music"]
 unique_name_in_owner = true
 stream = ExtResource("4_yal8j")
-volume_db = -8.0
+volume_db = -64.0
 pitch_scale = 1.1
 autoplay = true
 bus = &"music"
@@ -241,6 +250,7 @@ libraries = {
 speed_scale = 4.0
 
 [node name="PauseMenu" type="PanelContainer" parent="SubViewportContainer/SubViewport/UI"]
+unique_name_in_owner = true
 visible = false
 anchors_preset = 15
 anchor_right = 1.0
@@ -258,8 +268,8 @@ theme_override_constants/separation = 8
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_fonts/font = SubResource("FontVariation_winir")
-theme_override_font_sizes/font_size = 14
-text = "PAUSE
+theme_override_font_sizes/font_size = 16
+text = "pause
 "
 
 [node name="HBoxContainer" type="HBoxContainer" parent="SubViewportContainer/SubViewport/UI/PauseMenu/VBoxContainer"]
@@ -271,8 +281,8 @@ theme_override_constants/separation = 16
 custom_minimum_size = Vector2(64, 0)
 layout_mode = 2
 theme_override_fonts/font = SubResource("FontVariation_winir")
-theme_override_font_sizes/font_size = 14
-text = "SFX"
+theme_override_font_sizes/font_size = 16
+text = "sfx"
 
 [node name="SfxSlider" type="HSlider" parent="SubViewportContainer/SubViewport/UI/PauseMenu/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
@@ -295,8 +305,8 @@ theme_override_constants/separation = 16
 custom_minimum_size = Vector2(64, 0)
 layout_mode = 2
 theme_override_fonts/font = SubResource("FontVariation_winir")
-theme_override_font_sizes/font_size = 14
-text = "Music "
+theme_override_font_sizes/font_size = 16
+text = "music"
 
 [node name="MusicSlider" type="HSlider" parent="SubViewportContainer/SubViewport/UI/PauseMenu/VBoxContainer/HBoxContainer2"]
 unique_name_in_owner = true
@@ -318,8 +328,8 @@ theme_override_constants/separation = 16
 custom_minimum_size = Vector2(64, 0)
 layout_mode = 2
 theme_override_fonts/font = SubResource("FontVariation_winir")
-theme_override_font_sizes/font_size = 14
-text = "SCreen ShAKE"
+theme_override_font_sizes/font_size = 16
+text = "screen shake"
 
 [node name="ShakeBox" type="CheckBox" parent="SubViewportContainer/SubViewport/UI/PauseMenu/VBoxContainer/HBoxContainer3"]
 unique_name_in_owner = true
@@ -330,11 +340,13 @@ button_pressed = true
 
 [node name="Cutscene" type="PanelContainer" parent="SubViewportContainer/SubViewport/UI"]
 unique_name_in_owner = true
+process_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_847f2")
 script = ExtResource("23_828ns")
 
@@ -344,13 +356,14 @@ custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+mouse_filter = 2
 theme_override_fonts/normal_font = SubResource("FontVariation_winir")
-theme_override_font_sizes/normal_font_size = 14
+theme_override_font_sizes/normal_font_size = 16
 bbcode_enabled = true
 text = "[center][shake]
-
-come, now... you aren't quite ready to meet the infinite void."
+your physical form is a reflection of humanity's faith in you."
 fit_content = true
+scroll_active = false
 autowrap_mode = 2
 visible_characters_behavior = 1
 
@@ -360,10 +373,11 @@ custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
+mouse_filter = 2
 theme_override_fonts/normal_font = SubResource("FontVariation_winir")
-theme_override_font_sizes/normal_font_size = 14
+theme_override_font_sizes/normal_font_size = 16
 bbcode_enabled = true
-text = "[center][shake]
+text = "[shake]
 >> hold space to skip
 
 "
@@ -373,6 +387,8 @@ visible_characters_behavior = 1
 
 [node name="CharPlayer" type="AudioStreamPlayer" parent="SubViewportContainer/SubViewport/UI/Cutscene"]
 unique_name_in_owner = true
+stream = SubResource("AudioStreamRandomizer_pb8hl")
+volume_db = -24.0
 bus = &"sfx"
 
 [node name="Filter" type="CanvasLayer" parent="."]

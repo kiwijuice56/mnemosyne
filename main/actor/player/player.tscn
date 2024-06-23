@@ -441,11 +441,13 @@ script = ExtResource("2_r6spv")
 primary_bullet_scene = ExtResource("3_0cv6q")
 tentacle_scene = ExtResource("4_3rm2x")
 tentacle_material = ExtResource("5_0l8la")
-tentacle_speed_min = 5.0
-tentacle_speed_max = 16.0
+tentacle_speed_min = null
+tentacle_speed_max = null
 max_health = 0.2
 speed = 256.0
+accel = null
 knockback_scale = 1.5
+shoot_offset = null
 
 [node name="CPUParticles2D" parent="." index="0" instance=ExtResource("6_ywd4b")]
 

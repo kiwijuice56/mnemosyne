@@ -3,7 +3,7 @@ extends PanelContainer
 
 var message_text: String 
 var pause_indices: Dictionary = {}
-var chars_per_second: float = 24.0
+var chars_per_second: float = 32.0
 var character_progress: float
 var pause_progress: float
 var characters_advanced: int
@@ -18,11 +18,9 @@ signal finished_progressing
 signal continued
 
 func _ready() -> void:
-	modulate.a = 0.0
-	
-	await trans_in()
-	await show_lines(["hi i like pie__", "now you will die"])
-	await trans_out()
+	modulate.a = 1.0
+	%Text.visible_characters = 0
+	%Skip.visible = false
 
 func _unhandled_key_input(event: InputEvent) -> void:
 	if event.is_pressed():
@@ -61,8 +59,6 @@ func _physics_process(delta: float) -> void:
 
 func show_lines(lines: Array[String]) -> void:
 	%Text.visible_characters = 0
-	%Skip.visible = false
-	
 	await get_tree().create_timer(1.0).timeout
 	
 	for line in lines:
@@ -96,7 +92,7 @@ func show_lines(lines: Array[String]) -> void:
 func trans_in() -> void:
 	%Text.visible_characters = 0
 	%Skip.visible = false
-	await get_tree().create_tween().tween_property(self, "modulate:a", 1.0, 0.5)
+	get_tree().create_tween().set_pause_mode(Tween.TWEEN_PAUSE_PROCESS).tween_property(self, "modulate:a", 1.0, 0.5)
 
 func trans_out() -> void:
-	await get_tree().create_tween().tween_property(self, "modulate:a", 0.0, 0.5)
+	get_tree().create_tween().set_pause_mode(Tween.TWEEN_PAUSE_PROCESS).tween_property(self, "modulate:a", 0.0, 0.5)
